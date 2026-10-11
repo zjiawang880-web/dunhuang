@@ -1782,7 +1782,31 @@ body.senior-mode .ai-message {
   }
 
 }
+/* 将语言切换和 Senior Mode 移动到右上角 */
+@media (min-width: 769px) {
+    .nav-actions {
+        position: absolute !important;
+        top: 20px !important;
+        right: 30px !important;
 
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: 12px !important;
+
+        width: auto !important;
+        margin: 0 !important;
+        z-index: 100 !important;
+    }
+
+    .language-switcher {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 6px !important;
+    }
+}
 </style>
 </head>
 

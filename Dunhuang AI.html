@@ -1,0 +1,4835 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DUNHUANG | A Thousand Years, A Thousand Stories</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===================================================
+   01. GLOBAL
+=================================================== */
+
+:root {
+  --dark: #171c19;
+  --forest: #26342e;
+  --paper: #f5f0e6;
+  --white: #ffffff;
+  --gold: #d8b47c;
+  --deep-gold: #927218;
+  --red: #b44c2b;
+  --red-dark: #91391f;
+  --ink: #292723;
+  --muted: #625f59;
+
+  --body-font: 'DM Sans', 'Noto Sans SC', sans-serif;
+  --title-font: 'Cormorant Garamond', 'Noto Serif SC', serif;
+  --classic-font: 'Cinzel', 'Noto Serif SC', serif;
+
+  --nav-height: 90px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-height) + 20px);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body-font);
+  font-size: 18px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 4px;
+}
+
+/* ===================================================
+   02. NAVIGATION
+=================================================== */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 90px;
+  z-index: 1000;
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 25px;
+
+  padding: 15px 4%;
+
+  color: white;
+  transition: background 0.3s ease;
+}
+
+.navbar.scrolled {
+  background: rgba(23, 28, 25, 0.97);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+}
+
+.logo {
+  font-family: var(--title-font);
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.logo span {
+  color: var(--gold);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--gold);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.language-switcher {
+  display: flex;
+  gap: 5px;
+}
+
+.language-switcher button,
+.senior-button {
+  min-height: 44px;
+  padding: 8px 12px;
+
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.5);
+
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.senior-button {
+  border-color: var(--gold);
+  border-radius: 5px;
+}
+
+.language-switcher button.active,
+.language-switcher button:hover,
+.senior-button.active,
+.senior-button:hover {
+  background: var(--gold);
+  color: var(--dark);
+}
+
+/* ===================================================
+   03. HOME
+=================================================== */
+
+.hero {
+  position: relative;
+
+  min-height: max(100svh, 820px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 145px 5% 100px;
+
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  background: #332d26;
+}
+
+.hero-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    rgba(12,12,12,0.45),
+    rgba(12,12,12,0.7)
+  );
+
+  backdrop-filter: blur(4px);
+}
+
+.hero-circle {
+  position: absolute;
+
+  width: min(650px, 85vw);
+  aspect-ratio: 1;
+
+  border: 1px solid rgba(216,180,124,0.45);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.hero-circle::before,
+.hero-circle::after {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(216,180,124,0.3);
+  border-radius: 50%;
+}
+
+.hero-circle::before {
+  inset: 35px;
+}
+
+.hero-circle::after {
+  inset: 70px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1350px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-small {
+  margin-bottom: 25px;
+
+  font-family: var(--classic-font);
+  font-size: 20px;
+  letter-spacing: 4px;
+  color: #f0d3a5;
+}
+
+.hero-title {
+  margin-bottom: 25px;
+
+  font-family: var(--title-font);
+  font-size: clamp(40px, 10vw, 170px);
+  font-weight: 500;
+  letter-spacing: 0.015em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.hero-subtitle {
+  font-family: var(--title-font);
+  font-size: clamp(25px, 3vw, 42px);
+  font-style: italic;
+}
+
+.hero-line {
+  width: 1px;
+  height: 45px;
+  margin: 27px auto;
+  background: var(--gold);
+}
+
+.hero-search {
+  display: flex;
+
+  width: min(720px, 100%);
+  margin: 20px auto 18px;
+
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+
+  box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+}
+
+.hero-search input {
+  flex: 1;
+  min-width: 0;
+
+  padding: 22px 25px;
+
+  border: none;
+  background: white;
+
+  color: var(--ink);
+  font-size: 19px;
+}
+
+.hero-search button {
+  width: 85px;
+  min-height: 75px;
+
+  border: none;
+  background: #e5bd65;
+
+  color: var(--dark);
+  font-size: 30px;
+}
+
+.search-caption {
+  margin-bottom: 27px;
+  font-size: 15px;
+  color: #f2e1c4;
+}
+
+.hero-button {
+  display: inline-block;
+
+  padding: 20px 50px;
+
+  border: 2px solid var(--gold);
+
+  font-family: var(--classic-font);
+  font-size: 17px;
+  letter-spacing: 2px;
+
+  transition: 0.3s;
+}
+
+.hero-button:hover {
+  background: var(--gold);
+  color: var(--dark);
+}
+
+/* ===================================================
+   04. EXPLORE
+=================================================== */
+
+.experiences {
+  padding: 100px 0 120px;
+  background: white;
+}
+
+.section-heading {
+  max-width: 1400px;
+  margin: 0 auto 60px;
+  padding: 0 25px;
+
+  font-family: var(--title-font);
+  font-size: clamp(42px, 5vw, 68px);
+  font-weight: 600;
+  text-align: center;
+}
+
+.experience-navigation {
+  position: sticky;
+  top: var(--nav-height);
+  z-index: 900;
+
+  background: white;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+}
+
+.experience-tabs {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+
+  max-width: 1450px;
+  margin: auto;
+  padding: 15px 20px 0;
+}
+
+.experience-tab {
+  min-height: 120px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+
+  padding: 15px 5px;
+
+  border: none;
+  border-bottom: 3px solid transparent;
+
+  background: transparent;
+  color: #666;
+  text-align: center;
+}
+
+.experience-tab .tab-icon {
+  font-size: 39px;
+}
+
+.experience-tab span:last-child {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.experience-tab.active,
+.experience-tab:hover {
+  color: var(--red);
+}
+
+.experience-tab.active {
+  border-bottom-color: var(--red);
+}
+
+.experience-panel {
+  padding-top: 45px;
+}
+
+.experience-banner {
+  position: relative;
+
+  min-height: 540px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+  background: var(--dark);
+}
+
+.experience-banner > img {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.42);
+}
+
+.experience-banner-content {
+  position: relative;
+  z-index: 2;
+
+  max-width: 1100px;
+  padding: 100px 8%;
+
+  color: white;
+  text-align: center;
+}
+
+.experience-label {
+  margin-bottom: 20px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  font-size: 16px;
+}
+
+.experience-title {
+  margin-bottom: 25px;
+
+  font-family: var(--title-font);
+  font-size: clamp(55px, 7vw, 100px);
+  line-height: 1.1;
+}
+
+.experience-description {
+  font-size: 20px;
+  line-height: 1.9;
+}
+
+.experience-card-grid {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+
+  max-width: 1350px;
+  margin: -60px auto 0;
+  padding: 0 25px;
+}
+
+.experience-card {
+  position: relative;
+  min-height: 390px;
+  overflow: hidden;
+  background: var(--dark);
+}
+
+.experience-card img {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  transition: transform 0.5s;
+}
+
+.experience-card:hover img {
+  transform: scale(1.06);
+}
+
+.experience-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    transparent 15%,
+    rgba(0,0,0,0.85)
+  );
+}
+
+.experience-card-content {
+  position: relative;
+  z-index: 2;
+
+  min-height: 390px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  padding: 30px;
+  color: white;
+}
+
+.experience-card h3 {
+  font-family: var(--title-font);
+  font-size: 36px;
+  line-height: 1.2;
+}
+
+.experience-card p {
+  margin-top: 12px;
+  font-size: 16px;
+}
+
+/* ===================================================
+   05. JOURNEY HERO
+=================================================== */
+
+.journey {
+  position: relative;
+
+  min-height: 650px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+  background: var(--dark);
+
+  color: white;
+  text-align: center;
+}
+
+.journey > img {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.42);
+}
+
+.journey-content {
+  position: relative;
+  z-index: 2;
+
+  max-width: 1300px;
+  padding: 90px 30px;
+}
+
+.journey-label {
+  color: var(--gold);
+  letter-spacing: 4px;
+  font-size: 17px;
+}
+
+.journey h2 {
+  margin: 25px auto;
+
+  font-family: var(--title-font);
+  font-size: clamp(65px, 9vw, 135px);
+  line-height: 1.1;
+}
+
+.journey p:last-child {
+  font-size: 22px;
+}
+
+/* ===================================================
+   06. JOURNEY PLANNING — NEW DESIGN
+=================================================== */
+
+.journey-planning {
+  padding: 100px 0 110px;
+  background: #f7f7f7;
+}
+
+.journey-planning-container {
+  max-width: 1600px;
+  margin: auto;
+}
+
+.journey-planning-heading {
+  margin-bottom: 65px;
+  padding: 0 25px;
+  text-align: center;
+}
+
+.journey-planning-label {
+  margin-bottom: 15px;
+
+  font-family: var(--classic-font);
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: var(--deep-gold);
+}
+
+.journey-planning-heading h2 {
+  margin-bottom: 15px;
+
+  font-family: var(--title-font);
+  font-size: clamp(50px, 5.5vw, 80px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.journey-planning-heading > p:last-child {
+  color: var(--muted);
+  font-size: 18px;
+}
+
+/* Four cards */
+
+.journey-planning-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.journey-simple-card {
+  position: relative;
+
+  width: 100%;
+  min-height: 450px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+
+  padding: 45px 20px;
+
+  background: white;
+
+  border: none;
+  border-bottom: 7px solid transparent;
+
+  color: #303030;
+  text-align: center;
+
+  transition:
+    background 0.3s,
+    border-color 0.3s;
+}
+
+/* Unified SVG icons */
+
+.journey-simple-icon {
+  width: 105px;
+  height: 105px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--red);
+
+  transition: transform 0.3s;
+}
+
+.journey-simple-icon svg {
+  width: 100%;
+  height: 100%;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Card title */
+
+.journey-simple-card h3 {
+  margin: 0;
+
+  font-family: var(--body-font);
+  font-size: clamp(22px, 2vw, 33px);
+  font-weight: 700;
+  line-height: 1.4;
+
+  transition: color 0.3s;
+}
+
+/* Arrow */
+
+.journey-simple-arrow {
+  font-size: 53px;
+  line-height: 1;
+  font-weight: 300;
+
+  transition: transform 0.3s;
+}
+
+/* Hover */
+
+.journey-simple-card:hover,
+.journey-simple-card:focus-visible {
+  background: #fffdfa;
+  border-bottom-color: var(--red);
+}
+
+.journey-simple-card:hover h3,
+.journey-simple-card:focus-visible h3 {
+  color: var(--red);
+}
+
+.journey-simple-card:hover .journey-simple-icon {
+  transform: translateY(-7px);
+}
+
+.journey-simple-card:hover .journey-simple-arrow {
+  transform: translateX(10px);
+}
+
+/* ===================================================
+   07. STORIES
+=================================================== */
+
+.stories {
+  padding: 110px 6%;
+  background: var(--paper);
+}
+
+.stories-container {
+  max-width: 1450px;
+  margin: auto;
+}
+
+.stories-heading {
+  margin-bottom: 65px;
+  text-align: center;
+}
+
+.stories-label {
+  margin-bottom: 20px;
+
+  font-family: var(--classic-font);
+  font-size: 15px;
+  letter-spacing: 3px;
+  color: #79552b;
+}
+
+.stories-heading h2 {
+  margin-bottom: 20px;
+
+  font-family: var(--title-font);
+  font-size: clamp(48px, 5.5vw, 78px);
+  line-height: 1.2;
+}
+
+.stories-heading > p:last-child {
+  max-width: 850px;
+  margin: auto;
+
+  color: var(--muted);
+  font-size: 19px;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+}
+
+.story-card {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+
+  box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.story-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.story-image {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #e8dfcf;
+  overflow: hidden;
+}
+
+.story-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story-dynasty {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+
+  padding: 7px 12px;
+
+  background: #a83d2d;
+  color: white;
+
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.story-body {
+  padding: 28px;
+}
+
+.story-body h3 {
+  margin-bottom: 15px;
+
+  font-family: var(--title-font);
+  font-size: 30px;
+  line-height: 1.3;
+}
+
+.story-body p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  overflow: hidden;
+
+  color: #595959;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.story-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 0 24px 25px;
+  color: var(--deep-gold);
+}
+
+.story-divider::before,
+.story-divider::after {
+  content: "";
+  flex: 1;
+  border-top: 1px dashed #d4af37;
+}
+
+.story-divider span {
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.story-route {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 28px;
+  background: var(--paper);
+}
+
+.story-route h4 {
+  margin-bottom: 28px;
+  font-size: 17px;
+}
+
+.story-route-list {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 28px;
+  list-style: none;
+}
+
+.story-route-item {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+
+  padding-bottom: 28px;
+}
+
+.story-route-item:last-child {
+  padding-bottom: 0;
+}
+
+.story-route-item:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+  top: 29px;
+  left: 11.5px;
+
+  height: calc(100% - 29px);
+
+  border-left: 1px dashed #bdb5a8;
+}
+
+.story-route-number {
+  flex: 0 0 24px;
+
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+
+  background: var(--deep-gold);
+  color: white;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.story-route-location strong {
+  display: block;
+  font-size: 15px;
+}
+
+.story-route-location small {
+  display: block;
+  color: #666057;
+  font-size: 13px;
+}
+
+.story-route-button {
+  width: 100%;
+  margin-top: auto;
+  padding: 16px 20px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #c8412b;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  transition: 0.3s;
+}
+
+.story-route-button:hover {
+  background: #9e2d20;
+  transform: scale(1.02);
+}
+
+/* ===================================================
+   08. INFORMATION POPUP
+=================================================== */
+
+.info-dialog {
+  position: fixed;
+  inset: 0;
+
+  width: min(700px, calc(100vw - 30px));
+  max-height: 85dvh;
+
+  margin: auto;
+  padding: 0;
+
+  border: none;
+  border-radius: 18px;
+
+  background: #fffdf8;
+  color: #332d26;
+
+  overflow-y: auto;
+  box-shadow: 0 20px 70px rgba(0,0,0,0.4);
+}
+
+.info-dialog::backdrop {
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(4px);
+}
+
+.info-dialog-content {
+  position: relative;
+  padding: 55px 45px;
+}
+
+.info-dialog-close {
+  position: absolute;
+  top: 15px;
+  right: 22px;
+
+  border: none;
+  background: transparent;
+
+  font-size: 35px;
+}
+
+.info-dialog-icon {
+  margin-bottom: 20px;
+  font-size: 45px;
+  color: var(--red);
+}
+
+.info-dialog-icon svg {
+  width: 65px;
+  height: 65px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+}
+
+.info-dialog h2 {
+  margin-bottom: 20px;
+
+  font-family: var(--title-font);
+  font-size: clamp(36px, 4vw, 55px);
+  line-height: 1.2;
+}
+
+.info-dialog-description {
+  margin-bottom: 25px;
+  font-size: 18px;
+}
+
+.info-dialog-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.info-dialog-detail {
+  padding: 20px 25px;
+
+  border-left: 4px solid var(--deep-gold);
+  border-radius: 8px;
+
+  background: var(--paper);
+
+  font-size: 17px;
+}
+
+.info-dialog-detail strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.info-dialog-notice {
+  margin-top: 25px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ===================================================
+   09. FAQ
+=================================================== */
+
+.faq-section {
+  padding: 120px 8%;
+  background: #f8f6f2;
+}
+
+.faq-container {
+  max-width: 1350px;
+  margin: auto;
+}
+
+.faq-title {
+  margin-bottom: 70px;
+
+  font-family: var(--title-font);
+  font-size: clamp(55px, 6vw, 95px);
+  text-align: center;
+}
+
+.faq-list {
+  border-top: 1px solid #d5cbbd;
+}
+
+.faq-item {
+  border-bottom: 1px solid #d5cbbd;
+}
+
+.faq-item summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+
+  padding: 35px 10px;
+
+  list-style: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  font-size: 30px;
+}
+
+.faq-item[open] summary::after {
+  content: "−";
+}
+
+.faq-item p {
+  padding: 0 40px 40px 10px;
+
+  color: var(--muted);
+  font-size: 20px;
+}
+
+/* ===================================================
+   10. FOOTER
+=================================================== */
+
+.footer {
+  background: var(--dark);
+  color: var(--paper);
+}
+
+.footer-quote {
+  padding: 90px 20px 85px;
+
+  border-bottom: 1px solid rgba(216,180,124,0.25);
+  text-align: center;
+}
+
+.footer-ornament {
+  margin-bottom: 20px;
+  color: var(--gold);
+  font-size: 40px;
+}
+
+.footer-quote h2 {
+  max-width: 1450px;
+  margin: 0 auto 20px;
+
+  font-family: var(--title-font);
+  font-size: clamp(34px, 4vw, 60px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.footer-quote > p {
+  font-family: var(--classic-font);
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: var(--gold);
+}
+
+.footer-main {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
+  gap: 55px;
+
+  max-width: 1450px;
+  margin: auto;
+  padding: 90px 5% 100px;
+}
+
+.footer-column h4 {
+  margin-bottom: 25px;
+
+  font-family: var(--title-font);
+  font-size: 29px;
+  color: var(--gold);
+}
+
+.footer-brand-logo {
+  margin-bottom: 25px;
+
+  font-family: var(--title-font);
+  font-size: 46px;
+  letter-spacing: 3px;
+}
+
+.footer-brand-logo span {
+  color: var(--gold);
+}
+
+.footer-column p {
+  margin-bottom: 25px;
+  color: #e6dccd;
+  font-size: 17px;
+}
+
+.footer-column nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.footer-column nav a {
+  color: #e6dccd;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.footer-column nav a:hover {
+  color: var(--gold);
+}
+
+.footer-email {
+  color: var(--gold);
+  overflow-wrap: anywhere;
+}
+
+.footer-bottom {
+  max-width: 1450px;
+  margin: auto;
+  padding: 30px 5% 40px;
+
+  border-top: 1px solid rgba(216,180,124,0.25);
+
+  text-align: center;
+  font-size: 14px;
+  color: #e6dccd;
+}
+
+/* ===================================================
+   11. FLOATING BUTTONS
+=================================================== */
+
+.floating-controls {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  z-index: 1500;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ai-floating,
+.back-to-top {
+  width: 65px;
+  height: 65px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  font-size: 30px;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  transition: transform 0.3s;
+}
+
+.ai-floating {
+  border: 2px solid var(--gold);
+  background: var(--forest);
+  color: var(--gold);
+}
+
+.back-to-top {
+  border: none;
+  background: var(--gold);
+  color: var(--dark);
+}
+
+.ai-floating:hover,
+.back-to-top:hover {
+  transform: translateY(-4px);
+}
+
+/* ===================================================
+   12. AI GUIDE
+=================================================== */
+
+.ai-window {
+  position: fixed;
+  right: 120px;
+  bottom: 30px;
+  z-index: 1600;
+
+  width: min(450px, calc(100vw - 150px));
+  height: min(620px, calc(100dvh - 60px));
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid var(--gold);
+  border-radius: 16px;
+
+  background: #fffaf0;
+  overflow: hidden;
+
+  box-shadow: 0 15px 50px rgba(0,0,0,0.35);
+}
+
+.ai-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px;
+
+  background: var(--forest);
+  color: white;
+}
+
+.ai-header h3 {
+  font-family: var(--title-font);
+  font-size: 29px;
+  color: var(--gold);
+}
+
+.ai-header p {
+  font-size: 14px;
+}
+
+.ai-close {
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 30px;
+}
+
+.ai-messages {
+  flex: 1;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.ai-message {
+  max-width: 94%;
+  padding: 15px 18px;
+
+  border-radius: 12px;
+
+  font-size: 16px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.ai-message.bot {
+  align-self: flex-start;
+  background: #f0e5d0;
+}
+
+.ai-message.user {
+  align-self: flex-end;
+  background: var(--forest);
+  color: white;
+}
+
+.ai-speak {
+  display: block;
+
+  margin-top: 10px;
+  padding: 7px 12px;
+
+  border: 1px solid #c9b48f;
+  border-radius: 5px;
+
+  background: white;
+}
+
+.ai-context {
+  padding: 12px 18px;
+  background: #f5ebd8;
+  font-size: 14px;
+}
+
+.ai-suggestions {
+  display: flex;
+  gap: 8px;
+
+  padding: 12px;
+  overflow-x: auto;
+}
+
+.ai-suggestions button {
+  flex: 0 0 auto;
+
+  padding: 10px 13px;
+
+  border: 1px solid #c8ad7e;
+  border-radius: 20px;
+
+  background: white;
+  color: #67472d;
+
+  font-size: 14px;
+}
+
+.ai-input-area {
+  display: flex;
+  background: white;
+}
+
+.ai-input-area input {
+  flex: 1;
+  min-width: 0;
+  padding: 18px;
+  border: none;
+}
+
+.ai-input-area button {
+  width: 65px;
+  border: none;
+  background: var(--gold);
+  font-size: 25px;
+}
+
+/* ===================================================
+   13. SENIOR MODE
+=================================================== */
+
+body.senior-mode {
+  font-size: 25px;
+  line-height: 1.9;
+}
+
+body.senior-mode .navbar {
+  background: rgba(23,28,25,0.97);
+}
+
+body.senior-mode .nav-links a {
+  font-size: 21px;
+}
+
+body.senior-mode .language-switcher button,
+body.senior-mode .senior-button {
+  font-size: 18px;
+  min-height: 55px;
+}
+
+body.senior-mode .hero-subtitle {
+  font-size: 46px;
+}
+
+body.senior-mode .hero-search input {
+  font-size: 25px;
+}
+
+body.senior-mode .experience-tab span:last-child {
+  font-size: 21px;
+}
+
+body.senior-mode .experience-description {
+  font-size: 27px;
+}
+
+body.senior-mode .experience-card h3 {
+  font-size: 43px;
+}
+
+body.senior-mode .experience-card p {
+  font-size: 24px;
+}
+
+body.senior-mode .journey-simple-card {
+  min-height: 510px;
+}
+
+body.senior-mode .journey-simple-card h3 {
+  font-size: 35px;
+}
+
+body.senior-mode .story-body h3 {
+  font-size: 36px;
+}
+
+body.senior-mode .story-body p {
+  display: block;
+  font-size: 23px;
+}
+
+body.senior-mode .story-route-location strong {
+  font-size: 23px;
+}
+
+body.senior-mode .story-route-location small {
+  font-size: 19px;
+}
+
+body.senior-mode .story-route-button {
+  font-size: 22px;
+}
+
+body.senior-mode .faq-item summary {
+  font-size: 32px;
+}
+
+body.senior-mode .faq-item p {
+  font-size: 27px;
+}
+
+body.senior-mode .footer-column p,
+body.senior-mode .footer-column nav a {
+  font-size: 23px;
+}
+
+body.senior-mode .ai-message {
+  font-size: 23px;
+}
+
+/* ===================================================
+   14. RESPONSIVE
+=================================================== */
+
+@media (max-width: 1400px) {
+
+  .navbar {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 10px;
+    padding: 12px 4%;
+  }
+
+  .experience-tabs {
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .experience-tab {
+    flex: 0 0 165px;
+  }
+
+}
+
+@media (max-width: 1100px) {
+
+  .journey-planning-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+  .footer-main {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+}
+
+@media (max-width: 1024px) {
+
+  .story-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+}
+
+@media (max-width: 900px) {
+
+  .experience-card-grid {
+    grid-template-columns: 1fr;
+    max-width: 700px;
+    margin-top: 30px;
+  }
+
+  .ai-window {
+    right: 20px;
+    bottom: 170px;
+    width: calc(100vw - 40px);
+  }
+
+}
+
+@media (max-width: 767px) {
+
+  .nav-links {
+    gap: 14px;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+  }
+
+  .hero {
+    min-height: 820px;
+    padding: 190px 5% 90px;
+  }
+
+  .hero-title {
+    font-size: 10vw;
+  }
+
+  .hero-small {
+    font-size: 14px;
+  }
+
+  .hero-search input {
+    padding: 18px;
+    font-size: 16px;
+  }
+
+  .hero-search button {
+    width: 60px;
+  }
+
+  .journey-planning {
+    padding: 75px 0;
+  }
+
+  .journey-simple-card {
+    min-height: 340px;
+    gap: 30px;
+  }
+
+  .journey-simple-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .journey-simple-card h3 {
+    font-size: 26px;
+  }
+
+  .journey-simple-arrow {
+    font-size: 42px;
+  }
+
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stories {
+    padding: 75px 5%;
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr;
+    padding: 65px 8%;
+    gap: 45px;
+  }
+
+  .faq-section {
+    padding: 85px 6%;
+  }
+
+  .faq-item summary {
+    font-size: 21px;
+  }
+
+  .floating-controls {
+    right: 18px;
+    bottom: 20px;
+    gap: 15px;
+  }
+
+  .ai-floating,
+  .back-to-top {
+    width: 55px;
+    height: 55px;
+  }
+
+  .ai-window {
+    right: 10px;
+    bottom: 150px;
+
+    width: calc(100vw - 20px);
+    height: min(560px, calc(100dvh - 170px));
+  }
+
+  .info-dialog-content {
+    padding: 50px 25px 30px;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .journey-planning-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body.senior-mode .journey-planning-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .logo {
+    font-size: 28px;
+  }
+
+  .nav-links {
+    gap: 10px;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+  }
+
+  .language-switcher button,
+  .senior-button {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ===================================================
+     NAVIGATION
+=================================================== -->
+
+<nav class="navbar" id="navbar">
+
+  <a href="#home" class="logo">
+    DUNHUANG<span>.</span>
+  </a>
+
+  <ul class="nav-links">
+
+    <li>
+      <a href="#home" data-i18n="navHome">HOME</a>
+    </li>
+
+    <li>
+      <a href="#experiences" data-i18n="navExplore">EXPLORE</a>
+    </li>
+
+    <li>
+      <a href="#journey" data-i18n="navJourney">JOURNEY</a>
+    </li>
+
+    <li>
+      <a href="#stories" data-i18n="navStories">STORIES</a>
+    </li>
+
+    <li>
+      <a href="#faq" data-i18n="navFAQ">FAQ</a>
+    </li>
+
+  </ul>
+
+  <div class="nav-actions">
+
+    <div class="language-switcher">
+
+      <button type="button" data-lang="en" class="active">
+        EN
+      </button>
+
+      <button type="button" data-lang="zh">
+        中文
+      </button>
+
+      <button type="button" data-lang="ms">
+        BM
+      </button>
+
+    </div>
+
+    <button class="senior-button" id="seniorButton" type="button">
+      👓 <span data-i18n="seniorMode">Senior Mode</span>
+    </button>
+
+  </div>
+
+</nav>
+
+<!-- ===================================================
+     HOME
+=================================================== -->
+
+<header class="hero" id="home">
+
+  <div class="hero-background">
+    <img src="./dunhuang-mural.png" alt="Dunhuang mural">
+  </div>
+
+  <div class="hero-overlay"></div>
+  <div class="hero-circle"></div>
+
+  <div class="hero-content">
+
+    <p class="hero-small" data-i18n="heroSmall">
+      THE ANCIENT SILK ROAD
+    </p>
+
+    <h1 class="hero-title">
+      DUNHUANG
+    </h1>
+
+    <p class="hero-subtitle" data-i18n="heroSubtitle">
+      A Thousand Years, A Thousand Stories
+    </p>
+
+    <div class="hero-line"></div>
+
+    <form class="hero-search" id="heroSearch">
+
+      <input
+        type="search"
+        id="heroSearchInput"
+        data-placeholder="searchPlaceholder"
+        placeholder="How can I help you explore Dunhuang?"
+        required
+      >
+
+      <button type="submit" aria-label="Search">
+        ✧
+      </button>
+
+    </form>
+
+    <p class="search-caption" data-i18n="searchCaption">
+      ✦ Ask our virtual guide about history, culture and travel
+    </p>
+
+    <a href="#experiences" class="hero-button" data-i18n="heroButton">
+      BEGIN THE JOURNEY →
+    </a>
+
+  </div>
+
+</header>
+
+<!-- ===================================================
+     EXPLORE
+=================================================== -->
+
+<section class="experiences" id="experiences">
+
+  <h2 class="section-heading" data-i18n="expHeading">
+    Every experience is uniquely special
+  </h2>
+
+  <div class="experience-navigation">
+
+    <div class="experience-tabs" role="tablist">
+
+      <button class="experience-tab active"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              data-category="history">
+        <span class="tab-icon" aria-hidden="true">🏛</span>
+        <span data-i18n="expHistory">CULTURAL HISTORY</span>
+      </button>
+
+      <button class="experience-tab"
+              type="button"
+              role="tab"
+              data-category="adventure">
+        <span class="tab-icon" aria-hidden="true">⛰</span>
+        <span data-i18n="expAdventure">ADVENTURE</span>
+      </button>
+
+      <button class="experience-tab"
+              type="button"
+              role="tab"
+              data-category="nature">
+        <span class="tab-icon" aria-hidden="true">🌿</span>
+        <span data-i18n="expNature">NATURE</span>
+      </button>
+
+      <button class="experience-tab"
+              type="button"
+              role="tab"
+              data-category="food">
+        <span class="tab-icon" aria-hidden="true">🍜</span>
+        <span data-i18n="expFood">GASTRONOMY</span>
+      </button>
+
+      <button class="experience-tab"
+              type="button"
+              role="tab"
+              data-category="experience">
+        <span class="tab-icon" aria-hidden="true">🎨</span>
+        <span data-i18n="expExperiential">EXPERIENTIAL</span>
+      </button>
+
+      <button class="experience-tab"
+              type="button"
+              role="tab"
+              data-category="entertainment">
+        <span class="tab-icon" aria-hidden="true">🎭</span>
+        <span data-i18n="expEntertainment">ENTERTAINMENT</span>
+      </button>
+
+      <button class="experience-tab"
+              type="button"
+              role="tab"
+              data-category="exclusive">
+        <span class="tab-icon" aria-hidden="true">✦</span>
+        <span data-i18n="expExclusive">EXCLUSIVE</span>
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="experience-panel">
+
+    <div class="experience-banner">
+
+      <img id="experienceImage"
+           src="./dunhuang-mural.png"
+           alt="Dunhuang">
+
+      <div class="experience-banner-content">
+
+        <p class="experience-label" data-i18n="panelLabel">
+          DISCOVER DUNHUANG
+        </p>
+
+        <h2 class="experience-title" id="experienceTitle">
+          Cultural History
+        </h2>
+
+        <p class="experience-description" id="experienceText"></p>
+
+      </div>
+
+    </div>
+
+    <div class="experience-card-grid" id="experienceCards"></div>
+
+  </div>
+
+</section>
+
+<!-- ===================================================
+     JOURNEY HERO
+=================================================== -->
+
+<section class="journey" id="journey">
+
+  <img
+    src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1800"
+    alt="Desert landscape"
+    loading="lazy"
+  >
+
+  <div class="journey-content">
+
+    <p class="journey-label" data-i18n="journeyLabel">
+      THE JOURNEY CONTINUES
+    </p>
+
+    <h2 data-i18n="journeyTitle">
+      Experience Dunhuang
+    </h2>
+
+    <p data-i18n="journeyText">
+      Explore the history, art and landscapes of Dunhuang.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- ===================================================
+     JOURNEY — FOUR NEW CARDS
+=================================================== -->
+
+<section class="journey-planning" id="journeyPlanning">
+
+  <div class="journey-planning-container">
+
+    <div class="journey-planning-heading">
+
+      <p class="journey-planning-label">
+        YOUR DUNHUANG TRAVEL GUIDE
+      </p>
+
+      <h2 data-i18n="planningTitle">
+        Plan Your Journey
+      </h2>
+
+      <p data-i18n="planningSubtitle">
+        Everything you need to know before visiting Dunhuang.
+      </p>
+
+    </div>
+
+    <div class="journey-planning-grid">
+
+      <!-- CARD 1: TICKET BOOKING -->
+
+      <button
+        class="journey-simple-card"
+        type="button"
+        data-planning="ticket"
+      >
+
+        <div class="journey-simple-icon" aria-hidden="true">
+
+          <svg viewBox="0 0 64 64">
+
+            <path d="M10 18H54V27C48 27 48 37 54 37V46H10V37C16 37 16 27 10 27Z"/>
+
+            <path d="M32 18V46" stroke-dasharray="3 5"/>
+
+            <path d="M19 25H25M19 32H25M19 39H25"/>
+
+          </svg>
+
+        </div>
+
+        <h3 data-i18n="planningTicketTitle">
+          Ticket Booking
+        </h3>
+
+        <span class="journey-simple-arrow" aria-hidden="true">
+          →
+        </span>
+
+      </button>
+
+      <!-- CARD 2: TRANSPORTATION -->
+
+      <button
+        class="journey-simple-card"
+        type="button"
+        data-planning="transport"
+      >
+
+        <div class="journey-simple-icon" aria-hidden="true">
+
+          <svg viewBox="0 0 64 64">
+
+            <rect x="13" y="9" width="38" height="43" rx="8"/>
+
+            <path d="M13 19H51"/>
+
+            <rect x="19" y="24" width="26" height="13" rx="2"/>
+
+            <circle cx="23" cy="44" r="2"/>
+
+            <circle cx="41" cy="44" r="2"/>
+
+            <path d="M20 52V57M44 52V57"/>
+
+          </svg>
+
+        </div>
+
+        <h3 data-i18n="planningTransportTitle">
+          Transportation
+        </h3>
+
+        <span class="journey-simple-arrow" aria-hidden="true">
+          →
+        </span>
+
+      </button>
+
+      <!-- CARD 3: ACCOMMODATION -->
+
+      <button
+        class="journey-simple-card"
+        type="button"
+        data-planning="hotel"
+      >
+
+        <div class="journey-simple-icon" aria-hidden="true">
+
+          <svg viewBox="0 0 64 64">
+
+            <path d="M10 55V22L32 10L54 22V55Z"/>
+
+            <path d="M6 24L32 7L58 24"/>
+
+            <path d="M25 55V37H39V55"/>
+
+            <rect x="15" y="29" width="7" height="8"/>
+
+            <rect x="42" y="29" width="7" height="8"/>
+
+            <path d="M7 55H57"/>
+
+          </svg>
+
+        </div>
+
+        <h3 data-i18n="planningHotelTitle">
+          Accommodation
+        </h3>
+
+        <span class="journey-simple-arrow" aria-hidden="true">
+          →
+        </span>
+
+      </button>
+
+      <!-- CARD 4: BEST TIME TO VISIT -->
+
+      <button
+        class="journey-simple-card"
+        type="button"
+        data-planning="season"
+      >
+
+        <div class="journey-simple-icon" aria-hidden="true">
+
+          <svg viewBox="0 0 64 64">
+
+            <rect x="9" y="14" width="46" height="42" rx="5"/>
+
+            <path d="M9 25H55"/>
+
+            <path d="M20 8V20M44 8V20"/>
+
+            <circle cx="32" cy="40" r="8"/>
+
+            <path d="M32 28V25M32 55V52M20 40H17M47 40H44"/>
+
+            <path d="M23 31L21 29M43 51L41 49M41 31L43 29M21 51L23 49"/>
+
+          </svg>
+
+        </div>
+
+        <h3 data-i18n="planningSeasonTitle">
+          Best Time to Visit
+        </h3>
+
+        <span class="journey-simple-arrow" aria-hidden="true">
+          →
+        </span>
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ===================================================
+     STORIES
+=================================================== -->
+
+<section class="stories" id="stories">
+
+  <div class="stories-container">
+
+    <div class="stories-heading">
+
+      <p class="stories-label">
+        DUNHUANG · STORIES THROUGH TIME
+      </p>
+
+      <h2 id="storiesTitle">
+        Where Stories Become Journeys
+      </h2>
+
+      <p id="storiesIntro"></p>
+
+    </div>
+
+    <div class="story-grid" id="storyGrid"></div>
+
+  </div>
+
+</section>
+
+<!-- ===================================================
+     INFORMATION DIALOG
+=================================================== -->
+
+<dialog class="info-dialog" id="infoDialog">
+
+  <div class="info-dialog-content">
+
+    <button
+      class="info-dialog-close"
+      id="infoDialogClose"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+    <div class="info-dialog-icon" id="infoDialogIcon"></div>
+
+    <h2 id="infoDialogTitle"></h2>
+
+    <p class="info-dialog-description" id="infoDialogDescription"></p>
+
+    <div class="info-dialog-details" id="infoDialogDetails"></div>
+
+    <p class="info-dialog-notice" id="infoDialogNotice"></p>
+
+  </div>
+
+</dialog>
+
+<!-- ===================================================
+     FAQ
+=================================================== -->
+
+<section class="faq-section" id="faq">
+
+  <div class="faq-container">
+
+    <h2 class="faq-title" data-i18n="faqTitle">
+      Frequently Asked Questions
+    </h2>
+
+    <div class="faq-list">
+
+      <details class="faq-item">
+
+        <summary data-i18n="faqQ1">
+          Where is Dunhuang located?
+        </summary>
+
+        <p data-i18n="faqA1"></p>
+
+      </details>
+
+      <details class="faq-item">
+
+        <summary data-i18n="faqQ2">
+          What are the best places to visit?
+        </summary>
+
+        <p data-i18n="faqA2"></p>
+
+      </details>
+
+      <details class="faq-item">
+
+        <summary data-i18n="faqQ3">
+          When is the best time to visit?
+        </summary>
+
+        <p data-i18n="faqA3"></p>
+
+      </details>
+
+      <details class="faq-item">
+
+        <summary data-i18n="faqQ4">
+          Why is Dunhuang important?
+        </summary>
+
+        <p data-i18n="faqA4"></p>
+
+      </details>
+
+      <details class="faq-item">
+
+        <summary data-i18n="faqQ5">
+          Do I need to book tickets?
+        </summary>
+
+        <p data-i18n="faqA5"></p>
+
+      </details>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ===================================================
+     FOOTER
+=================================================== -->
+
+<footer class="footer" id="footer">
+
+  <div class="footer-quote">
+
+    <div class="footer-ornament">
+      ✦
+    </div>
+
+    <h2 data-i18n="footerQuote">
+      The journey ends, but the stories live on.
+    </h2>
+
+    <p data-i18n="footerQuoteSub">
+      A Thousand Years, A Thousand Stories
+    </p>
+
+  </div>
+
+  <div class="footer-main">
+
+    <div class="footer-column">
+
+      <h3 class="footer-brand-logo">
+        DUNHUANG<span>.</span>
+      </h3>
+
+      <p data-i18n="footerAbout">
+        Discover the timeless beauty of Dunhuang.
+      </p>
+
+    </div>
+
+    <div class="footer-column">
+
+      <h4 data-i18n="footerQuickLinks">
+        Quick Links
+      </h4>
+
+      <nav>
+
+        <a href="#home" data-i18n="navHome">HOME</a>
+
+        <a href="#experiences" data-i18n="navExplore">EXPLORE</a>
+
+        <a href="#journey" data-i18n="navJourney">JOURNEY</a>
+
+        <a href="#stories" data-i18n="navStories">STORIES</a>
+
+        <a href="#faq" data-i18n="navFAQ">FAQ</a>
+
+      </nav>
+
+    </div>
+
+    <div class="footer-column">
+
+      <h4 data-i18n="footerExploreTitle">
+        Explore Dunhuang
+      </h4>
+
+      <nav>
+
+        <a href="#experiences" data-footer-category="history"
+           data-i18n="expHistory">CULTURAL HISTORY</a>
+
+        <a href="#experiences" data-footer-category="adventure"
+           data-i18n="expAdventure">ADVENTURE</a>
+
+        <a href="#experiences" data-footer-category="nature"
+           data-i18n="expNature">NATURE</a>
+
+        <a href="#experiences" data-footer-category="food"
+           data-i18n="expFood">GASTRONOMY</a>
+
+        <a href="#experiences" data-footer-category="experience"
+           data-i18n="expExperiential">EXPERIENTIAL</a>
+
+      </nav>
+
+    </div>
+
+    <div class="footer-column">
+
+      <h4 data-i18n="footerContactTitle">
+        Contact Us
+      </h4>
+
+      <p data-i18n="footerContactDescription">
+        Have questions about our project?
+      </p>
+
+      <a class="footer-email" href="mailto:yourproject@example.com">
+        ✉ yourproject@example.com
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+
+    <p>
+      © <span id="footerYear">2026</span> DUNHUANG.
+      <span data-i18n="footerRights">All Rights Reserved.</span>
+    </p>
+
+  </div>
+
+</footer>
+
+<!-- ===================================================
+     FLOATING BUTTONS
+=================================================== -->
+
+<div class="floating-controls">
+
+  <button
+    class="ai-floating"
+    id="aiFloating"
+    type="button"
+    aria-label="Open virtual guide"
+  >
+    ✦
+  </button>
+
+  <a href="#home" class="back-to-top" aria-label="Back to top">
+    ↑
+  </a>
+
+</div>
+
+<!-- ===================================================
+     AI GUIDE
+=================================================== -->
+
+<div class="ai-window" id="aiWindow" hidden>
+
+  <div class="ai-header">
+
+    <div>
+
+      <h3 data-i18n="aiTitle">
+        ✦ DUNHUANG GUIDE
+      </h3>
+
+      <p data-i18n="aiSubtitle">
+        Your virtual guide
+      </p>
+
+    </div>
+
+    <button class="ai-close" id="aiClose" type="button">
+      ×
+    </button>
+
+  </div>
+
+  <div class="ai-messages" id="aiMessages" role="log" aria-live="polite"></div>
+
+  <div class="ai-context" id="aiContext"></div>
+
+  <div class="ai-suggestions" id="aiSuggestions"></div>
+
+  <form class="ai-input-area" id="aiForm">
+
+    <input
+      type="text"
+      id="aiInput"
+      data-placeholder="aiPlaceholder"
+      placeholder="Ask me a question..."
+      required
+    >
+
+    <button type="submit" aria-label="Send">
+      ➤
+    </button>
+
+  </form>
+
+</div>
+
+<script>
+
+/* ===================================================
+   15. COMPLETE TRANSLATIONS
+=================================================== */
+
+const translations = {
+
+  /* ---------------- ENGLISH ---------------- */
+
+  en: {
+
+    navHome: "HOME",
+    navExplore: "EXPLORE",
+    navJourney: "JOURNEY",
+    navStories: "STORIES",
+    navFAQ: "FAQ",
+
+    seniorMode: "Senior Mode",
+
+    heroSmall: "THE ANCIENT SILK ROAD",
+    heroSubtitle: "A Thousand Years, A Thousand Stories",
+    heroButton: "BEGIN THE JOURNEY →",
+
+    searchPlaceholder: "How can I help you explore Dunhuang?",
+    searchCaption: "✦ Ask our virtual guide about history, culture and travel",
+
+    expHeading: "Every experience is uniquely special",
+
+    expHistory: "CULTURAL HISTORY",
+    expAdventure: "ADVENTURE",
+    expNature: "NATURE",
+    expFood: "GASTRONOMY",
+    expExperiential: "EXPERIENTIAL",
+    expEntertainment: "ENTERTAINMENT",
+    expExclusive: "EXCLUSIVE",
+
+    panelLabel: "DISCOVER DUNHUANG",
+
+    journeyLabel: "THE JOURNEY CONTINUES",
+    journeyTitle: "Experience Dunhuang",
+    journeyText: "Explore the history, art and landscapes of Dunhuang.",
+
+    planningTitle: "Plan Your Journey",
+    planningSubtitle: "Everything you need to know before visiting Dunhuang.",
+
+    planningTicketTitle: "Ticket Booking",
+    planningTicketDesc: "Book Mogao Caves tickets in advance to plan your visit.",
+
+    planningTransportTitle: "Transportation",
+    planningTransportDesc: "Flights, trains and local transportation to Dunhuang.",
+
+    planningHotelTitle: "Accommodation",
+    planningHotelDesc: "Desert camping, hotels and guesthouses for every budget.",
+
+    planningSeasonTitle: "Best Time to Visit",
+    planningSeasonDesc: "Weather, festivals and clothing tips for your trip.",
+
+    faqTitle: "Frequently Asked Questions",
+
+    faqQ1: "Where is Dunhuang located?",
+    faqA1: "Dunhuang is located in Gansu Province, northwestern China.",
+
+    faqQ2: "What are the best places to visit?",
+    faqA2: "Popular attractions include the Mogao Caves, Mingsha Mountain, Crescent Lake and Yumen Pass.",
+
+    faqQ3: "When is the best time to visit?",
+    faqA3: "Spring and autumn are generally comfortable. April to June and September to October are popular periods.",
+
+    faqQ4: "Why is Dunhuang important?",
+    faqA4: "Dunhuang connected ancient trade routes and encouraged cultural exchange between different civilizations.",
+
+    faqQ5: "Do I need to book tickets?",
+    faqA5: "Advance booking is recommended for the Mogao Caves. Check official ticket information before visiting.",
+
+    footerQuote: "The journey ends, but the stories live on.",
+    footerQuoteSub: "A Thousand Years, A Thousand Stories",
+
+    footerAbout: "Discover the timeless beauty of Dunhuang, where history, art and the Silk Road meet.",
+
+    footerQuickLinks: "Quick Links",
+    footerExploreTitle: "Explore Dunhuang",
+
+    footerContactTitle: "Contact Us",
+    footerContactDescription: "Have questions about our project? We'd love to hear from you.",
+
+    footerRights: "All Rights Reserved.",
+
+    aiTitle: "✦ DUNHUANG GUIDE",
+    aiSubtitle: "Your virtual guide",
+    aiPlaceholder: "Ask me a question...",
+    aiWelcome: "Welcome to Dunhuang! Ask me about its history, attractions and cultural stories. This demo uses prepared answers.",
+    aiContext: "Currently exploring",
+    aiSpeak: "🔊 Listen",
+    aiFallback: "I don't have a prepared answer yet. Try asking about the Silk Road, Mogao Caves, Crescent Lake, food or the Nine-Colored Deer."
+
+  },
+
+  /* ---------------- CHINESE ---------------- */
+
+  zh: {
+
+    navHome: "首页",
+    navExplore: "探索",
+    navJourney: "旅程",
+    navStories: "历史故事",
+    navFAQ: "常见问题",
+
+    seniorMode: "长辈模式",
+
+    heroSmall: "古丝绸之路",
+    heroSubtitle: "千年时光，万千故事",
+    heroButton: "开启探索之旅 →",
+
+    searchPlaceholder: "有什么关于敦煌的问题想了解？",
+    searchCaption: "✦ 询问虚拟导览助手，探索历史、文化与旅游",
+
+    expHeading: "每一种体验，都独一无二",
+
+    expHistory: "历史文化",
+    expAdventure: "沙漠探险",
+    expNature: "自然风光",
+    expFood: "敦煌美食",
+    expExperiential: "文化体验",
+    expEntertainment: "文化活动",
+    expExclusive: "特色探索",
+
+    panelLabel: "探索敦煌",
+
+    journeyLabel: "旅程仍在继续",
+    journeyTitle: "亲自走进敦煌",
+    journeyText: "探索敦煌的历史、艺术与自然风光。",
+
+    planningTitle: "规划你的敦煌之旅",
+    planningSubtitle: "出发之前，了解旅行所需的实用信息。",
+
+    planningTicketTitle: "门票预约",
+    planningTicketDesc: "莫高窟实行预约及限流管理，建议提前预约。",
+
+    planningTransportTitle: "交通指南",
+    planningTransportDesc: "飞机、火车及市内交通，了解如何抵达敦煌。",
+
+    planningHotelTitle: "住宿推荐",
+    planningHotelDesc: "沙漠露营、市区酒店和特色民宿，根据预算选择。",
+
+    planningSeasonTitle: "最佳季节",
+    planningSeasonDesc: "了解适合游览敦煌的月份、天气和穿衣建议。",
+
+    faqTitle: "常见问题",
+
+    faqQ1: "敦煌位于中国哪里？",
+    faqA1: "敦煌位于中国西北部的甘肃省，是古丝绸之路上的重要城市。",
+
+    faqQ2: "敦煌有哪些值得游览的景点？",
+    faqA2: "著名景点包括莫高窟、鸣沙山、月牙泉和玉门关。",
+
+    faqQ3: "什么时候去敦煌旅游比较合适？",
+    faqA3: "春秋两季通常比较适合游览。4月至6月以及9月至10月是较受欢迎的时段。",
+
+    faqQ4: "敦煌为什么具有重要的历史意义？",
+    faqA4: "敦煌连接了不同的贸易路线，并促进了多个文明之间的文化交流。",
+
+    faqQ5: "参观莫高窟需要提前预约吗？",
+    faqA5: "建议提前预约，并在出行前查看官方购票信息。",
+
+    footerQuote: "旅程终有尽时，故事千年不息。",
+    footerQuoteSub: "千年时光，万千故事",
+
+    footerAbout: "探索敦煌跨越千年的文化之美，感受历史、艺术与丝绸之路的交汇。",
+
+    footerQuickLinks: "快速导航",
+    footerExploreTitle: "探索敦煌",
+
+    footerContactTitle: "联系我们",
+    footerContactDescription: "如果你对我们的项目有任何疑问，欢迎联系我们。",
+
+    footerRights: "版权所有。",
+
+    aiTitle: "✦ 敦煌智能导览",
+    aiSubtitle: "陪伴你的文化探索之旅",
+    aiPlaceholder: "请输入你的问题……",
+    aiWelcome: "欢迎来到敦煌！你可以询问敦煌历史、文化故事和旅游景点。目前使用预设知识库进行演示。",
+    aiContext: "当前正在探索",
+    aiSpeak: "🔊 朗读",
+    aiFallback: "这个问题暂时没有预设答案。你可以询问丝绸之路、莫高窟、月牙泉、敦煌美食或九色鹿的故事。"
+
+  },
+
+  /* ---------------- BAHASA MELAYU ---------------- */
+
+  ms: {
+
+    navHome: "UTAMA",
+    navExplore: "TEROKAI",
+    navJourney: "KEMBARA",
+    navStories: "KISAH",
+    navFAQ: "SOALAN LAZIM",
+
+    seniorMode: "Mod Warga Emas",
+
+    heroSmall: "LALUAN SUTERA PURBA",
+    heroSubtitle: "Seribu Tahun, Seribu Kisah",
+    heroButton: "MULAKAN PENGEMBARAAN →",
+
+    searchPlaceholder: "Bagaimana saya boleh membantu anda meneroka Dunhuang?",
+    searchCaption: "✦ Tanya panduan maya tentang sejarah, budaya dan pelancongan",
+
+    expHeading: "Setiap pengalaman mempunyai keistimewaan tersendiri",
+
+    expHistory: "SEJARAH BUDAYA",
+    expAdventure: "PENGEMBARAAN",
+    expNature: "ALAM SEMULA JADI",
+    expFood: "GASTRONOMI",
+    expExperiential: "PENGALAMAN",
+    expEntertainment: "HIBURAN",
+    expExclusive: "EKSKLUSIF",
+
+    panelLabel: "TEROKAI DUNHUANG",
+
+    journeyLabel: "PENGEMBARAAN DITERUSKAN",
+    journeyTitle: "Alami Dunhuang",
+    journeyText: "Terokai sejarah, seni dan landskap Dunhuang.",
+
+    planningTitle: "Rancang Perjalanan Anda",
+    planningSubtitle: "Maklumat penting sebelum melawat Dunhuang.",
+
+    planningTicketTitle: "Tempahan Tiket",
+    planningTicketDesc: "Tempah tiket Gua Mogao lebih awal untuk merancang lawatan.",
+
+    planningTransportTitle: "Pengangkutan",
+    planningTransportDesc: "Penerbangan, kereta api dan pengangkutan tempatan ke Dunhuang.",
+
+    planningHotelTitle: "Penginapan",
+    planningHotelDesc: "Perkhemahan gurun, hotel dan rumah tamu untuk setiap bajet.",
+
+    planningSeasonTitle: "Masa Terbaik untuk Melawat",
+    planningSeasonDesc: "Cuaca, perayaan dan panduan pakaian untuk perjalanan anda.",
+
+    faqTitle: "Soalan Lazim",
+
+    faqQ1: "Di manakah Dunhuang terletak?",
+    faqA1: "Dunhuang terletak di Wilayah Gansu, barat laut China.",
+
+    faqQ2: "Apakah tempat menarik di Dunhuang?",
+    faqA2: "Tempat popular termasuk Gua Mogao, Gunung Mingsha, Tasik Bulan Sabit dan Laluan Yumen.",
+
+    faqQ3: "Bilakah masa terbaik untuk melawat Dunhuang?",
+    faqA3: "Musim bunga dan musim luruh biasanya sesuai untuk melawat Dunhuang.",
+
+    faqQ4: "Mengapakah Dunhuang penting dalam sejarah?",
+    faqA4: "Dunhuang menghubungkan laluan perdagangan dan pertukaran budaya antara tamadun.",
+
+    faqQ5: "Perlukah menempah tiket Gua Mogao lebih awal?",
+    faqA5: "Tempahan awal digalakkan. Semak maklumat tiket rasmi sebelum berkunjung.",
+
+    footerQuote: "Perjalanan berakhir, namun kisah terus hidup.",
+    footerQuoteSub: "Seribu Tahun, Seribu Kisah",
+
+    footerAbout: "Terokai keindahan Dunhuang, tempat sejarah, seni dan Laluan Sutera bertemu.",
+
+    footerQuickLinks: "Pautan Pantas",
+    footerExploreTitle: "Terokai Dunhuang",
+
+    footerContactTitle: "Hubungi Kami",
+    footerContactDescription: "Ada soalan tentang projek kami? Sila hubungi kami.",
+
+    footerRights: "Hak Cipta Terpelihara.",
+
+    aiTitle: "✦ PANDUAN DUNHUANG",
+    aiSubtitle: "Panduan maya anda",
+    aiPlaceholder: "Tanya soalan...",
+    aiWelcome: "Selamat datang ke Dunhuang! Tanya tentang sejarah, tarikan dan kisah budaya. Demo ini menggunakan jawapan yang telah disediakan.",
+    aiContext: "Sedang meneroka",
+    aiSpeak: "🔊 Dengar",
+    aiFallback: "Saya belum mempunyai jawapan untuk soalan itu. Cuba tanya tentang Laluan Sutera, Gua Mogao, makanan atau Rusa Sembilan Warna."
+
+  }
+
+};
+
+/* ===================================================
+   16. EXPLORE DATA
+=================================================== */
+
+const experienceData = {
+
+  history: {
+
+    title: {
+      en: "Cultural History",
+      zh: "历史文化",
+      ms: "Sejarah Budaya"
+    },
+
+    description: {
+      en: "Discover the history of Dunhuang and the cultural heritage of the ancient Silk Road.",
+      zh: "探索敦煌的悠久历史与古丝绸之路的文化遗产。",
+      ms: "Terokai sejarah Dunhuang dan warisan budaya Laluan Sutera purba."
+    },
+
+    image: "./dunhuang-mural.png",
+
+    cards: [
+
+      {
+        image: "./sichouzhilu.png",
+        title: {
+          en: "The Silk Road",
+          zh: "丝绸之路",
+          ms: "Laluan Sutera"
+        },
+        desc: {
+          en: "An ancient route connecting different civilizations.",
+          zh: "连接不同文明的古代贸易路线。",
+          ms: "Laluan yang menghubungkan pelbagai tamadun."
+        }
+      },
+
+      {
+        image: "./mogaoku.png",
+        title: {
+          en: "Mogao Caves",
+          zh: "莫高窟",
+          ms: "Gua Mogao"
+        },
+        desc: {
+          en: "Explore centuries of Buddhist art.",
+          zh: "探索跨越多个世纪的佛教艺术。",
+          ms: "Terokai seni Buddha berabad-abad lamanya."
+        }
+      },
+
+      {
+        image: "./dunhuang-mural.png",
+        title: {
+          en: "Dunhuang Murals",
+          zh: "敦煌壁画",
+          ms: "Lukisan Dinding Dunhuang"
+        },
+        desc: {
+          en: "Discover ancient artistic traditions.",
+          zh: "欣赏敦煌珍贵的壁画艺术。",
+          ms: "Kenali tradisi seni purba."
+        }
+      }
+
+    ]
+
+  },
+
+  adventure: {
+
+    title: {
+      en: "Adventure",
+      zh: "沙漠探险",
+      ms: "Pengembaraan"
+    },
+
+    description: {
+      en: "Explore Dunhuang's golden dunes and desert landscapes.",
+      zh: "探索敦煌金色沙丘与壮丽的沙漠景观。",
+      ms: "Terokai bukit pasir keemasan dan landskap gurun."
+    },
+
+    image: "./shamo.png",
+
+    cards: [
+
+      {
+        image: "./mingshashan.png",
+        title: {
+          en: "Mingsha Mountain",
+          zh: "鸣沙山",
+          ms: "Gunung Mingsha"
+        },
+        desc: {
+          en: "Explore golden sand dunes.",
+          zh: "探索金色沙丘。",
+          ms: "Terokai bukit pasir."
+        }
+      },
+
+      {
+        image: "./shamo.png",
+        title: {
+          en: "Desert Exploration",
+          zh: "沙漠探索",
+          ms: "Penerokaan Gurun"
+        },
+        desc: {
+          en: "Experience the desert landscape.",
+          zh: "感受沙漠自然景观。",
+          ms: "Nikmati landskap gurun."
+        }
+      },
+
+      {
+        image: "./riluo.png",
+        title: {
+          en: "Desert Sunset",
+          zh: "沙漠日落",
+          ms: "Matahari Terbenam"
+        },
+        desc: {
+          en: "Enjoy the beauty of the sunset.",
+          zh: "欣赏沙漠日落。",
+          ms: "Nikmati matahari terbenam."
+        }
+      }
+
+    ]
+
+  },
+
+  nature: {
+
+    title: {
+      en: "Nature",
+      zh: "自然风光",
+      ms: "Alam Semula Jadi"
+    },
+
+    description: {
+      en: "Discover peaceful oases and beautiful desert landscapes.",
+      zh: "探索敦煌的宁静绿洲与辽阔沙漠。",
+      ms: "Terokai oasis dan keindahan gurun."
+    },
+
+    image: "./yueyaquan.png",
+
+    cards: [
+
+      {
+        image: "./yueyaquan.png",
+        title: {
+          en: "Crescent Lake",
+          zh: "月牙泉",
+          ms: "Tasik Bulan Sabit"
+        },
+        desc: {
+          en: "An oasis surrounded by dunes.",
+          zh: "被沙丘环绕的绿洲。",
+          ms: "Oasis yang dikelilingi bukit pasir."
+        }
+      },
+
+      {
+        image: "./shamo.png",
+        title: {
+          en: "Golden Dunes",
+          zh: "金色沙丘",
+          ms: "Bukit Pasir Emas"
+        },
+        desc: {
+          en: "Explore the natural beauty of sand.",
+          zh: "欣赏沙丘的自然之美。",
+          ms: "Nikmati keindahan pasir."
+        }
+      },
+
+      {
+        image: "./mo.png",
+        title: {
+          en: "Desert Landscapes",
+          zh: "沙漠景观",
+          ms: "Landskap Gurun"
+        },
+        desc: {
+          en: "Discover peaceful scenery.",
+          zh: "探索宁静的自然风光。",
+          ms: "Terokai pemandangan yang tenang."
+        }
+      }
+
+    ]
+
+  },
+
+  food: {
+
+    title: {
+      en: "Gastronomy",
+      zh: "敦煌美食",
+      ms: "Gastronomi"
+    },
+
+    description: {
+      en: "Discover traditional flavours and local food culture.",
+      zh: "探索敦煌传统美食和当地饮食文化。",
+      ms: "Kenali makanan dan budaya tempatan."
+    },
+
+    image: "./huangmian.png",
+
+    cards: [
+
+      {
+        image: "./huangmian.png",
+        title: {
+          en: "Yellow Noodles",
+          zh: "敦煌黄面",
+          ms: "Mi Kuning Dunhuang"
+        },
+        desc: {
+          en: "A famous local noodle dish.",
+          zh: "具有代表性的敦煌面食。",
+          ms: "Hidangan mi tempatan."
+        }
+      },
+
+      {
+        image: "./Foood.png",
+        title: {
+          en: "Local Cuisine",
+          zh: "地方美食",
+          ms: "Masakan Tempatan"
+        },
+        desc: {
+          en: "Explore traditional dishes.",
+          zh: "探索地方传统菜肴。",
+          ms: "Terokai hidangan tradisional."
+        }
+      },
+
+      {
+        image: "./food.jpg",
+        title: {
+          en: "Food Culture",
+          zh: "饮食文化",
+          ms: "Budaya Makanan"
+        },
+        desc: {
+          en: "Enjoy local flavours.",
+          zh: "品味敦煌特色风味。",
+          ms: "Nikmati cita rasa tempatan."
+        }
+      }
+
+    ]
+
+  },
+
+  experience: {
+
+    title: {
+      en: "Cultural Experiences",
+      zh: "文化体验",
+      ms: "Pengalaman Budaya"
+    },
+
+    description: {
+      en: "Explore Dunhuang's traditional art and heritage.",
+      zh: "体验敦煌传统艺术与文化遗产。",
+      ms: "Terokai seni dan warisan Dunhuang."
+    },
+
+    image: "./dunhuang-mural.png",
+
+    cards: [
+
+      {
+        image: "./bihua.png",
+        title: {
+          en: "Mural Art",
+          zh: "壁画艺术",
+          ms: "Seni Mural"
+        },
+        desc: {
+          en: "Discover mural traditions.",
+          zh: "探索传统壁画艺术。",
+          ms: "Kenali seni mural."
+        }
+      },
+
+      {
+        image: "./wenhua3.jpg",
+        title: {
+          en: "Traditional Art",
+          zh: "传统艺术",
+          ms: "Seni Tradisional"
+        },
+        desc: {
+          en: "Experience artistic traditions.",
+          zh: "体验传统艺术。",
+          ms: "Alami seni tradisional."
+        }
+      },
+
+      {
+        image: "./wenhuayichan.png",
+        title: {
+          en: "Cultural Heritage",
+          zh: "文化遗产",
+          ms: "Warisan Budaya"
+        },
+        desc: {
+          en: "Discover Dunhuang's cultural legacy.",
+          zh: "探索敦煌文化遗产。",
+          ms: "Terokai warisan Dunhuang."
+        }
+      }
+
+    ]
+
+  },
+
+  entertainment: {
+
+    title: {
+      en: "Entertainment",
+      zh: "文化活动",
+      ms: "Hiburan"
+    },
+
+    description: {
+      en: "Discover performances and creative cultural activities.",
+      zh: "探索敦煌文化表演与艺术活动。",
+      ms: "Terokai persembahan dan aktiviti budaya."
+    },
+
+    image: "./wenhua1.png",
+
+    cards: [
+
+      {
+        image: "./biaoyan.png",
+        title: {
+          en: "Cultural Performances",
+          zh: "文化表演",
+          ms: "Persembahan Budaya"
+        },
+        desc: {
+          en: "Enjoy traditional performances.",
+          zh: "欣赏传统文化表演。",
+          ms: "Nikmati persembahan tradisional."
+        }
+      },
+
+      {
+        image: "./huodong.png",
+        title: {
+          en: "Art Activities",
+          zh: "艺术活动",
+          ms: "Aktiviti Seni"
+        },
+        desc: {
+          en: "Explore creative activities.",
+          zh: "探索创意艺术活动。",
+          ms: "Terokai aktiviti seni."
+        }
+      },
+
+      {
+        image: "./huodong1.png",
+        title: {
+          en: "Cultural Events",
+          zh: "文化节庆",
+          ms: "Acara Budaya"
+        },
+        desc: {
+          en: "Discover cultural celebrations.",
+          zh: "探索文化节庆活动。",
+          ms: "Kenali acara budaya."
+        }
+      }
+
+    ]
+
+  },
+
+  exclusive: {
+
+    title: {
+      en: "Exclusive Experiences",
+      zh: "特色探索",
+      ms: "Pengalaman Eksklusif"
+    },
+
+    description: {
+      en: "Discover unique ways to explore Dunhuang.",
+      zh: "以不同方式探索敦煌。",
+      ms: "Temui cara unik untuk meneroka Dunhuang."
+    },
+
+    image: "./dunhuang-mural.png",
+
+    cards: [
+
+      {
+        image: "./dunhuang-mural.png",
+        title: {
+          en: "Heritage Journey",
+          zh: "文化遗产之旅",
+          ms: "Kembara Warisan"
+        },
+        desc: {
+          en: "Explore cultural history.",
+          zh: "探索文化历史。",
+          ms: "Terokai sejarah budaya."
+        }
+      },
+
+      {
+        image: "./shamo.png",
+        title: {
+          en: "Desert Experience",
+          zh: "沙漠体验",
+          ms: "Pengalaman Gurun"
+        },
+        desc: {
+          en: "Explore desert scenery.",
+          zh: "探索沙漠风光。",
+          ms: "Nikmati pemandangan gurun."
+        }
+      },
+
+      {
+        image: "./yueyaquan.png",
+        title: {
+          en: "Discover Dunhuang",
+          zh: "发现敦煌",
+          ms: "Terokai Dunhuang"
+        },
+        desc: {
+          en: "See Dunhuang in a new way.",
+          zh: "从新的角度发现敦煌。",
+          ms: "Lihat Dunhuang dengan cara baharu."
+        }
+      }
+
+    ]
+
+  }
+
+};
+
+/* ===================================================
+   17. JOURNEY PLANNING DATA
+=================================================== */
+
+const planningData = {
+
+  ticket: {
+
+    titleKey: "planningTicketTitle",
+    descKey: "planningTicketDesc",
+
+    details: {
+
+      en: [
+        "Mogao Caves use a reservation and visitor management system.",
+        "Book tickets in advance, especially during holidays and peak travel seasons.",
+        "Check official information for ticket types, prices and opening hours."
+      ],
+
+      zh: [
+        "莫高窟实行预约及游客限流管理。",
+        "建议提前预约，特别是在节假日和旅游旺季。",
+        "出发前请查看官方公布的门票类型、价格及开放时间。"
+      ],
+
+      ms: [
+        "Gua Mogao menggunakan sistem tempahan dan kawalan pelawat.",
+        "Tempah tiket lebih awal, terutama pada musim puncak.",
+        "Semak jenis tiket, harga dan waktu operasi rasmi."
+      ]
+
+    }
+
+  },
+
+  transport: {
+
+    titleKey: "planningTransportTitle",
+    descKey: "planningTransportDesc",
+
+    details: {
+
+      en: [
+        "By air: Check available flights to Dunhuang Mogao International Airport.",
+        "By train: Check railway services and connections to Dunhuang.",
+        "Local travel: Use local buses, taxis or suitable transport services."
+      ],
+
+      zh: [
+        "飞机：查询前往敦煌莫高国际机场的航班。",
+        "火车：查询敦煌站及相关铁路交通信息。",
+        "市内交通：可根据目的地选择公交、出租车等交通方式。"
+      ],
+
+      ms: [
+        "Penerbangan: Semak penerbangan ke Lapangan Terbang Dunhuang Mogao.",
+        "Kereta api: Semak perkhidmatan kereta api ke Dunhuang.",
+        "Pengangkutan tempatan: Gunakan bas, teksi atau perkhidmatan lain."
+      ]
+
+    }
+
+  },
+
+  hotel: {
+
+    titleKey: "planningHotelTitle",
+    descKey: "planningHotelDesc",
+
+    details: {
+
+      en: [
+        "City hotels are convenient for restaurants and local transportation.",
+        "Guesthouses may offer a more personal travel experience.",
+        "Desert camping requires checking weather, safety and local regulations."
+      ],
+
+      zh: [
+        "市区酒店：交通和餐饮通常比较方便。",
+        "特色民宿：适合希望体验当地生活氛围的游客。",
+        "沙漠露营：需要提前确认天气、安全条件及当地管理规定。"
+      ],
+
+      ms: [
+        "Hotel bandar memudahkan akses ke restoran dan pengangkutan.",
+        "Rumah tamu menawarkan pengalaman yang lebih peribadi.",
+        "Perkhemahan gurun memerlukan pemeriksaan cuaca dan keselamatan."
+      ]
+
+    }
+
+  },
+
+  season: {
+
+    titleKey: "planningSeasonTitle",
+    descKey: "planningSeasonDesc",
+
+    details: {
+
+      en: [
+        "Spring and autumn are generally comfortable for sightseeing.",
+        "Summer can be hot, especially during the daytime.",
+        "Bring sun protection and suitable clothing for temperature changes."
+      ],
+
+      zh: [
+        "春季和秋季通常更适合游览敦煌。",
+        "夏季白天气温可能较高，建议做好防晒。",
+        "沙漠地区昼夜温差可能较大，建议准备适合的衣物。"
+      ],
+
+      ms: [
+        "Musim bunga dan musim luruh biasanya selesa untuk melancong.",
+        "Musim panas boleh menjadi panas pada waktu siang.",
+        "Bawa perlindungan matahari dan pakaian yang sesuai."
+      ]
+
+    }
+
+  }
+
+};
+
+/* ===================================================
+   18. STORIES DATA
+=================================================== */
+
+const storiesData = [
+
+  {
+
+    id: "deer",
+    image: "./jiuselu.png",
+
+    dynasty: {
+      en: "Northern Wei",
+      zh: "北魏",
+      ms: "Wei Utara"
+    },
+
+    title: {
+      en: "The Legend of the Nine-Colored Deer",
+      zh: "九色鹿的传说",
+      ms: "Legenda Rusa Sembilan Warna"
+    },
+
+    description: {
+      en: "A nine-colored deer saves a drowning man but is later betrayed. The mural in Cave 257 tells this Buddhist story.",
+      zh: "释迦牟尼前世化为九色鹿拯救溺水者，却反被背叛。第257窟的壁画描绘了这个动人的本生故事。",
+      ms: "Seekor rusa sembilan warna menyelamatkan seorang lelaki yang hampir lemas tetapi kemudian dikhianati."
+    },
+
+    routes: [
+
+      {
+
+        name: {
+          en: "Mogao Cave 257",
+          zh: "莫高窟第257窟",
+          ms: "Gua Mogao 257"
+        },
+
+        tip: {
+          en: "Nine-Colored Deer mural",
+          zh: "九色鹿本生故事",
+          ms: "Lukisan Rusa Sembilan Warna"
+        },
+
+        detail: {
+          en: "Learn about the Nine-Colored Deer mural. Access depends on official cave arrangements.",
+          zh: "了解九色鹿本生故事与北魏壁画艺术。实际开放情况以景区安排为准。",
+          ms: "Kenali kisah Rusa Sembilan Warna. Akses bergantung pada aturan rasmi."
+        }
+
+      },
+
+      {
+
+        name: {
+          en: "Dunhuang Museum",
+          zh: "敦煌博物馆",
+          ms: "Muzium Dunhuang"
+        },
+
+        tip: {
+          en: "History and cultural exhibitions",
+          zh: "探索敦煌文化与艺术",
+          ms: "Pameran sejarah dan budaya"
+        },
+
+        detail: {
+          en: "Explore exhibitions about Silk Road history and Dunhuang heritage.",
+          zh: "通过博物馆展览进一步了解敦煌历史、丝路文化与艺术传统。",
+          ms: "Terokai pameran tentang sejarah Laluan Sutera."
+        }
+
+      },
+
+      {
+
+        name: {
+          en: "Mingsha Mountain",
+          zh: "鸣沙山",
+          ms: "Gunung Mingsha"
+        },
+
+        tip: {
+          en: "Desert-inspired experience",
+          zh: "在沙漠中延续神鹿的想象",
+          ms: "Pengalaman bertema gurun"
+        },
+
+        detail: {
+          en: "Enjoy the desert scenery while reflecting on the legend.",
+          zh: "欣赏鸣沙山的沙漠风光，在自然景观中回味九色鹿传说。",
+          ms: "Nikmati pemandangan gurun sambil menghayati legenda."
+        }
+
+      }
+
+    ]
+
+  },
+
+  {
+
+    id: "apsara",
+    image: "./feile.png",
+
+    dynasty: {
+      en: "Tang Dynasty",
+      zh: "唐代",
+      ms: "Dinasti Tang"
+    },
+
+    title: {
+      en: "The Paradise of Flying Apsaras",
+      zh: "飞天的极乐世界",
+      ms: "Syurga Apsara Terbang"
+    },
+
+    description: {
+      en: "Tang artists used graceful lines and rich colours to depict flying celestial musicians and visions of paradise.",
+      zh: "盛唐时期，画工们用飘逸的线条和丰富的色彩描绘漫天飞舞的伎乐天。",
+      ms: "Pelukis Dinasti Tang menggunakan garisan yang lembut dan warna yang kaya."
+    },
+
+    routes: [
+
+      {
+
+        name: {
+          en: "Mogao Cave 320",
+          zh: "莫高窟第320窟",
+          ms: "Gua Mogao 320"
+        },
+
+        tip: {
+          en: "Tang dynasty flying apsaras",
+          zh: "了解唐代飞天艺术",
+          ms: "Seni apsara Dinasti Tang"
+        },
+
+        detail: {
+          en: "Explore the art of Tang dynasty flying apsaras. Check cave access.",
+          zh: "了解第320窟的唐代飞天艺术。具体开放情况需提前确认。",
+          ms: "Terokai seni apsara Dinasti Tang. Semak akses gua."
+        }
+
+      },
+
+      {
+
+        name: {
+          en: "Dunhuang Dance Performance",
+          zh: "敦煌乐舞表演",
+          ms: "Persembahan Tarian Dunhuang"
+        },
+
+        tip: {
+          en: "Dance inspired by Dunhuang art",
+          zh: "又见敦煌主题演出",
+          ms: "Tarian berinspirasikan Dunhuang"
+        },
+
+        detail: {
+          en: "Enjoy a performance inspired by Dunhuang culture, subject to schedules.",
+          zh: "观看敦煌文化主题演出，例如《又见敦煌》。需提前确认演出场次。",
+          ms: "Nikmati persembahan budaya Dunhuang mengikut jadual."
+        }
+
+      },
+
+      {
+
+        name: {
+          en: "Desert Stargazing",
+          zh: "沙漠星空体验",
+          ms: "Melihat Bintang di Gurun"
+        },
+
+        tip: {
+          en: "Explore the desert night sky",
+          zh: "感受星空与飞天意境",
+          ms: "Nikmati langit malam"
+        },
+
+        detail: {
+          en: "Enjoy the desert night sky in permitted areas. Check weather and safety.",
+          zh: "在允许活动的区域欣赏沙漠星空，并遵守当地安全规定。",
+          ms: "Nikmati langit malam di kawasan yang dibenarkan."
+        }
+
+      }
+
+    ]
+
+  },
+
+  {
+
+    id: "library",
+    image: "./cangjingdong.png",
+
+    dynasty: {
+      en: "1900",
+      zh: "1900年",
+      ms: "Tahun 1900"
+    },
+
+    title: {
+      en: "The Discovery of the Library Cave",
+      zh: "藏经洞的发现",
+      ms: "Penemuan Gua Manuskrip"
+    },
+
+    description: {
+      en: "In 1900, Wang Yuanlu discovered a hidden cave containing thousands of manuscripts.",
+      zh: "道士王圆箓无意间打开了一扇封闭多年的门，大量敦煌遗书重见天日。",
+      ms: "Pada tahun 1900, Wang Yuanlu menemui gua tersembunyi yang mengandungi ribuan manuskrip."
+    },
+
+    routes: [
+
+      {
+
+        name: {
+          en: "Library Cave Exhibition",
+          zh: "莫高窟藏经洞陈列馆",
+          ms: "Pameran Gua Manuskrip"
+        },
+
+        tip: {
+          en: "Discover the Library Cave",
+          zh: "探索藏经洞的发现历史",
+          ms: "Sejarah Gua Manuskrip"
+        },
+
+        detail: {
+          en: "Learn about the discovery and historical value of the manuscripts.",
+          zh: "了解1900年藏经洞被发现的历史，以及敦煌文献的文化价值。",
+          ms: "Ketahui sejarah penemuan gua dan kepentingan manuskrip."
+        }
+
+      },
+
+      {
+
+        name: {
+          en: "Dunhuang Digital Exhibitions",
+          zh: "敦煌研究院相关数字展示",
+          ms: "Pameran Digital Dunhuang"
+        },
+
+        tip: {
+          en: "Explore digital heritage",
+          zh: "数字化了解敦煌文献",
+          ms: "Warisan digital Dunhuang"
+        },
+
+        detail: {
+          en: "Explore digital resources related to Dunhuang manuscripts and art.",
+          zh: "通过数字展示了解敦煌文献、石窟艺术与数字保护成果。",
+          ms: "Terokai sumber digital tentang manuskrip dan seni Dunhuang."
+        }
+
+      },
+
+      {
+
+        name: {
+          en: "Dunhuang Bookstore",
+          zh: "敦煌书局",
+          ms: "Kedai Buku Dunhuang"
+        },
+
+        tip: {
+          en: "Continue the reading journey",
+          zh: "选购敦煌学主题书籍",
+          ms: "Teruskan perjalanan membaca"
+        },
+
+        detail: {
+          en: "Explore books about Dunhuang studies and the Silk Road.",
+          zh: "通过敦煌主题图书继续了解敦煌学与丝绸之路。",
+          ms: "Terokai buku tentang kajian Dunhuang dan Laluan Sutera."
+        }
+
+      }
+
+    ]
+
+  }
+
+];
+
+const storiesTranslations = {
+
+  en: {
+
+    title: "Where Stories Become Journeys",
+
+    intro: "Every Dunhuang mural tells a story. Discover the history behind these artworks and explore the places connected to their cultural heritage.",
+
+    divider: "Travel Through Time ↓",
+
+    route: "Your Experience Route",
+
+    button: "VIEW FULL ROUTE →",
+
+    notice: "This is a suggested cultural route, not an official itinerary. Check opening hours and booking rules."
+
+  },
+
+  zh: {
+
+    title: "从千年故事，走向真实旅程",
+
+    intro: "每一幅敦煌壁画背后，都隐藏着一个故事。跟随历史的脚步，探索故事中的文化与今日敦煌的风景。",
+
+    divider: "穿越千年，重走丝路 ↓",
+
+    route: "你的体验路线",
+
+    button: "查看完整路线 →",
+
+    notice: "本路线为文化主题推荐，并非官方行程。洞窟开放和预约规则请以实际公布的信息为准。"
+
+  },
+
+  ms: {
+
+    title: "Dari Kisah ke Pengembaraan",
+
+    intro: "Setiap lukisan dinding Dunhuang mempunyai kisah tersendiri.",
+
+    divider: "Merentas Masa ↓",
+
+    route: "Laluan Pengalaman Anda",
+
+    button: "LIHAT LALUAN PENUH →",
+
+    notice: "Ini cadangan laluan budaya, bukan jadual rasmi. Semak waktu operasi dan tempahan."
+
+  }
+
+};
+
+/* ===================================================
+   19. WEBSITE STATE
+=================================================== */
+
+let currentLanguage = "en";
+let currentCategory = "history";
+
+const navbar = document.getElementById("navbar");
+
+const experienceImage = document.getElementById("experienceImage");
+const experienceTitle = document.getElementById("experienceTitle");
+const experienceText = document.getElementById("experienceText");
+const experienceCards = document.getElementById("experienceCards");
+
+const infoDialog = document.getElementById("infoDialog");
+
+/* ===================================================
+   20. EXPLORE CATEGORY SWITCHING
+=================================================== */
+
+function showCategory(category) {
+
+  const data = experienceData[category];
+
+  if (!data) return;
+
+  currentCategory = category;
+
+  const lang = currentLanguage;
+
+  experienceImage.src = data.image;
+  experienceImage.alt = data.title[lang];
+
+  experienceTitle.textContent = data.title[lang];
+  experienceText.textContent = data.description[lang];
+
+  experienceCards.replaceChildren();
+
+  data.cards.forEach(card => {
+
+    const article = document.createElement("article");
+    article.className = "experience-card";
+
+    const img = document.createElement("img");
+    img.src = card.image;
+    img.alt = card.title[lang];
+    img.loading = "lazy";
+
+    const content = document.createElement("div");
+    content.className = "experience-card-content";
+
+    const h3 = document.createElement("h3");
+    h3.textContent = card.title[lang];
+
+    const p = document.createElement("p");
+    p.textContent = card.desc[lang];
+
+    content.append(h3, p);
+    article.append(img, content);
+
+    experienceCards.append(article);
+
+  });
+
+  document.querySelectorAll(".experience-tab").forEach(tab => {
+
+    const active = tab.dataset.category === category;
+
+    tab.classList.toggle("active", active);
+    tab.setAttribute("aria-selected", String(active));
+
+  });
+
+  updateAIContext();
+
+}
+
+document.querySelectorAll(".experience-tab").forEach(tab => {
+
+  tab.addEventListener("click", () => {
+    showCategory(tab.dataset.category);
+  });
+
+});
+
+/* ===================================================
+   21. INFORMATION DIALOG
+=================================================== */
+
+function openInfoDialog(icon, title, description, details, notice = "") {
+
+  const iconElement = document.getElementById("infoDialogIcon");
+
+  iconElement.replaceChildren();
+
+  if (icon instanceof Element) {
+    iconElement.append(icon);
+  } else {
+    iconElement.textContent = icon;
+  }
+
+  document.getElementById("infoDialogTitle").textContent = title;
+
+  document.getElementById("infoDialogDescription").textContent = description;
+
+  document.getElementById("infoDialogNotice").textContent = notice;
+
+  const container = document.getElementById("infoDialogDetails");
+
+  container.replaceChildren();
+
+  details.forEach(item => {
+
+    const div = document.createElement("div");
+    div.className = "info-dialog-detail";
+
+    if (typeof item === "string") {
+
+      div.textContent = "✦ " + item;
+
+    } else {
+
+      const strong = document.createElement("strong");
+      strong.textContent = item.title;
+
+      const p = document.createElement("p");
+      p.textContent = item.text;
+
+      div.append(strong, p);
+
+    }
+
+    container.append(div);
+
+  });
+
+  if (!infoDialog.open) {
+    infoDialog.showModal();
+  }
+
+}
+
+document.getElementById("infoDialogClose").addEventListener("click", () => {
+  infoDialog.close();
+});
+
+infoDialog.addEventListener("click", event => {
+
+  if (event.target === infoDialog) {
+    infoDialog.close();
+  }
+
+});
+
+/* ===================================================
+   22. JOURNEY CARD POPUPS
+=================================================== */
+
+document.querySelectorAll("[data-planning]").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    const type = button.dataset.planning;
+
+    const data = planningData[type];
+
+    const lang = currentLanguage;
+    const t = translations[lang];
+
+    const iconSVG = button
+      .querySelector(".journey-simple-icon svg")
+      .cloneNode(true);
+
+    openInfoDialog(
+      iconSVG,
+      t[data.titleKey],
+      t[data.descKey],
+      data.details[lang]
+    );
+
+  });
+
+});
+
+/* ===================================================
+   23. RENDER STORIES
+=================================================== */
+
+function renderStories() {
+
+  const lang = currentLanguage;
+  const t = storiesTranslations[lang];
+
+  document.getElementById("storiesTitle").textContent = t.title;
+  document.getElementById("storiesIntro").textContent = t.intro;
+
+  const grid = document.getElementById("storyGrid");
+
+  grid.replaceChildren();
+
+  storiesData.forEach(story => {
+
+    const card = document.createElement("article");
+    card.className = "story-card";
+
+    /* Image */
+
+    const imageWrapper = document.createElement("div");
+    imageWrapper.className = "story-image";
+
+    const img = document.createElement("img");
+    img.src = story.image;
+    img.alt = story.title[lang];
+    img.loading = "lazy";
+
+    const dynasty = document.createElement("span");
+    dynasty.className = "story-dynasty";
+    dynasty.textContent = story.dynasty[lang];
+
+    imageWrapper.append(img, dynasty);
+
+    /* Description */
+
+    const body = document.createElement("div");
+    body.className = "story-body";
+
+    const title = document.createElement("h3");
+    title.textContent = story.title[lang];
+
+    const desc = document.createElement("p");
+    desc.textContent = story.description[lang];
+
+    body.append(title, desc);
+
+    /* Divider */
+
+    const divider = document.createElement("div");
+    divider.className = "story-divider";
+
+    const dividerText = document.createElement("span");
+    dividerText.textContent = t.divider;
+
+    divider.append(dividerText);
+
+    /* Route */
+
+    const routeSection = document.createElement("section");
+    routeSection.className = "story-route";
+
+    const routeHeading = document.createElement("h4");
+    routeHeading.textContent = t.route;
+
+    const list = document.createElement("ol");
+    list.className = "story-route-list";
+
+    story.routes.forEach((route, index) => {
+
+      const item = document.createElement("li");
+      item.className = "story-route-item";
+
+      const number = document.createElement("span");
+      number.className = "story-route-number";
+      number.textContent = index + 1;
+
+      const location = document.createElement("div");
+      location.className = "story-route-location";
+
+      const strong = document.createElement("strong");
+      strong.textContent = route.name[lang];
+
+      const small = document.createElement("small");
+      small.textContent = route.tip[lang];
+
+      location.append(strong, small);
+      item.append(number, location);
+
+      list.append(item);
+
+    });
+
+    /* Button */
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "story-route-button";
+    button.textContent = t.button;
+
+    button.addEventListener("click", () => {
+      openStoryRoute(story);
+    });
+
+    routeSection.append(routeHeading, list, button);
+
+    card.append(imageWrapper, body, divider, routeSection);
+
+    grid.append(card);
+
+  });
+
+}
+
+function openStoryRoute(story) {
+
+  const lang = currentLanguage;
+
+  const details = story.routes.map((route, index) => ({
+    title: (index + 1) + ". " + route.name[lang],
+    text: route.detail[lang]
+  }));
+
+  openInfoDialog(
+    "✦",
+    story.title[lang],
+    story.description[lang],
+    details,
+    storiesTranslations[lang].notice
+  );
+
+}
+
+/* ===================================================
+   24. LANGUAGE SWITCHING
+=================================================== */
+
+function changeLanguage(lang) {
+
+  if (!translations[lang]) return;
+
+  currentLanguage = lang;
+
+  const t = translations[lang];
+
+  /* Translate static content */
+
+  document.querySelectorAll("[data-i18n]").forEach(element => {
+
+    const key = element.dataset.i18n;
+
+    if (t[key] !== undefined) {
+      element.textContent = t[key];
+    }
+
+  });
+
+  /* Translate placeholders */
+
+  document.querySelectorAll("[data-placeholder]").forEach(element => {
+
+    const key = element.dataset.placeholder;
+
+    if (t[key] !== undefined) {
+      element.placeholder = t[key];
+    }
+
+  });
+
+  /* Update document language */
+
+  document.documentElement.lang =
+    lang === "zh" ? "zh-CN" :
+    lang === "ms" ? "ms" :
+    "en";
+
+  /* Update active language button */
+
+  document.querySelectorAll(".language-switcher button").forEach(button => {
+
+    button.classList.toggle(
+      "active",
+      button.dataset.lang === lang
+    );
+
+  });
+
+  /* Re-render translated sections */
+
+  showCategory(currentCategory);
+
+  renderStories();
+
+  /* Close old-language popup */
+
+  if (infoDialog.open) {
+    infoDialog.close();
+  }
+
+  /* Refresh AI text */
+
+  updateAIContext();
+
+  /* Save preference */
+
+  try {
+    localStorage.setItem("dunhuang-language", lang);
+  } catch (error) {}
+
+  updateNavigationHeight();
+
+}
+
+document.querySelectorAll(".language-switcher button").forEach(button => {
+
+  button.addEventListener("click", () => {
+    changeLanguage(button.dataset.lang);
+  });
+
+});
+
+/* ===================================================
+   25. AI GUIDE KNOWLEDGE
+=================================================== */
+
+const aiKnowledge = [
+
+  {
+
+    keywords: [
+      "丝绸之路",
+      "丝路",
+      "silk road",
+      "silk route",
+      "laluan sutera"
+    ],
+
+    answer: {
+
+      en: "The Silk Road was a network of ancient trade routes connecting China with other regions. Dunhuang was an important gateway for trade and cultural exchange.",
+
+      zh: "丝绸之路是连接中国与其他地区的古代贸易路线网络。敦煌是其中重要的门户，促进了商品、宗教和文化的交流。",
+
+      ms: "Laluan Sutera ialah rangkaian perdagangan purba. Dunhuang menjadi tempat penting untuk perdagangan dan pertukaran budaya."
+
+    }
+
+  },
+
+  {
+
+    keywords: [
+      "九色鹿",
+      "神鹿",
+      "nine-colored",
+      "nine colored",
+      "sembilan warna"
+    ],
+
+    answer: {
+
+      en: "The Nine-Colored Deer is a Buddhist story shown in Mogao Cave 257. The deer saves a drowning man, but the man later betrays it.",
+
+      zh: "九色鹿本生故事绘于莫高窟第257窟。九色鹿救起溺水者，却遭到对方背叛。故事表达了感恩、诚信与善良的重要性。",
+
+      ms: "Kisah Rusa Sembilan Warna terdapat di Gua Mogao 257."
+
+    }
+
+  },
+
+  {
+
+    keywords: [
+      "飞天",
+      "apsara",
+      "flying"
+    ],
+
+    answer: {
+
+      en: "Flying Apsaras are famous figures in Dunhuang murals, shown floating with flowing ribbons.",
+
+      zh: "飞天是敦煌壁画中极具代表性的艺术形象，常以飘逸的衣带和空中飞舞的姿态出现。",
+
+      ms: "Apsara terbang ialah imej terkenal dalam lukisan dinding Dunhuang."
+
+    }
+
+  },
+
+  {
+
+    keywords: [
+      "藏经洞",
+      "library cave",
+      "manuscript",
+      "manuskrip",
+      "王圆箓"
+    ],
+
+    answer: {
+
+      en: "The Library Cave at Mogao was discovered in 1900 and contained thousands of historical manuscripts.",
+
+      zh: "藏经洞于1900年被发现，保存了大量古代写本与文献，为研究丝绸之路历史提供了重要资料。",
+
+      ms: "Gua Manuskrip ditemui pada tahun 1900 dan mengandungi ribuan dokumen."
+
+    }
+
+  },
+
+  {
+
+    keywords: [
+      "莫高窟",
+      "mogao",
+      "grotto",
+      "gua mogao",
+      "cave"
+    ],
+
+    answer: {
+
+      en: "The Mogao Caves preserve Buddhist murals and sculptures from many centuries.",
+
+      zh: "莫高窟是位于敦煌附近的著名佛教石窟群，保存了珍贵的壁画和彩塑。",
+
+      ms: "Gua Mogao ialah kompleks gua Buddha yang terkenal berhampiran Dunhuang."
+
+    }
+
+  },
+
+  {
+
+    keywords: [
+      "月牙泉",
+      "crescent lake",
+      "oasis",
+      "tasik bulan"
+    ],
+
+    answer: {
+
+      en: "Crescent Lake is a crescent-shaped oasis surrounded by sand dunes near Mingsha Mountain.",
+
+      zh: "月牙泉是位于鸣沙山附近的月牙形泉湖，被金色沙丘环绕。",
+
+      ms: "Tasik Bulan Sabit ialah oasis yang dikelilingi bukit pasir."
+
+    }
+
+  },
+
+  {
+
+    keywords: [
+      "美食",
+      "黄面",
+      "food",
+      "noodle",
+      "makanan",
+      "mi kuning"
+    ],
+
+    answer: {
+
+      en: "Dunhuang is known for local food such as yellow noodles.",
+
+      zh: "敦煌黄面是当地具有代表性的传统美食。",
+
+      ms: "Dunhuang terkenal dengan makanan tempatan seperti mi kuning."
+
+    }
+
+  },
+
+  {
+
+    keywords: [
+      "鸣沙山",
+      "沙漠",
+      "desert",
+      "mingsha",
+      "sand",
+      "gurun"
+    ],
+
+    answer: {
+
+      en: "Mingsha Mountain is famous for its large golden sand dunes.",
+
+      zh: "鸣沙山以壮丽的金色沙丘闻名，附近还有著名的月牙泉。",
+
+      ms: "Gunung Mingsha terkenal dengan bukit pasir keemasan."
+
+    }
+
+  },
+
+  {
+
+    keywords: [
+      "什么时候",
+      "几月",
+      "天气",
+      "best time",
+      "weather",
+      "season",
+      "masa terbaik",
+      "cuaca"
+    ],
+
+    answer: {
+
+      en: "Spring and autumn are generally comfortable times to visit Dunhuang.",
+
+      zh: "敦煌通常在春秋两季更适合旅游，建议提前查看天气预报。",
+
+      ms: "Musim bunga dan musim luruh biasanya sesuai untuk melawat Dunhuang."
+
+    }
+
+  },
+
+  {
+
+    keywords: [
+      "门票",
+      "预约",
+      "ticket",
+      "booking",
+      "reservation",
+      "tiket",
+      "tempahan"
+    ],
+
+    answer: {
+
+      en: "Advance booking is recommended for the Mogao Caves. Check official information.",
+
+      zh: "建议提前预约莫高窟门票。具体开放洞窟和预约规则请以官方信息为准。",
+
+      ms: "Tempahan awal digalakkan untuk Gua Mogao."
+
+    }
+
+  }
+
+];
+
+/* ===================================================
+   26. AI SUGGESTED QUESTIONS
+=================================================== */
+
+const suggestedQuestions = {
+
+  history: {
+
+    en: [
+      "What is the Silk Road?",
+      "What are the Mogao Caves?"
+    ],
+
+    zh: [
+      "什么是丝绸之路？",
+      "莫高窟有什么特别？"
+    ],
+
+    ms: [
+      "Apakah Laluan Sutera?",
+      "Apakah Gua Mogao?"
+    ]
+
+  },
+
+  adventure: {
+
+    en: [
+      "What is Mingsha Mountain?",
+      "Best time to visit?"
+    ],
+
+    zh: [
+      "鸣沙山有什么特色？",
+      "什么时候去敦煌？"
+    ],
+
+    ms: [
+      "Apakah Gunung Mingsha?",
+      "Bilakah masa terbaik?"
+    ]
+
+  },
+
+  nature: {
+
+    en: [
+      "What is Crescent Lake?",
+      "Tell me about the desert."
+    ],
+
+    zh: [
+      "月牙泉是什么？",
+      "敦煌的沙漠有什么特色？"
+    ],
+
+    ms: [
+      "Apakah Tasik Bulan Sabit?",
+      "Bagaimana keadaan gurun?"
+    ]
+
+  },
+
+  food: {
+
+    en: [
+      "What food should I try?",
+      "Tell me about yellow noodles."
+    ],
+
+    zh: [
+      "敦煌有什么美食？",
+      "敦煌黄面是什么？"
+    ],
+
+    ms: [
+      "Apakah makanan tempatan?",
+      "Apakah mi kuning?"
+    ]
+
+  },
+
+  experience: {
+
+    en: [
+      "Tell me about Flying Apsaras.",
+      "What are the Mogao Caves?"
+    ],
+
+    zh: [
+      "什么是敦煌飞天？",
+      "莫高窟有什么特色？"
+    ],
+
+    ms: [
+      "Apakah seni Apsara?",
+      "Apakah Gua Mogao?"
+    ]
+
+  },
+
+  entertainment: {
+
+    en: [
+      "Tell me about Flying Apsaras.",
+      "What is Dunhuang art?"
+    ],
+
+    zh: [
+      "敦煌飞天是什么？",
+      "敦煌艺术有什么特色？"
+    ],
+
+    ms: [
+      "Apakah seni Apsara?",
+      "Apakah seni Dunhuang?"
+    ]
+
+  },
+
+  exclusive: {
+
+    en: [
+      "What is the Silk Road?",
+      "What is Crescent Lake?"
+    ],
+
+    zh: [
+      "丝绸之路是什么？",
+      "月牙泉在哪里？"
+    ],
+
+    ms: [
+      "Apakah Laluan Sutera?",
+      "Apakah Tasik Bulan Sabit?"
+    ]
+
+  }
+
+};
+
+/* ===================================================
+   27. AI GUIDE FUNCTIONS
+=================================================== */
+
+const aiWindow = document.getElementById("aiWindow");
+const aiFloating = document.getElementById("aiFloating");
+const aiMessages = document.getElementById("aiMessages");
+const aiInput = document.getElementById("aiInput");
+const aiSuggestions = document.getElementById("aiSuggestions");
+
+function openAI() {
+
+  aiWindow.hidden = false;
+
+  aiFloating.setAttribute("aria-expanded", "true");
+
+  if (!aiMessages.children.length) {
+
+    addAIMessage(
+      translations[currentLanguage].aiWelcome,
+      "bot"
+    );
+
+  }
+
+  aiInput.focus();
+
+}
+
+function closeAI() {
+
+  aiWindow.hidden = true;
+
+  aiFloating.setAttribute("aria-expanded", "false");
+
+  if ("speechSynthesis" in window) {
+    speechSynthesis.cancel();
+  }
+
+}
+
+aiFloating.addEventListener("click", () => {
+
+  if (aiWindow.hidden) {
+    openAI();
+  } else {
+    closeAI();
+  }
+
+});
+
+document.getElementById("aiClose").addEventListener("click", closeAI);
+
+function speakText(text) {
+
+  if (!("speechSynthesis" in window)) return;
+
+  speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+
+  utterance.lang =
+    currentLanguage === "zh" ? "zh-CN" :
+    currentLanguage === "ms" ? "ms-MY" :
+    "en-US";
+
+  utterance.rate =
+    document.body.classList.contains("senior-mode")
+      ? 0.85
+      : 1;
+
+  speechSynthesis.speak(utterance);
+
+}
+
+function addAIMessage(text, type) {
+
+  const message = document.createElement("div");
+  message.className = "ai-message " + type;
+
+  const content = document.createElement("div");
+  content.textContent = text;
+
+  message.append(content);
+
+  if (type === "bot") {
+
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "ai-speak";
+    button.textContent = translations[currentLanguage].aiSpeak;
+
+    button.addEventListener("click", () => {
+      speakText(text);
+    });
+
+    message.append(button);
+
+  }
+
+  aiMessages.append(message);
+
+  aiMessages.scrollTop = aiMessages.scrollHeight;
+
+}
+
+function getAIAnswer(question) {
+
+  const q = question.toLowerCase();
+
+  for (const item of aiKnowledge) {
+
+    if (
+      item.keywords.some(keyword =>
+        q.includes(keyword.toLowerCase())
+      )
+    ) {
+
+      return item.answer[currentLanguage];
+
+    }
+
+  }
+
+  return translations[currentLanguage].aiFallback;
+
+}
+
+function askAI(question) {
+
+  const q = question.trim();
+
+  if (!q) return;
+
+  openAI();
+
+  addAIMessage(q, "user");
+
+  addAIMessage(getAIAnswer(q), "bot");
+
+}
+
+document.getElementById("aiForm").addEventListener("submit", event => {
+
+  event.preventDefault();
+
+  const question = aiInput.value.trim();
+
+  aiInput.value = "";
+
+  askAI(question);
+
+});
+
+document.getElementById("heroSearch").addEventListener("submit", event => {
+
+  event.preventDefault();
+
+  const input = document.getElementById("heroSearchInput");
+
+  const question = input.value.trim();
+
+  input.value = "";
+
+  askAI(question);
+
+});
+
+function updateAIContext() {
+
+  const data = experienceData[currentCategory];
+
+  if (!data) return;
+
+  const lang = currentLanguage;
+
+  document.getElementById("aiContext").textContent =
+    translations[lang].aiContext + ": " + data.title[lang];
+
+  aiSuggestions.replaceChildren();
+
+  suggestedQuestions[currentCategory][lang].forEach(question => {
+
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.textContent = question;
+
+    button.addEventListener("click", () => {
+      askAI(question);
+    });
+
+    aiSuggestions.append(button);
+
+  });
+
+}
+
+/* ===================================================
+   28. SENIOR MODE
+=================================================== */
+
+const seniorButton = document.getElementById("seniorButton");
+
+function setSeniorMode(enabled) {
+
+  document.body.classList.toggle("senior-mode", enabled);
+
+  seniorButton.classList.toggle("active", enabled);
+
+  seniorButton.setAttribute("aria-pressed", String(enabled));
+
+  try {
+    localStorage.setItem(
+      "dunhuang-senior-mode",
+      String(enabled)
+    );
+  } catch (error) {}
+
+  updateNavigationHeight();
+
+}
+
+seniorButton.addEventListener("click", () => {
+
+  setSeniorMode(
+    !document.body.classList.contains("senior-mode")
+  );
+
+});
+
+/* ===================================================
+   29. FOOTER CATEGORY LINKS
+=================================================== */
+
+document.querySelectorAll("[data-footer-category]").forEach(link => {
+
+  link.addEventListener("click", () => {
+
+    showCategory(link.dataset.footerCategory);
+
+  });
+
+});
+
+/* ===================================================
+   30. NAVIGATION
+=================================================== */
+
+function updateNavbar() {
+
+  navbar.classList.toggle(
+    "scrolled",
+    window.scrollY > 60
+  );
+
+}
+
+function updateNavigationHeight() {
+
+  document.documentElement.style.setProperty(
+    "--nav-height",
+    navbar.offsetHeight + "px"
+  );
+
+}
+
+window.addEventListener("scroll", updateNavbar, {
+  passive: true
+});
+
+window.addEventListener("resize", updateNavigationHeight);
+
+if ("ResizeObserver" in window) {
+
+  new ResizeObserver(updateNavigationHeight).observe(navbar);
+
+}
+
+/* ===================================================
+   31. INITIALIZATION
+=================================================== */
+
+document.getElementById("footerYear").textContent =
+  new Date().getFullYear();
+
+let savedLanguage = "en";
+let savedSeniorMode = false;
+
+try {
+
+  savedLanguage =
+    localStorage.getItem("dunhuang-language") || "en";
+
+  savedSeniorMode =
+    localStorage.getItem("dunhuang-senior-mode") === "true";
+
+} catch (error) {}
+
+setSeniorMode(savedSeniorMode);
+
+changeLanguage(
+  translations[savedLanguage]
+    ? savedLanguage
+    : "en"
+);
+
+updateNavbar();
+updateNavigationHeight();
+
+</script>
+
+</body>
+</html>

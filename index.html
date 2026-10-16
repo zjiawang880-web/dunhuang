@@ -205,29 +205,136 @@ summary:focus-visible {
   overflow: hidden;
 }
 
+
+/* ==========================================
+   DUNHUANG HERO — MOVING MURAL
+   敦煌首页动态壁画
+========================================== */
+
 .hero-background {
-  position: absolute;
-  inset: 0;
-  background: #332d26;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #332d26;
 }
 
 .hero-background img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    transform-origin: center center;
+
+    animation: muralMovement 15s ease-in-out infinite alternate;
+
+    will-change: transform;
 }
+
+/* 壁画缓慢放大并轻微移动 */
+
+@keyframes muralMovement {
+
+    0% {
+        transform: scale(1.06) translate(0, 0);
+    }
+
+    50% {
+        transform: scale(1.12) translate(-1%, -0.5%);
+    }
+
+    100% {
+        transform: scale(1.07) translate(1%, 0.5%);
+    }
+
+}
+
+
+
+/* ==========================================
+   DUNHUANG HERO — GOLDEN LIGHT
+   敦煌壁画流动光影
+========================================== */
 
 .hero-overlay {
-  position: absolute;
-  inset: 0;
+    position: absolute;
+    inset: 0;
 
-  background: linear-gradient(
-    rgba(12,12,12,0.45),
-    rgba(12,12,12,0.7)
-  );
+    background: linear-gradient(
+        180deg,
+        rgba(12, 12, 12, 0.45) 0%,
+        rgba(12, 12, 12, 0.38) 45%,
+        rgba(12, 12, 12, 0.68) 100%
+    );
 
-  backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+
+    pointer-events: none;
+    overflow: hidden;
 }
+
+/* 柔和的金色光影 */
+
+.hero-overlay::after {
+    content: "";
+
+    position: absolute;
+    inset: -50%;
+
+    background: radial-gradient(
+        ellipse at center,
+        rgba(255, 210, 130, 0.24) 0%,
+        rgba(222, 159, 76, 0.12) 24%,
+        rgba(190, 122, 55, 0.05) 40%,
+        transparent 65%
+    );
+
+    transform: translate(-28%, -12%);
+
+    animation: goldenLight 17s ease-in-out infinite alternate;
+
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
+
+/* 光影从一侧缓慢移动到另一侧 */
+
+@keyframes goldenLight {
+
+    0% {
+        transform: translate(-28%, -12%) rotate(-8deg);
+        opacity: 0.45;
+    }
+
+    50% {
+        transform: translate(0%, 0%) rotate(0deg);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translate(28%, 12%) rotate(8deg);
+        opacity: 0.5;
+    }
+
+}
+
+/* 保证文字始终显示在光影上方 */
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* 用户设置减少动态效果时自动停止 */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-background img,
+    .hero-overlay::after {
+        animation: none !important;
+    }
+
+}
+
 
 .hero-circle {
   position: absolute;
@@ -1807,6 +1914,146 @@ body.senior-mode .ai-message {
         gap: 6px !important;
     }
 }
+
+/* ==========================================
+   JOURNEY TRAVEL GUIDE
+========================================== */
+
+.journey-guide {
+    background: #f5f0e6;
+    padding: 90px 6%;
+    color: #292723;
+}
+
+/* 标题区域 */
+
+.journey-guide-head {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 50px;
+}
+
+.journey-guide-head .eyebrow {
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: #93613e;
+    font-weight: bold;
+}
+
+.journey-guide-head h2 {
+    font-family: Georgia, serif;
+    font-size: 48px;
+    margin: 15px 0;
+    color: #493c2e;
+}
+
+.journey-guide-head p {
+    font-size: 17px;
+    color: #777067;
+    line-height: 1.8;
+}
+
+/* 四张卡片排列 */
+
+.journey-guide-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 1350px;
+    margin: 0 auto;
+}
+
+/* 卡片外观 */
+
+.guide-card {
+    background: #fffdf8;
+    padding: 35px 25px;
+    border: 1px solid #e5d8c5;
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+
+    transition: 0.3s ease;
+}
+
+/* 鼠标悬停 */
+
+.guide-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(65, 45, 25, 0.12);
+}
+
+/* 图标 */
+
+.guide-icon {
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+/* 标题 */
+
+.guide-card h3 {
+    font-size: 22px;
+    color: #493c2e;
+    margin-bottom: 15px;
+}
+
+/* 描述 */
+
+.guide-card p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #777067;
+    flex-grow: 1;
+}
+
+/* 按钮 */
+
+.guide-card button {
+    margin-top: 25px;
+
+    padding: 13px 18px;
+
+    border: 1px solid #9b7653;
+    background: transparent;
+    color: #785537;
+
+    font-size: 12px;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.guide-card button:hover {
+    background: #785537;
+    color: white;
+}
+
+/* 平板 */
+
+@media (max-width: 1000px) {
+    .journey-guide-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 手机 */
+
+@media (max-width: 600px) {
+    .journey-guide-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .journey-guide-head h2 {
+        font-size: 34px;
+    }
+
+    .journey-guide {
+        padding: 65px 6%;
+    }
+}
 </style>
 </head>
 
@@ -3306,19 +3553,22 @@ const planningData = {
     details: {
 
       en: [
-        "Mogao Caves use a reservation and visitor management system.",
+        "Mogao Caves offer different types of tickets, including Category A and Category B tickets.",
+        "Category A tickets usually provide a more complete visiting experience, while Category B tickets offer a shorter visit.",
         "Book tickets in advance, especially during holidays and peak travel seasons.",
         "Check official information for ticket types, prices and opening hours."
       ],
 
       zh: [
-        "莫高窟实行预约及游客限流管理。",
+        "莫高窟提供不同类型的参观门票，包括 A 类票和 B 类票。",
+        "A 类票通常提供更完整的参观体验，而 B 类票的参观内容相对较少。",
         "建议提前预约，特别是在节假日和旅游旺季。",
         "出发前请查看官方公布的门票类型、价格及开放时间。"
       ],
 
       ms: [
-        "Gua Mogao menggunakan sistem tempahan dan kawalan pelawat.",
+        "Gua Mogao menawarkan pelbagai jenis tiket, termasuk tiket Kategori A dan Kategori B.",
+        "Tiket Kategori A biasanya menawarkan pengalaman lawatan yang lebih lengkap, manakala tiket Kategori B menyediakan lawatan yang lebih ringkas.",
         "Tempah tiket lebih awal, terutama pada musim puncak.",
         "Semak jenis tiket, harga dan waktu operasi rasmi."
       ]
@@ -3333,26 +3583,30 @@ const planningData = {
     descKey: "planningTransportDesc",
 
     details: {
+    en: [
+        "By Air: Visitors can fly to Dunhuang Mogao International Airport. After arriving, they can take a taxi or use local transportation to reach the city centre.",
+        "By Train: Dunhuang Railway Station connects the city with other destinations in Gansu. Visitors can take a taxi or local bus from the station.",
+        "Mogao Caves: Visitors usually need to go to the Mogao Caves Digital Exhibition Centre first. Follow the official arrangements for transportation to the caves.",
+        "Mingsha Mountain and Crescent Lake: These attractions are located near Dunhuang city. Visitors can travel there by taxi or local bus.",
+        "Travel Tip: Check transportation schedules in advance, especially during holidays and peak travel seasons."
+    ],
 
-      en: [
-        "By air: Check available flights to Dunhuang Mogao International Airport.",
-        "By train: Check railway services and connections to Dunhuang.",
-        "Local travel: Use local buses, taxis or suitable transport services."
-      ],
+    zh: [
+        "飞机：游客可以乘坐飞机抵达敦煌莫高国际机场，之后乘坐出租车或其他交通工具前往市区。",
+        "火车：敦煌火车站连接甘肃省内及其他地区，游客可以从火车站乘坐出租车或公交车前往市区。",
+        "莫高窟：游客通常需要先前往莫高窟数字展示中心，再按照官方安排乘坐交通工具前往洞窟参观。",
+        "鸣沙山月牙泉：景区距离敦煌市区较近，游客可以选择乘坐出租车或当地公交车前往。",
+        "旅行建议：节假日和旅游旺季可能出现交通拥堵，建议提前了解交通路线及运营时间。"
+    ],
 
-      zh: [
-        "飞机：查询前往敦煌莫高国际机场的航班。",
-        "火车：查询敦煌站及相关铁路交通信息。",
-        "市内交通：可根据目的地选择公交、出租车等交通方式。"
-      ],
-
-      ms: [
-        "Penerbangan: Semak penerbangan ke Lapangan Terbang Dunhuang Mogao.",
-        "Kereta api: Semak perkhidmatan kereta api ke Dunhuang.",
-        "Pengangkutan tempatan: Gunakan bas, teksi atau perkhidmatan lain."
-      ]
-
-    }
+    ms: [
+        "Kapal Terbang: Pelawat boleh menaiki penerbangan ke Lapangan Terbang Antarabangsa Dunhuang Mogao. Selepas tiba, mereka boleh menaiki teksi atau pengangkutan tempatan ke pusat bandar.",
+        "Kereta Api: Stesen Kereta Api Dunhuang menghubungkan bandar ini dengan destinasi lain di Gansu. Pelawat boleh menaiki teksi atau bas tempatan dari stesen.",
+        "Gua Mogao: Pelawat biasanya perlu pergi ke Pusat Pameran Digital Gua Mogao terlebih dahulu dan mengikuti aturan pengangkutan rasmi ke gua.",
+        "Gunung Mingsha dan Tasik Bulan Sabit: Tarikan ini terletak berhampiran bandar Dunhuang. Pelawat boleh pergi ke sana dengan teksi atau bas tempatan.",
+        "Tip Perjalanan: Semak jadual pengangkutan lebih awal, terutamanya semasa cuti dan musim pelancongan."
+    ]
+}
 
   },
 
@@ -3362,27 +3616,30 @@ const planningData = {
     descKey: "planningHotelDesc",
 
     details: {
+    en: [
+        "City Centre Hotels: Staying in downtown Dunhuang is convenient for restaurants, shops, and local transportation. It is a good choice for first-time visitors.",
+        "Near Mingsha Mountain: Hotels and guesthouses near Mingsha Mountain and Crescent Lake are suitable for visitors who want to enjoy desert scenery and visit the attractions easily.",
+        "Desert Camping: Some camps offer tents, desert activities, and stargazing experiences. Facilities and comfort levels vary, so check the details before booking.",
+        "Budget Guide: Budget accommodation may cost around CNY 100–250 per night, mid-range hotels around CNY 250–500, and higher-end hotels CNY 500 or more. Prices may increase during peak seasons.",
+        "Travel Tip: Book accommodation early during summer holidays and popular travel periods. Check the location, transportation, and recent guest reviews before booking."
+    ],
 
-      en: [
-        "City hotels are convenient for restaurants and local transportation.",
-        "Guesthouses may offer a more personal travel experience.",
-        "Desert camping requires checking weather, safety and local regulations."
-      ],
+    zh: [
+        "敦煌市区酒店：住在敦煌市中心，附近通常有餐厅、商店和公共交通，出行比较方便，适合第一次来敦煌的游客。",
+        "鸣沙山附近住宿：鸣沙山月牙泉附近有酒店和民宿，适合喜欢沙漠风景、希望方便前往景区的游客。",
+        "沙漠露营：部分营地提供帐篷住宿、沙漠活动和观星体验。不同营地的设施与舒适程度有所不同，建议提前了解。",
+        "住宿预算：经济型住宿每晚约100–250元，中档酒店约250–500元，高档酒店通常在500元以上。旅游旺季价格可能上涨。",
+        "旅行建议：暑假及旅游旺季建议提前预订住宿，并查看酒店位置、交通条件及近期住客评价。"
+    ],
 
-      zh: [
-        "市区酒店：交通和餐饮通常比较方便。",
-        "特色民宿：适合希望体验当地生活氛围的游客。",
-        "沙漠露营：需要提前确认天气、安全条件及当地管理规定。"
-      ],
-
-      ms: [
-        "Hotel bandar memudahkan akses ke restoran dan pengangkutan.",
-        "Rumah tamu menawarkan pengalaman yang lebih peribadi.",
-        "Perkhemahan gurun memerlukan pemeriksaan cuaca dan keselamatan."
-      ]
-
-    }
-
+    ms: [
+        "Hotel di Pusat Bandar: Menginap di pusat bandar Dunhuang memudahkan pelawat mencari restoran, kedai dan pengangkutan tempatan. Pilihan ini sesuai untuk pelawat kali pertama.",
+        "Penginapan Berhampiran Gunung Mingsha: Hotel dan rumah tamu berhampiran Gunung Mingsha dan Tasik Bulan Sabit sesuai untuk pelawat yang ingin menikmati pemandangan padang pasir.",
+        "Perkhemahan di Padang Pasir: Sesetengah tapak perkhemahan menawarkan khemah, aktiviti padang pasir dan pengalaman melihat bintang. Kemudahan dan tahap keselesaan mungkin berbeza.",
+        "Panduan Bajet: Penginapan bajet mungkin berharga sekitar CNY 100–250 semalam, hotel sederhana sekitar CNY 250–500, dan hotel mewah CNY 500 atau lebih. Harga mungkin meningkat pada musim puncak.",
+        "Tip Perjalanan: Tempah penginapan lebih awal semasa cuti musim panas dan musim pelancongan. Semak lokasi, pengangkutan dan ulasan tetamu sebelum membuat tempahan."
+    ]
+}
   },
 
   season: {
@@ -3391,26 +3648,48 @@ const planningData = {
     descKey: "planningSeasonDesc",
 
     details: {
+    en: [
+        "Best Seasons: April to June and September to October are generally the best times to visit Dunhuang. The weather is usually more comfortable for outdoor activities and sightseeing.",
 
-      en: [
-        "Spring and autumn are generally comfortable for sightseeing.",
-        "Summer can be hot, especially during the daytime.",
-        "Bring sun protection and suitable clothing for temperature changes."
-      ],
+        "Spring (March–May): Temperatures gradually become warmer. Spring is suitable for sightseeing, but visitors should be prepared for wind, dust, and temperature changes.",
 
-      zh: [
-        "春季和秋季通常更适合游览敦煌。",
-        "夏季白天气温可能较高，建议做好防晒。",
-        "沙漠地区昼夜温差可能较大，建议准备适合的衣物。"
-      ],
+        "Summer (June–August): Summer is a popular travel season, but daytime temperatures can be very high. Visiting Mingsha Mountain in the early morning or late afternoon is recommended.",
 
-      ms: [
-        "Musim bunga dan musim luruh biasanya selesa untuk melancong.",
-        "Musim panas boleh menjadi panas pada waktu siang.",
-        "Bawa perlindungan matahari dan pakaian yang sesuai."
-      ]
+        "Autumn (September–November): Autumn offers cooler temperatures and generally pleasant weather. September and October are especially popular for exploring the desert and historical attractions.",
 
-    }
+        "Winter (December–February): Winter is cold and usually has fewer tourists. Visitors may enjoy a quieter experience, but some attractions and services may have reduced operating hours.",
+
+        "Travel Tip: Dunhuang has a dry desert climate with strong sunlight and large temperature differences between day and night. Bring sunscreen, water, comfortable shoes, and suitable clothing."
+    ],
+
+    zh: [
+        "最佳旅行时间：4月至6月以及9月至10月通常是前往敦煌旅游的理想时间。这段时间气候相对舒适，适合户外活动和景点参观。",
+
+        "春季（3月至5月）：气温逐渐回升，适合观光旅游。但春季可能出现大风、沙尘天气以及较大的温差，建议提前查看天气预报。",
+
+        "夏季（6月至8月）：夏季是敦煌的旅游旺季，但白天气温可能很高。建议选择清晨或傍晚前往鸣沙山月牙泉，避免在正午长时间进行户外活动。",
+
+        "秋季（9月至11月）：秋季气温逐渐下降，天气通常比较舒适。其中9月和10月尤其适合体验沙漠风光及参观历史文化景点。",
+
+        "冬季（12月至2月）：冬季气温较低，游客通常较少，适合喜欢安静旅行体验的人。但部分景点和旅游服务可能缩短开放时间。",
+
+        "旅行建议：敦煌属于干燥的沙漠气候，日照强烈，昼夜温差较大。建议准备防晒用品、饮用水、舒适的鞋子，以及适合温差变化的衣物。"
+    ],
+
+    ms: [
+        "Musim Terbaik: April hingga Jun dan September hingga Oktober biasanya merupakan masa terbaik untuk melawat Dunhuang. Cuaca lebih selesa untuk aktiviti luar dan lawatan.",
+
+        "Musim Bunga (Mac–Mei): Suhu semakin meningkat dan sesuai untuk bersiar-siar. Namun, pelawat perlu bersedia menghadapi angin, habuk dan perubahan suhu.",
+
+        "Musim Panas (Jun–Ogos): Musim panas merupakan musim pelancongan yang popular, tetapi suhu pada waktu siang boleh menjadi sangat tinggi. Lawatan ke Gunung Mingsha pada awal pagi atau lewat petang adalah lebih sesuai.",
+
+        "Musim Luruh (September–November): Musim luruh menawarkan suhu yang lebih sejuk dan cuaca yang biasanya selesa. September dan Oktober sangat sesuai untuk menikmati pemandangan padang pasir dan tempat bersejarah.",
+
+        "Musim Sejuk (Disember–Februari): Musim sejuk sangat sejuk dan biasanya mempunyai lebih sedikit pelancong. Pelawat boleh menikmati suasana yang lebih tenang, tetapi sesetengah tarikan mungkin mempunyai waktu operasi yang lebih pendek.",
+
+        "Tip Perjalanan: Dunhuang mempunyai iklim padang pasir yang kering, cahaya matahari yang kuat dan perbezaan suhu yang besar antara siang dan malam. Bawa pelindung matahari, air minuman, kasut yang selesa dan pakaian yang sesuai."
+    ]
+}
 
   }
 
@@ -3919,29 +4198,35 @@ infoDialog.addEventListener("click", event => {
    22. JOURNEY CARD POPUPS
 =================================================== */
 
+/* ==========================================
+   JOURNEY PAGE NAVIGATION
+   四张卡片跳转到独立页面
+========================================== */
+
 document.querySelectorAll("[data-planning]").forEach(button => {
 
-  button.addEventListener("click", () => {
+    button.addEventListener("click", () => {
 
-    const type = button.dataset.planning;
+        const type = button.dataset.planning;
 
-    const data = planningData[type];
+        // 每张卡片对应的新页面
+        const pages = {
+            ticket: "ticket.html",
+            transport: "transport.html",
+            hotel: "accommodation.html",
+            season: "season.html"
+        };
 
-    const lang = currentLanguage;
-    const t = translations[lang];
+        // 保留当前语言
+        const lang = currentLanguage || "en";
 
-    const iconSVG = button
-      .querySelector(".journey-simple-icon svg")
-      .cloneNode(true);
+        // 跳转到对应页面
+        if (pages[type]) {
+            window.location.href =
+                pages[type] + "?lang=" + encodeURIComponent(lang);
+        }
 
-    openInfoDialog(
-      iconSVG,
-      t[data.titleKey],
-      t[data.descKey],
-      data.details[lang]
-    );
-
-  });
+    });
 
 });
 

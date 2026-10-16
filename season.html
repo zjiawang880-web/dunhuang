@@ -1,0 +1,1830 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DUNHUANG | Best Time to Visit</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================
+   GLOBAL
+========================================= */
+:root {
+    --dark: #171c19;
+    --forest: #26342e;
+    --paper: #f5f0e6;
+    --gold: #d8b47c;
+    --ink: #292723;
+    --muted: #625f59;
+    --border: #ddd2bc;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "DM Sans", "Noto Sans SC", sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* =========================================
+   NAVIGATION
+========================================= */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 90px;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding: 15px 4%;
+    background: rgba(23,28,25,.97);
+    backdrop-filter: blur(12px);
+    color: white;
+}
+
+.site-logo {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    white-space: nowrap;
+}
+
+.site-logo span {
+    color: var(--gold);
+}
+
+.site-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.lang-btn,
+.senior-btn,
+.back-home {
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid rgba(255,255,255,.5);
+    background: transparent;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.lang-btn.active,
+.lang-btn:hover,
+.senior-btn.active,
+.senior-btn:hover,
+.back-home:hover {
+    background: var(--gold);
+    color: var(--dark);
+}
+
+.senior-btn,
+.back-home {
+    border-color: var(--gold);
+    border-radius: 5px;
+}
+
+.senior-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.senior-btn .glasses {
+    font-size: 19px;
+}
+
+/* =========================================
+   HERO
+========================================= */
+.guide-hero {
+    position: relative;
+    min-height: 560px;
+    margin-top: 90px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 95px 7%;
+    text-align: center;
+    color: white;
+
+    background:
+        linear-gradient(rgba(17,25,21,.65),rgba(17,25,21,.78)),
+        url("shamo.png") center / cover,
+        var(--forest);
+}
+
+.hero-content {
+    max-width: 900px;
+}
+
+.eyebrow {
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    margin-bottom: 20px;
+}
+
+.guide-hero h1 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(55px,9vw,105px);
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.guide-hero p:last-child {
+    font-size: 19px;
+    color: #eee4d5;
+}
+
+/* =========================================
+   COMMON SECTIONS
+========================================= */
+.section {
+    padding: 90px 7%;
+}
+
+.section.alt {
+    background: #eae3d5;
+}
+
+.section-heading {
+    max-width: 870px;
+    margin: 0 auto 45px;
+    text-align: center;
+}
+
+.section-label {
+    color: #987044;
+    letter-spacing: 3px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.section-heading h2 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(36px,5vw,60px);
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 12px 0 15px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 17px;
+}
+
+.season-grid {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 18px;
+    max-width: 1250px;
+    margin: auto;
+}
+
+.season-card {
+    min-height: 255px;
+    padding: 32px 25px;
+    background: #fffdf8;
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--gold);
+}
+
+.season-icon {
+    font-size: 35px;
+    display: block;
+    margin-bottom: 18px;
+}
+
+.season-card h3 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.season-card p {
+    font-size: 15px;
+    color: var(--muted);
+}
+
+.essential-grid {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 22px;
+}
+
+.essential-card {
+    padding: 30px;
+    border: 1px solid var(--border);
+    background: #fffdf8;
+}
+
+.essential-card h3 {
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.essential-card p {
+    color: var(--muted);
+    font-size: 15px;
+}
+
+/* =========================================
+   MONTHLY OUTFIT INTERACTION
+========================================= */
+.outfit-section {
+    padding: 85px 5%;
+    background: linear-gradient(135deg,#26342e,#19231e);
+    color: white;
+}
+
+.outfit-section .section-heading h2 {
+    color: #fff8e9;
+}
+
+.outfit-section .section-heading p {
+    color: #d8d6cc;
+}
+
+.outfit-layout {
+    max-width: 1420px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: minmax(0,1fr) minmax(0,1.2fr);
+    gap: 36px;
+    align-items: start;
+}
+
+/* 左侧小女孩 */
+.character-panel {
+    min-width: 0;
+    position: sticky;
+    top: 115px;
+
+    border: 1px solid rgba(216,180,124,.4);
+    border-radius: 18px;
+
+    padding: 20px;
+    background:
+        radial-gradient(circle at center,#faf3e6,#e5d7bc);
+    text-align: center;
+    color: var(--ink);
+}
+
+.character-title {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #9b7448;
+    margin-bottom: 12px;
+}
+
+/* 这里显示你自己的完整人物图片 */
+.character-stage {
+    height: 510px;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.character-stage img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 9px rgba(47,36,24,.16));
+}
+
+.character-placeholder {
+    color: #8b7459;
+    border: 2px dashed #b7a080;
+    border-radius: 12px;
+    padding: 30px;
+    font-size: 15px;
+}
+
+.character-caption {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 29px;
+    font-weight: 600;
+    padding-top: 12px;
+}
+
+.character-subtitle {
+    font-size: 14px;
+    color: #786750;
+}
+
+/* 右侧12个月 */
+.month-grid {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.month-card {
+    min-height: 112px;
+    padding: 15px 10px;
+    border-radius: 10px;
+    border: 1px solid #d4bc91;
+    background: #f8f2e7;
+    color: #372e26;
+    text-align: left;
+    transition: .25s;
+}
+
+.month-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--gold);
+    background: #fffaf0;
+}
+
+.month-card.active {
+    background: #e4c38d;
+    border: 2px solid #fff2d5;
+    box-shadow: 0 0 0 3px rgba(216,180,124,.25);
+}
+
+.month-number {
+    display: block;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 39px;
+    line-height: 1;
+}
+
+.month-short {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-top: 8px;
+    font-weight: 700;
+}
+
+/* 天气信息区 */
+.weather-panel {
+    border-radius: 12px;
+    background: #fffaf1;
+    color: var(--ink);
+    padding: 30px;
+}
+
+.weather-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.weather-heading h3 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 40px;
+    line-height: 1.1;
+}
+
+.weather-heading span {
+    color: #95724b;
+}
+
+.temperature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.temperature-box {
+    background: #eee7d9;
+    padding: 15px 20px;
+    border-radius: 7px;
+}
+
+.temperature-box small {
+    display: block;
+    color: #806b52;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.temperature-box strong {
+    font-family: Georgia,serif;
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.weather-detail {
+    margin-bottom: 16px;
+}
+
+.weather-detail h4 {
+    color: #927044;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.weather-detail p {
+    font-size: 15px;
+    color: #65584b;
+}
+
+.speech-button {
+    border: none;
+    border-radius: 6px;
+    background: var(--forest);
+    color: white;
+    padding: 13px 20px;
+    margin-top: 10px;
+}
+
+.speech-button:hover {
+    background: #486453;
+}
+
+/* =========================================
+   TRAVEL TIPS
+========================================= */
+.tips-grid {
+    max-width: 1200px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+
+.tip-card {
+    padding: 30px;
+    background: white;
+    border: 1px solid var(--border);
+}
+
+.tip-card h3 {
+    margin-bottom: 12px;
+}
+
+.tip-card p {
+    color: var(--muted);
+    font-size: 15px;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+footer {
+    padding: 60px 20px;
+    text-align: center;
+    background: var(--dark);
+    color: #f5ead8;
+}
+
+footer h2 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 36px;
+    letter-spacing: 3px;
+}
+
+/* =========================================
+   SENIOR MODE
+========================================= */
+body.senior-mode .section-heading p,
+body.senior-mode .season-card p,
+body.senior-mode .essential-card p,
+body.senior-mode .weather-detail p,
+body.senior-mode .tip-card p {
+    font-size: 22px;
+}
+
+body.senior-mode .month-card {
+    min-height: 130px;
+}
+
+body.senior-mode .month-short {
+    font-size: 17px;
+}
+
+body.senior-mode .lang-btn,
+body.senior-mode .senior-btn,
+body.senior-mode .back-home {
+    font-size: 18px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+@media (max-width: 1100px) {
+    .season-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .outfit-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .character-panel {
+        position: static;
+    }
+
+    .character-stage {
+        height: 450px;
+    }
+}
+
+@media (max-width: 760px) {
+    .site-header {
+        position: sticky;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 12px;
+        min-height: auto;
+    }
+
+    .site-logo {
+        font-size: 29px;
+    }
+
+    .site-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .lang-btn,
+    .senior-btn,
+    .back-home {
+        font-size: 12px;
+        padding: 7px 9px;
+    }
+
+    .guide-hero {
+        margin-top: 0;
+        min-height: 420px;
+    }
+
+    .section {
+        padding: 65px 6%;
+    }
+
+    .season-grid,
+    .essential-grid,
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .month-grid {
+        grid-template-columns: repeat(3,1fr);
+    }
+
+    .character-stage {
+        height: 360px;
+    }
+
+    .weather-panel {
+        padding: 22px;
+    }
+}
+
+@media (max-width: 400px) {
+    .month-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+/* ======================================
+   JOURNEY PAGE NAVIGATION
+====================================== */
+
+.journey-page-nav {
+    background: #171c19;
+    padding: 65px 6%;
+    color: #f5efe5;
+}
+
+.journey-page-nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.journey-page-nav-label {
+    text-align: center;
+    color: #d8b47c;
+    letter-spacing: 3px;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.journey-page-nav-links {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.journey-page-link {
+    flex: 1;
+    min-width: 0;
+    padding: 22px 25px;
+
+    border: 1px solid rgba(216,180,124,0.5);
+    border-radius: 8px;
+
+    color: #f5efe5;
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.journey-page-link:hover {
+    background: #d8b47c;
+    color: #171c19;
+}
+
+.journey-page-link.next {
+    text-align: right;
+}
+
+.journey-page-link span {
+    display: block;
+    font-size: 13px;
+    opacity: 0.75;
+    margin-bottom: 7px;
+}
+
+.journey-page-link strong {
+    display: block;
+    font-size: 20px;
+}
+
+.journey-page-nav-spacer {
+    flex: 1;
+}
+
+@media (max-width: 600px) {
+    .journey-page-nav-links {
+        flex-direction: column;
+    }
+
+    .journey-page-nav-spacer {
+        display: none;
+    }
+
+    .journey-page-link.next {
+        text-align: left;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =====================================
+     NAVIGATION
+===================================== -->
+<header class="site-header">
+
+    <a id="homeLogo" class="site-logo"
+       href="Dunhuang%20AI.html">
+        DUNHUANG<span>.</span>
+    </a>
+
+    <div class="site-controls">
+
+        <button class="lang-btn"
+                data-lang="en"
+                onclick="setLanguage('en')">
+            EN
+        </button>
+
+        <button class="lang-btn"
+                data-lang="zh"
+                onclick="setLanguage('zh')">
+            中文
+        </button>
+
+        <button class="lang-btn"
+                data-lang="ms"
+                onclick="setLanguage('ms')">
+            BM
+        </button>
+
+        <button class="senior-btn"
+                id="seniorButton"
+                onclick="toggleSeniorMode()">
+            <span class="glasses">👓</span>
+            <span data-i18n="senior">Senior Mode</span>
+        </button>
+
+        <a class="back-home"
+           id="backHome"
+           href="Dunhuang%20AI.html"
+           data-i18n="back">
+            ← BACK TO HOME
+        </a>
+
+    </div>
+</header>
+
+<!-- =====================================
+     TOP HERO
+===================================== -->
+<section class="guide-hero" id="top">
+
+    <div class="hero-content">
+
+        <p class="eyebrow" data-i18n="heroLabel">
+            PLAN YOUR JOURNEY
+        </p>
+
+        <h1 data-i18n="heroTitle">
+            WHEN TO VISIT
+        </h1>
+
+        <p data-i18n="heroDesc">
+            Discover the best seasons and weather for your Dunhuang journey.
+        </p>
+
+    </div>
+</section>
+
+<!-- =====================================
+     FOUR SEASONS
+===================================== -->
+<section class="section" id="seasons">
+
+    <div class="section-heading">
+        <span class="section-label"
+              data-i18n="seasonLabel">
+            EXPLORE THE SEASONS
+        </span>
+
+        <h2 data-i18n="seasonHeading">
+            Four Seasons in Dunhuang
+        </h2>
+
+        <p data-i18n="seasonIntro">
+            Every season offers a different way to explore Dunhuang.
+        </p>
+    </div>
+
+    <div class="season-grid">
+
+        <article class="season-card">
+            <span class="season-icon">🌸</span>
+            <h3 data-i18n="springTitle">Spring</h3>
+            <p data-i18n="springDesc">
+                March to May. Comfortable daytime temperatures,
+                cool mornings and occasional wind.
+            </p>
+        </article>
+
+        <article class="season-card">
+            <span class="season-icon">☀️</span>
+            <h3 data-i18n="summerTitle">Summer</h3>
+            <p data-i18n="summerDesc">
+                June to August. Bright sunshine,
+                long days and hot afternoons.
+            </p>
+        </article>
+
+        <article class="season-card">
+            <span class="season-icon">🍂</span>
+            <h3 data-i18n="autumnTitle">Autumn</h3>
+            <p data-i18n="autumnDesc">
+                September to November. Clear skies,
+                comfortable weather and cool nights.
+            </p>
+        </article>
+
+        <article class="season-card">
+            <span class="season-icon">❄️</span>
+            <h3 data-i18n="winterTitle">Winter</h3>
+            <p data-i18n="winterDesc">
+                December to February. Very cold,
+                dry weather and fewer visitors.
+            </p>
+        </article>
+
+    </div>
+</section>
+
+<!-- =====================================
+     BEST TIME / ESSENTIALS
+===================================== -->
+<section class="section alt" id="essentials">
+
+    <div class="section-heading">
+        <span class="section-label"
+              data-i18n="bestLabel">
+            TRAVEL PLANNING
+        </span>
+
+        <h2 data-i18n="bestHeading">
+            The Best Time to Explore
+        </h2>
+
+        <p data-i18n="bestIntro">
+            April to June and September to October
+            are often comfortable periods for visiting.
+        </p>
+    </div>
+
+    <div class="essential-grid">
+
+        <div class="essential-card">
+            <h3 data-i18n="essential1Title">
+                🌤 Comfortable Weather
+            </h3>
+            <p data-i18n="essential1Desc">
+                Spring and autumn are generally suitable
+                for walking and sightseeing.
+            </p>
+        </div>
+
+        <div class="essential-card">
+            <h3 data-i18n="essential2Title">
+                🎫 Plan Ahead
+            </h3>
+            <p data-i18n="essential2Desc">
+                Book Mogao Caves tickets early,
+                especially during holidays.
+            </p>
+        </div>
+
+        <div class="essential-card">
+            <h3 data-i18n="essential3Title">
+                🧥 Prepare Your Clothes
+            </h3>
+            <p data-i18n="essential3Desc">
+                Dunhuang has large differences between
+                daytime and nighttime temperatures.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- =====================================
+     12 MONTH OUTFIT INTERACTION
+===================================== -->
+<section class="outfit-section" id="monthlyGuide">
+
+    <div class="section-heading">
+
+        <span class="section-label"
+              data-i18n="outfitLabel">
+            INTERACTIVE TRAVEL GUIDE
+        </span>
+
+        <h2 data-i18n="outfitHeading">
+            Dress for Dunhuang
+        </h2>
+
+        <p data-i18n="outfitIntro">
+            Choose a month to see what our little
+            Silk Road explorer would wear.
+        </p>
+
+    </div>
+
+    <div class="outfit-layout">
+
+        <!-- 左侧：你自己的完整人物图片 -->
+        <div class="character-panel">
+
+            <p class="character-title"
+               data-i18n="characterLabel">
+                LITTLE SILK ROAD EXPLORER
+            </p>
+
+            <div class="character-stage">
+
+                <!--
+                =======================================
+                ★ 你的人物图片显示在这里
+
+                实际图片文件名由下方 JavaScript
+                的 MONTH_IMAGES 控制。
+
+                无需每个月手动修改此处 HTML。
+                =======================================
+                -->
+
+                <img id="characterImage"
+                     src=""
+                     alt="Dunhuang travel character"
+                     hidden>
+
+                <div class="character-placeholder"
+                     id="imagePlaceholder">
+                    Add your character image here.
+                </div>
+
+            </div>
+
+            <h3 class="character-caption"
+                id="characterMonth">
+                January
+            </h3>
+
+            <p class="character-subtitle"
+               data-i18n="characterHint">
+                Click a month to change the outfit.
+            </p>
+
+        </div>
+
+        <!-- 右侧：月份和天气 -->
+        <div class="monthly-panel">
+
+            <div class="month-grid" id="monthGrid">
+                <!-- JS 自动生成12张月份卡牌 -->
+            </div>
+
+            <div class="weather-panel">
+
+                <div class="weather-heading">
+                    <h3 id="weatherMonth">January</h3>
+                    <span id="weatherMonthNumber">01</span>
+                </div>
+
+                <div class="temperature-grid">
+
+                    <div class="temperature-box">
+                        <small data-i18n="highLabel">
+                            TYPICAL HIGH
+                        </small>
+                        <strong id="weatherHigh">-1°C</strong>
+                    </div>
+
+                    <div class="temperature-box">
+                        <small data-i18n="lowLabel">
+                            TYPICAL LOW
+                        </small>
+                        <strong id="weatherLow">-14°C</strong>
+                    </div>
+
+                </div>
+
+                <div class="weather-detail">
+                    <h4 data-i18n="conditionsLabel">
+                        WEATHER CONDITIONS
+                    </h4>
+                    <p id="weatherConditions"></p>
+                </div>
+
+                <div class="weather-detail">
+                    <h4 data-i18n="wearLabel">
+                        WHAT TO WEAR
+                    </h4>
+                    <p id="weatherClothing"></p>
+                </div>
+
+                <div class="weather-detail">
+                    <h4 data-i18n="tipLabel">
+                        TRAVEL TIP
+                    </h4>
+                    <p id="weatherTip"></p>
+                </div>
+
+                <button class="speech-button"
+                        id="speechButton"
+                        onclick="speakGuide()"
+                        data-i18n="speech">
+                    🔊 Hear the little guide
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- =====================================
+     ADDITIONAL TRAVEL TIPS
+===================================== -->
+<section class="section alt" id="travelTips">
+
+    <div class="section-heading">
+        <span class="section-label"
+              data-i18n="tipsLabel">
+            BEFORE YOU GO
+        </span>
+
+        <h2 data-i18n="tipsHeading">
+            Travel Tips
+        </h2>
+    </div>
+
+    <div class="tips-grid">
+
+        <article class="tip-card">
+            <h3 data-i18n="tip1Title">
+                ☀️ Sun Protection
+            </h3>
+            <p data-i18n="tip1Desc">
+                Bring sunscreen, sunglasses and a hat
+                when exploring outdoor attractions.
+            </p>
+        </article>
+
+        <article class="tip-card">
+            <h3 data-i18n="tip2Title">
+                💧 Stay Hydrated
+            </h3>
+            <p data-i18n="tip2Desc">
+                Dunhuang is very dry.
+                Carry drinking water during your trip.
+            </p>
+        </article>
+
+        <article class="tip-card">
+            <h3 data-i18n="tip3Title">
+                🌙 Be Ready for Cool Nights
+            </h3>
+            <p data-i18n="tip3Desc">
+                Temperatures can fall quickly at night.
+                Pack an extra layer.
+            </p>
+        </article>
+
+    </div>
+</section>
+<!-- JOURNEY PAGE NAVIGATION -->
+<div id="journeyPageNavigation"></div>
+<script>
+/* ======================================
+   JOURNEY PREVIOUS / NEXT NAVIGATION
+====================================== */
+
+(function () {
+
+    const pages = [
+        {
+            file: "ticket.html",
+            en: "Ticket Booking",
+            zh: "门票预约",
+            ms: "Tempahan Tiket"
+        },
+        {
+            file: "transport.html",
+            en: "Transportation",
+            zh: "交通指南",
+            ms: "Pengangkutan"
+        },
+        {
+            file: "accommodation.html",
+            en: "Accommodation",
+            zh: "住宿推荐",
+            ms: "Penginapan"
+        },
+        {
+            file: "season.html",
+            en: "Best Time to Visit",
+            zh: "最佳旅行季节",
+            ms: "Masa Terbaik untuk Melawat"
+        }
+    ];
+
+    const currentFile =
+        decodeURIComponent(
+            window.location.pathname.split("/").pop()
+        ).toLowerCase();
+
+    const currentIndex = pages.findIndex(
+        page => page.file.toLowerCase() === currentFile
+    );
+
+    if (currentIndex === -1) return;
+
+    const params = new URLSearchParams(
+        window.location.search
+    );
+
+    let currentLang = params.get("lang");
+
+    if (!["en", "zh", "ms"].includes(currentLang)) {
+        currentLang = "en";
+    }
+
+    const labels = {
+        en: {
+            heading: "CONTINUE YOUR JOURNEY",
+            previous: "← PREVIOUS",
+            next: "NEXT →",
+            home: "BACK TO HOME"
+        },
+        zh: {
+            heading: "继续探索敦煌",
+            previous: "← 上一页",
+            next: "下一页 →",
+            home: "返回首页"
+        },
+        ms: {
+            heading: "TERUSKAN PERJALANAN",
+            previous: "← SEBELUMNYA",
+            next: "SETERUSNYA →",
+            home: "KEMBALI KE LAMAN UTAMA"
+        }
+    };
+
+    const container = document.getElementById(
+        "journeyPageNavigation"
+    );
+
+    if (!container) return;
+
+    function makeLink(page, direction, label) {
+
+        const link = document.createElement("a");
+
+        link.className =
+            "journey-page-link " + direction;
+
+        link.href =
+            page.file +
+            "?lang=" +
+            encodeURIComponent(currentLang);
+
+        const small = document.createElement("span");
+        small.textContent = label;
+
+        const strong = document.createElement("strong");
+        strong.textContent = page[currentLang];
+
+        link.append(small, strong);
+
+        return link;
+    }
+
+    function renderNavigation(lang) {
+
+        currentLang = lang;
+
+        const t = labels[currentLang];
+
+        container.replaceChildren();
+
+        const section = document.createElement("section");
+        section.className = "journey-page-nav";
+
+        const inner = document.createElement("div");
+        inner.className = "journey-page-nav-inner";
+
+        const heading = document.createElement("p");
+        heading.className = "journey-page-nav-label";
+        heading.textContent = t.heading;
+
+        const links = document.createElement("div");
+        links.className = "journey-page-nav-links";
+
+        if (currentIndex > 0) {
+
+            links.appendChild(
+                makeLink(
+                    pages[currentIndex - 1],
+                    "previous",
+                    t.previous
+                )
+            );
+
+        } else {
+
+            const spacer = document.createElement("div");
+            spacer.className = "journey-page-nav-spacer";
+            links.appendChild(spacer);
+
+        }
+
+        if (currentIndex < pages.length - 1) {
+
+            links.appendChild(
+                makeLink(
+                    pages[currentIndex + 1],
+                    "next",
+                    t.next
+                )
+            );
+
+        } else {
+
+            links.appendChild(
+                makeLink(
+                    {
+                        file: "Dunhuang%20AI.html",
+                        en: "Home",
+                        zh: "首页",
+                        ms: "Laman Utama"
+                    },
+                    "next",
+                    t.home
+                )
+            );
+
+        }
+
+        inner.append(heading, links);
+        section.appendChild(inner);
+        container.appendChild(section);
+    }
+
+    renderNavigation(currentLang);
+
+    /* Synchronise with existing language buttons */
+
+    document.querySelectorAll("[data-lang]")
+        .forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const newLang = button.dataset.lang;
+
+                if (labels[newLang]) {
+                    renderNavigation(newLang);
+                }
+
+            });
+
+        });
+
+})();
+</script>
+
+<footer>
+    <h2>DUNHUANG.</h2>
+    <p data-i18n="footer">
+        Discover the beauty of the ancient Silk Road.
+    </p>
+</footer>
+
+<script>
+/* =========================================
+   这里插入你自己的12张人物图片
+========================================= */
+
+/*
+你的图片与 season.html 放在同一文件夹。
+
+例如：
+season.html
+一月.png
+二月.png
+三月.png
+...
+
+如果你的文件名称不一样，
+只需要修改下面引号中的名字。
+*/
+
+const MONTH_IMAGES = [
+    "1.png", // 一月
+    "2.png", // 二月
+    "3.png", // 三月
+    "4.png", // 四月
+    "5.png", // 五月
+    "6.png", // 六月
+    "7.png", // 七月
+    "8.png", // 八月
+    "9.png", // 九月
+    "10.png", // 十月
+    "11.png", // 十一月
+    "12.png"  // 十二月
+];
+
+/* =========================================
+   MONTH WEATHER DATA
+   参考气温，非实时预报
+========================================= */
+
+const monthWeather = [
+    [-1,-14], [6,-10], [13,-2], [22,5],
+    [27,10], [32,15], [33,17], [32,15],
+    [27,9], [19,1], [9,-5], [1,-12]
+];
+
+const monthNames = {
+    en: [
+        "January","February","March","April",
+        "May","June","July","August",
+        "September","October","November","December"
+    ],
+    zh: [
+        "一月","二月","三月","四月",
+        "五月","六月","七月","八月",
+        "九月","十月","十一月","十二月"
+    ],
+    ms: [
+        "Januari","Februari","Mac","April",
+        "Mei","Jun","Julai","Ogos",
+        "September","Oktober","November","Disember"
+    ]
+};
+
+/* 每个月的天气、服装、旅行建议 */
+
+const monthlyContent = {
+    en: [
+        ["Very cold and dry.","Thick padded coat, fur-lined hat, scarf and warm boots.","Quiet season. Confirm attraction opening hours."],
+        ["Cold with frosty mornings.","Warm coat, thick trousers, scarf and gloves.","Prepare for winter cold and holiday crowds."],
+        ["Windy and cool, with large temperature changes.","Windproof jacket, long trousers and comfortable shoes.","Carry an extra layer for windy days."],
+        ["Dry, breezy and gradually warmer.","Light jacket, long sleeves and sun hat.","A comfortable month for walking."],
+        ["Warm days and cooler nights.","Light layers, sun hat and walking shoes.","Good balance for sightseeing."],
+        ["Hot sunshine and long days.","Breathable clothes, sun hat and sunscreen.","Visit desert areas early or late in the day."],
+        ["Very hot afternoons and strong sunlight.","Light summer clothes, wide-brimmed hat and sunglasses.","Avoid the hottest hours outdoors."],
+        ["Hot weather with occasional rain.","Light clothes, breathable shoes and sun protection.","Check the weather before desert activities."],
+        ["Warm days and increasingly cool nights.","Light jacket, long trousers and comfortable shoes.","Excellent for desert photography."],
+        ["Cooler and generally dry.","Jacket, warm layers and covered shoes.","A comfortable autumn travel period."],
+        ["Cold mornings and evenings.","Thicker coat, scarf and warm trousers.","Prepare for colder weather and shorter days."],
+        ["Very cold, especially at night.","Heavy winter coat, thick scarf, warm hat and insulated boots.","Check winter opening arrangements."]
+    ],
+
+    zh: [
+        ["寒冷干燥，早晚气温很低。","厚棉袄、毛绒帽、围巾和保暖靴。","游客较少，出发前确认景区开放时间。"],
+        ["天气寒冷，清晨容易出现霜冻。","厚外套、保暖长裤、围巾和手套。","注意冬季低温和春节假期客流。"],
+        ["风较大，昼夜温差明显。","防风外套、长裤和舒适的鞋子。","建议随身携带一件外套。"],
+        ["天气干燥，逐渐转暖。","薄外套、长袖和遮阳帽。","比较适合步行游览。"],
+        ["白天温暖，夜晚偏凉。","轻薄衣服、遮阳帽和运动鞋。","适合安排多种户外活动。"],
+        ["阳光强烈，白昼较长。","透气夏装、遮阳帽和防晒用品。","沙漠活动尽量安排在早晚。"],
+        ["下午炎热，紫外线较强。","轻薄夏装、宽檐帽和太阳镜。","避免正午长时间户外活动。"],
+        ["天气炎热，偶尔有降雨。","轻便衣物、透气鞋和防晒用品。","沙漠活动前留意天气变化。"],
+        ["白天温暖，夜晚逐渐变凉。","薄外套、长裤和舒适的鞋子。","很适合拍摄沙漠风景。"],
+        ["气温下降，天气通常较干燥。","外套、保暖内搭和包脚鞋。","适合秋季旅行和文化参观。"],
+        ["早晚寒冷，白天也逐渐转凉。","较厚外套、围巾和保暖长裤。","注意气温下降和日照时间缩短。"],
+        ["天气非常寒冷，夜间温度很低。","厚冬装、厚围巾、保暖帽和防寒靴。","提前查看冬季景区开放安排。"]
+    ],
+
+    ms: [
+        ["Sangat sejuk dan kering.","Kot tebal, topi hangat, selendang dan but.","Semak waktu operasi tarikan."],
+        ["Sejuk dengan pagi yang berfros.","Kot tebal, seluar panjang dan sarung tangan.","Bersedia untuk cuaca sejuk."],
+        ["Berangin dan agak sejuk.","Jaket tahan angin dan seluar panjang.","Bawa pakaian tambahan."],
+        ["Kering dan semakin panas.","Jaket ringan, baju lengan panjang dan topi.","Sesuai untuk berjalan."],
+        ["Hari panas, malam lebih sejuk.","Pakaian ringan dan topi matahari.","Baik untuk bersiar-siar."],
+        ["Panas dengan cahaya matahari kuat.","Pakaian bernafas dan pelindung matahari.","Lawat gurun pada awal pagi."],
+        ["Sangat panas pada waktu petang.","Pakaian musim panas dan topi lebar.","Elakkan waktu paling panas."],
+        ["Panas dengan hujan sekali-sekala.","Pakaian ringan dan kasut selesa.","Semak cuaca sebelum aktiviti gurun."],
+        ["Hari hangat, malam semakin sejuk.","Jaket ringan dan seluar panjang.","Bagus untuk fotografi."],
+        ["Lebih sejuk dan biasanya kering.","Jaket dan pakaian berlapis.","Sesuai untuk lawatan musim luruh."],
+        ["Pagi dan malam yang sejuk.","Kot tebal dan selendang.","Bersedia untuk suhu lebih rendah."],
+        ["Sangat sejuk, terutama pada waktu malam.","Kot musim sejuk tebal, topi dan but.","Semak aturan lawatan musim sejuk."]
+    ]
+};
+
+/* =========================================
+   THREE LANGUAGE TRANSLATIONS
+========================================= */
+
+const translations = {
+    en: {
+        senior:"Senior Mode",
+        back:"← BACK TO HOME",
+        heroLabel:"PLAN YOUR JOURNEY",
+        heroTitle:"WHEN TO VISIT",
+        heroDesc:"Discover the best seasons and weather for your Dunhuang journey.",
+        seasonLabel:"EXPLORE THE SEASONS",
+        seasonHeading:"Four Seasons in Dunhuang",
+        seasonIntro:"Every season offers a different way to explore Dunhuang.",
+        springTitle:"Spring",
+        springDesc:"March to May. Comfortable daytime temperatures, cool mornings and occasional wind.",
+        summerTitle:"Summer",
+        summerDesc:"June to August. Bright sunshine, long days and hot afternoons.",
+        autumnTitle:"Autumn",
+        autumnDesc:"September to November. Clear skies and cooler nights.",
+        winterTitle:"Winter",
+        winterDesc:"December to February. Very cold, dry weather and fewer visitors.",
+        bestLabel:"TRAVEL PLANNING",
+        bestHeading:"The Best Time to Explore",
+        bestIntro:"April to June and September to October are often comfortable periods for visiting.",
+        essential1Title:"🌤 Comfortable Weather",
+        essential1Desc:"Spring and autumn are generally suitable for walking and sightseeing.",
+        essential2Title:"🎫 Plan Ahead",
+        essential2Desc:"Book Mogao Caves tickets early, especially during holidays.",
+        essential3Title:"🧥 Prepare Your Clothes",
+        essential3Desc:"Dunhuang has large differences between daytime and nighttime temperatures.",
+        outfitLabel:"INTERACTIVE TRAVEL GUIDE",
+        outfitHeading:"Dress for Dunhuang",
+        outfitIntro:"Choose a month to see what our little Silk Road explorer would wear.",
+        characterLabel:"LITTLE SILK ROAD EXPLORER",
+        characterHint:"Click a month to change the outfit.",
+        highLabel:"TYPICAL HIGH",
+        lowLabel:"TYPICAL LOW",
+        conditionsLabel:"WEATHER CONDITIONS",
+        wearLabel:"WHAT TO WEAR",
+        tipLabel:"TRAVEL TIP",
+        speech:"🔊 Hear the little guide",
+        tipsLabel:"BEFORE YOU GO",
+        tipsHeading:"Travel Tips",
+        tip1Title:"☀️ Sun Protection",
+        tip1Desc:"Bring sunscreen, sunglasses and a hat when exploring outdoor attractions.",
+        tip2Title:"💧 Stay Hydrated",
+        tip2Desc:"Dunhuang is very dry. Carry drinking water during your trip.",
+        tip3Title:"🌙 Be Ready for Cool Nights",
+        tip3Desc:"Temperatures can fall quickly at night. Pack an extra layer.",
+        footer:"Discover the beauty of the ancient Silk Road."
+    },
+
+    zh: {
+        senior:"长辈模式",
+        back:"← 返回首页",
+        heroLabel:"规划您的旅程",
+        heroTitle:"最佳旅行时间",
+        heroDesc:"了解敦煌四季气候，选择适合自己的旅行时间。",
+        seasonLabel:"探索四季",
+        seasonHeading:"敦煌的四个季节",
+        seasonIntro:"每个季节，都能发现不同的敦煌之美。",
+        springTitle:"春季",
+        springDesc:"三月至五月。白天较舒适，早晚偏凉，有时风较大。",
+        summerTitle:"夏季",
+        summerDesc:"六月至八月。日照充足，白天较长，午后炎热。",
+        autumnTitle:"秋季",
+        autumnDesc:"九月至十一月。天空晴朗，夜间逐渐转凉。",
+        winterTitle:"冬季",
+        winterDesc:"十二月至二月。天气寒冷干燥，游客相对较少。",
+        bestLabel:"旅行规划",
+        bestHeading:"什么时候去敦煌最好？",
+        bestIntro:"四月至六月以及九月至十月通常是比较舒适的旅游时段。",
+        essential1Title:"🌤 舒适的天气",
+        essential1Desc:"春秋季通常比较适合徒步和户外观光。",
+        essential2Title:"🎫 提前规划",
+        essential2Desc:"建议提前预约莫高窟门票，尤其在节假日期间。",
+        essential3Title:"🧥 准备合适的衣物",
+        essential3Desc:"敦煌昼夜温差比较大，建议根据气温搭配衣服。",
+        outfitLabel:"互动旅行指南",
+        outfitHeading:"敦煌十二个月穿搭指南",
+        outfitIntro:"点击月份，看看敦煌旅行小向导会穿什么衣服。",
+        characterLabel:"丝路旅行小向导",
+        characterHint:"点击月份，切换不同服装。",
+        highLabel:"参考最高温",
+        lowLabel:"参考最低温",
+        conditionsLabel:"天气特点",
+        wearLabel:"穿衣建议",
+        tipLabel:"旅行提醒",
+        speech:"🔊 听小向导介绍",
+        tipsLabel:"出发之前",
+        tipsHeading:"旅行小贴士",
+        tip1Title:"☀️ 注意防晒",
+        tip1Desc:"户外游览时建议携带防晒霜、太阳镜和帽子。",
+        tip2Title:"💧 及时补水",
+        tip2Desc:"敦煌空气干燥，游览时记得携带饮用水。",
+        tip3Title:"🌙 注意早晚温差",
+        tip3Desc:"夜间气温可能明显下降，建议多带一件外套。",
+        footer:"探索古代丝绸之路的文化与魅力。"
+    },
+
+    ms: {
+        senior:"Mod Warga Emas",
+        back:"← KEMBALI KE LAMAN UTAMA",
+        heroLabel:"RANCANG PERJALANAN ANDA",
+        heroTitle:"MASA TERBAIK UNTUK MELAWAT",
+        heroDesc:"Kenali musim dan cuaca Dunhuang sebelum perjalanan anda.",
+        seasonLabel:"TEROKAI MUSIM",
+        seasonHeading:"Empat Musim di Dunhuang",
+        seasonIntro:"Setiap musim menawarkan pengalaman yang berbeza.",
+        springTitle:"Musim Bunga",
+        springDesc:"Mac hingga Mei. Cuaca siang yang selesa dan kadang-kadang berangin.",
+        summerTitle:"Musim Panas",
+        summerDesc:"Jun hingga Ogos. Cahaya matahari kuat dan petang yang panas.",
+        autumnTitle:"Musim Luruh",
+        autumnDesc:"September hingga November. Langit cerah dan malam yang lebih sejuk.",
+        winterTitle:"Musim Sejuk",
+        winterDesc:"Disember hingga Februari. Sangat sejuk, kering dan kurang pelawat.",
+        bestLabel:"PERANCANGAN PERJALANAN",
+        bestHeading:"Masa Terbaik untuk Meneroka",
+        bestIntro:"April hingga Jun serta September hingga Oktober biasanya lebih selesa.",
+        essential1Title:"🌤 Cuaca Selesa",
+        essential1Desc:"Musim bunga dan luruh sesuai untuk berjalan dan melawat.",
+        essential2Title:"🎫 Rancang Awal",
+        essential2Desc:"Tempah tiket Gua Mogao lebih awal.",
+        essential3Title:"🧥 Sediakan Pakaian",
+        essential3Desc:"Suhu siang dan malam di Dunhuang boleh berbeza dengan ketara.",
+        outfitLabel:"PANDUAN PERJALANAN INTERAKTIF",
+        outfitHeading:"Pakaian untuk Dunhuang",
+        outfitIntro:"Pilih bulan untuk melihat pakaian panduan kecil kami.",
+        characterLabel:"PENGEMBARA LALUAN SUTERA",
+        characterHint:"Klik bulan untuk menukar pakaian.",
+        highLabel:"SUHU TERTINGGI RUJUKAN",
+        lowLabel:"SUHU TERENDAH RUJUKAN",
+        conditionsLabel:"KEADAAN CUACA",
+        wearLabel:"CADANGAN PAKAIAN",
+        tipLabel:"TIP PERJALANAN",
+        speech:"🔊 Dengar panduan kecil",
+        tipsLabel:"SEBELUM BERTOLAK",
+        tipsHeading:"Tip Perjalanan",
+        tip1Title:"☀️ Perlindungan Matahari",
+        tip1Desc:"Bawa pelindung matahari, cermin mata hitam dan topi.",
+        tip2Title:"💧 Minum Air Secukupnya",
+        tip2Desc:"Dunhuang sangat kering. Bawa air minuman.",
+        tip3Title:"🌙 Bersedia untuk Malam Sejuk",
+        tip3Desc:"Suhu malam boleh turun dengan cepat. Bawa jaket.",
+        footer:"Terokai keindahan Laluan Sutera purba."
+    }
+};
+
+/* =========================================
+   LANGUAGE AND MONTH STATE
+========================================= */
+
+let currentLanguage = "en";
+let currentMonth = 0;
+let seniorMode = false;
+
+const imageElement =
+    document.getElementById("characterImage");
+
+const placeholder =
+    document.getElementById("imagePlaceholder");
+
+const monthGrid =
+    document.getElementById("monthGrid");
+
+/* =========================================
+   RENDER 12 MONTH BUTTONS
+========================================= */
+
+function renderMonthButtons() {
+
+    monthGrid.innerHTML = "";
+
+    for (let i = 0; i < 12; i++) {
+
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = "month-card";
+
+        if (i === currentMonth) {
+            button.classList.add("active");
+        }
+
+        button.setAttribute(
+            "aria-pressed",
+            i === currentMonth ? "true" : "false"
+        );
+
+        button.innerHTML = `
+            <span class="month-number">
+                ${String(i + 1).padStart(2,"0")}
+            </span>
+
+            <span class="month-short">
+                ${monthNames[currentLanguage][i]}
+            </span>
+        `;
+
+        button.addEventListener("click", () => {
+            changeMonth(i);
+        });
+
+        monthGrid.appendChild(button);
+    }
+}
+
+/* =========================================
+   CHANGE MONTH AND CHARACTER IMAGE
+========================================= */
+
+function changeMonth(index) {
+
+    currentMonth = index;
+
+    const lang = currentLanguage;
+
+    const monthName = monthNames[lang][index];
+
+    document.getElementById("characterMonth")
+        .textContent = monthName;
+
+    document.getElementById("weatherMonth")
+        .textContent = monthName;
+
+    document.getElementById("weatherMonthNumber")
+        .textContent =
+        String(index + 1).padStart(2,"0");
+
+    document.getElementById("weatherHigh")
+        .textContent = monthWeather[index][0] + "°C";
+
+    document.getElementById("weatherLow")
+        .textContent = monthWeather[index][1] + "°C";
+
+    const content = monthlyContent[lang][index];
+
+    document.getElementById("weatherConditions")
+        .textContent = content[0];
+
+    document.getElementById("weatherClothing")
+        .textContent = content[1];
+
+    document.getElementById("weatherTip")
+        .textContent = content[2];
+
+    /* =====================================
+       切换你自己插入的人物图片
+    ===================================== */
+
+    const imagePath = MONTH_IMAGES[index];
+
+    imageElement.hidden = true;
+    placeholder.hidden = false;
+
+    placeholder.textContent =
+        lang === "zh"
+        ? "请添加 " + monthName + " 的人物图片"
+        : lang === "ms"
+        ? "Sila tambah gambar untuk " + monthName
+        : "Add your character image for " + monthName;
+
+    // 避免快速切换时旧图片覆盖新月份
+    const requestIndex = index;
+
+    const testImage = new Image();
+
+    testImage.onload = () => {
+
+        if (currentMonth !== requestIndex) {
+            return;
+        }
+
+        imageElement.src = imagePath;
+        imageElement.alt = monthName + " outfit";
+        imageElement.hidden = false;
+        placeholder.hidden = true;
+    };
+
+    testImage.onerror = () => {
+
+        if (currentMonth !== requestIndex) {
+            return;
+        }
+
+        imageElement.hidden = true;
+        placeholder.hidden = false;
+    };
+
+    testImage.src = imagePath;
+
+    renderMonthButtons();
+}
+
+/* =========================================
+   LANGUAGE SWITCH
+========================================= */
+
+function setLanguage(lang) {
+
+    if (!translations[lang]) {
+        lang = "en";
+    }
+
+    currentLanguage = lang;
+
+    document.documentElement.lang =
+        lang === "zh" ? "zh-CN" : lang;
+
+    const t = translations[lang];
+
+    document.querySelectorAll("[data-i18n]")
+        .forEach(element => {
+
+            const key = element.dataset.i18n;
+
+            if (t[key] !== undefined) {
+                element.textContent = t[key];
+            }
+
+        });
+
+    document.querySelectorAll(".lang-btn")
+        .forEach(button => {
+
+            button.classList.toggle(
+                "active",
+                button.dataset.lang === lang
+            );
+
+        });
+
+    const homeHref =
+        "Dunhuang%20AI.html?lang=" +
+        encodeURIComponent(lang);
+
+    document.getElementById("homeLogo").href =
+        homeHref;
+
+    document.getElementById("backHome").href =
+        homeHref;
+
+    changeMonth(currentMonth);
+}
+
+/* =========================================
+   SENIOR MODE
+========================================= */
+
+function toggleSeniorMode() {
+
+    seniorMode = !seniorMode;
+
+    document.body.classList.toggle(
+        "senior-mode",
+        seniorMode
+    );
+
+    document.getElementById("seniorButton")
+        .classList.toggle("active", seniorMode);
+}
+
+/* =========================================
+   VOICE GUIDE
+========================================= */
+
+function speakGuide() {
+
+    if (!("speechSynthesis" in window)) {
+        alert("Speech is not supported in this browser.");
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const lang = currentLanguage;
+    const content = monthlyContent[lang][currentMonth];
+
+    const monthName = monthNames[lang][currentMonth];
+
+    const speechText = [
+        monthName,
+        content[0],
+        content[1],
+        content[2]
+    ].join(". ");
+
+    const utterance =
+        new SpeechSynthesisUtterance(speechText);
+
+    utterance.lang =
+        lang === "zh" ? "zh-CN" :
+        lang === "ms" ? "ms-MY" :
+        "en-US";
+
+    utterance.rate = 0.9;
+
+    window.speechSynthesis.speak(utterance);
+}
+
+/* =========================================
+   INITIALISE
+========================================= */
+
+const params =
+    new URLSearchParams(window.location.search);
+
+const initialLanguage = params.get("lang") || "en";
+
+setLanguage(initialLanguage);
+
+</script>
+
+</body>
+</html>

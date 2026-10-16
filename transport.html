@@ -1,0 +1,2248 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DUNHUANG | Transportation Guide</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ================================
+   GLOBAL
+================================ */
+:root {
+    --dark: #171c19;
+    --forest: #24372f;
+    --forest-light: #354e40;
+    --gold: #d8b47c;
+    --paper: #fffaf2;
+    --cream: #f5efe5;
+    --sand: #e9dec9;
+    --ink: #302c26;
+    --muted: #70685e;
+    --border: #d9cab2;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--cream);
+    font-family: "DM Sans","Noto Sans SC",sans-serif;
+    color: var(--ink);
+    line-height: 1.75;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* ================================
+   HEADER
+================================ */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    min-height: 90px;
+    padding: 15px 4%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    background: rgba(23,28,25,.97);
+    backdrop-filter: blur(12px);
+    color: white;
+}
+
+.logo {
+    font-family: "Cormorant Garamond",Georgia,serif;
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--gold);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+.nav-actions button,
+.home-link {
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid rgba(255,255,255,.5);
+    background: transparent;
+    color: white;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.nav-actions .senior-btn,
+.home-link {
+    border-color: var(--gold);
+    border-radius: 5px;
+}
+
+.nav-actions button.active,
+.nav-actions button:hover,
+.home-link:hover {
+    background: var(--gold);
+    color: var(--dark);
+}
+
+/* ================================
+   HERO
+================================ */
+.hero {
+    padding: 168px 6% 85px;
+    background: linear-gradient(135deg,#18271f,#354a3c);
+    color: white;
+    text-align: center;
+}
+
+.eyebrow {
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    font-family: "Cormorant Garamond",Georgia,serif;
+    font-weight: 500;
+    font-size: clamp(54px,8vw,100px);
+    line-height: 1.1;
+    margin: 15px 0 20px;
+}
+
+.hero p {
+    max-width: 780px;
+    margin: auto;
+    color: #e3dacf;
+    font-size: 17px;
+}
+
+/* ================================
+   COMMON SECTIONS
+================================ */
+.section {
+    padding: 85px 6%;
+}
+
+.section.alt {
+    background: #eae2d4;
+}
+
+.section.dark {
+    background: var(--forest);
+    color: white;
+}
+
+.container {
+    max-width: 1240px;
+    margin: auto;
+}
+
+.section-heading {
+    max-width: 850px;
+    margin: 0 auto 42px;
+    text-align: center;
+}
+
+.section-heading h2 {
+    font-family: "Cormorant Garamond",Georgia,serif;
+    font-weight: 600;
+    font-size: clamp(39px,5vw,64px);
+    line-height: 1.18;
+    margin: 12px 0 15px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 16px;
+}
+
+.dark .section-heading p {
+    color: #dcd4c4;
+}
+
+/* ================================
+   INTERACTIVE TRANSPORT SCENE
+================================ */
+.animation-section {
+    background: #19251f;
+    padding: 30px 4% 75px;
+}
+
+.landscape {
+    position: relative;
+    isolation: isolate;
+
+    max-width: 1400px;
+    height: 560px;
+    margin: auto;
+    overflow: hidden;
+
+    border: 1px solid #c9a777;
+    border-radius: 15px;
+
+    background: linear-gradient(
+        180deg,
+        #8baba9 0%,
+        #e6cfa5 50%,
+        #d59d6f 100%
+    );
+}
+
+.sun {
+    position: absolute;
+    right: 18%;
+    top: 15%;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #ffe3a3;
+    box-shadow: 0 0 70px #f6d49a;
+}
+
+.cloud {
+    position: absolute;
+    z-index: 2;
+    font-size: 64px;
+    opacity: .7;
+    animation: cloudFloat 8s ease-in-out infinite alternate;
+}
+
+.cloud.one {
+    left: 9%;
+    top: 10%;
+}
+
+.cloud.two {
+    right: 9%;
+    top: 25%;
+    animation-delay: -3s;
+}
+
+@keyframes cloudFloat {
+    from {transform: translateX(-15px);}
+    to {transform: translateX(35px);}
+}
+
+.mountain {
+    position: absolute;
+    bottom: 25%;
+    left: -5%;
+    width: 110%;
+    height: 46%;
+    z-index: 2;
+
+    background: #b78b69;
+    clip-path: polygon(
+        0 100%,0 65%,13% 20%,
+        25% 70%,38% 9%,
+        52% 62%,65% 20%,
+        78% 70%,90% 15%,
+        100% 65%,100% 100%
+    );
+}
+
+.mountain.back {
+    bottom: 34%;
+    opacity: .45;
+    transform: scale(1.12);
+}
+
+.dune {
+    position: absolute;
+    width: 125%;
+    height: 45%;
+    border-radius: 50%;
+}
+
+.dune.one {
+    left: -14%;
+    bottom: -21%;
+    z-index: 3;
+    background: #e0af7c;
+    transform: rotate(-6deg);
+}
+
+.dune.two {
+    right: -35%;
+    bottom: -34%;
+    z-index: 4;
+    background: #c98f5c;
+    transform: rotate(9deg);
+}
+
+.railway {
+    position: absolute;
+    top: 60%;
+    width: 100%;
+    height: 16px;
+    z-index: 6;
+
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0 28px,
+        #68503e 28px 38px,
+        transparent 38px 58px
+    );
+
+    border-top: 4px solid #675441;
+    border-bottom: 4px solid #675441;
+}
+
+.road {
+    position: absolute;
+    bottom: 8%;
+    left: -5%;
+    width: 110%;
+    height: 17%;
+    z-index: 7;
+
+    background: #655b50;
+    border-top: 8px solid #ad8664;
+    transform: rotate(-3deg);
+}
+
+.road::after {
+    content: "";
+    position: absolute;
+    top: 48%;
+    width: 100%;
+    height: 4px;
+
+    background: repeating-linear-gradient(
+        90deg,
+        #f1dfb9 0 32px,
+        transparent 32px 67px
+    );
+}
+
+/* Four clickable animated vehicles */
+.vehicle {
+    position: absolute;
+    z-index: 12;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+
+    padding: 10px 17px;
+    color: white;
+
+    border: 1px solid rgba(255,245,225,.75);
+    border-radius: 12px;
+    background: rgba(23,28,25,.83);
+
+    box-shadow: 0 8px 22px rgba(0,0,0,.25);
+}
+
+.vehicle:hover {
+    background: var(--forest-light);
+    border-color: var(--gold);
+}
+
+.vehicle .vehicle-icon {
+    font-size: clamp(43px,5vw,73px);
+    line-height: 1.1;
+}
+
+.vehicle .vehicle-label {
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.flight {
+    top: 14%;
+    left: 18%;
+    animation: fly 5s ease-in-out infinite alternate;
+}
+
+.train {
+    top: 43%;
+    left: 31%;
+    animation: trainMove 5.5s ease-in-out infinite alternate;
+}
+
+.bus {
+    bottom: 15%;
+    left: 25%;
+    animation: driveBus 4s ease-in-out infinite alternate;
+}
+
+.taxi {
+    bottom: 10%;
+    right: 13%;
+    animation: driveTaxi 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes fly {
+    from {transform:translate(-14px,12px) rotate(-3deg);}
+    to {transform:translate(40px,-24px) rotate(3deg);}
+}
+
+@keyframes trainMove {
+    from {transform:translateX(-28px);}
+    to {transform:translateX(50px);}
+}
+
+@keyframes driveBus {
+    from {transform:translateX(-20px);}
+    to {transform:translateX(35px);}
+}
+
+@keyframes driveTaxi {
+    from {transform:translateX(20px);}
+    to {transform:translateX(-34px);}
+}
+
+.animation-hint {
+    text-align: center;
+    margin: 24px 0 0;
+    color: #e8d7bb;
+}
+
+/* ================================
+   POPUP DIALOG
+================================ */
+.info-dialog {
+    width: min(92vw,660px);
+    max-height: 85vh;
+    margin: auto;
+    padding: 0;
+
+    background: var(--paper);
+    border: 1px solid var(--gold);
+    border-radius: 13px;
+    color: var(--ink);
+    overflow-y: auto;
+    box-shadow: 0 25px 80px rgba(0,0,0,.4);
+}
+
+.info-dialog::backdrop {
+    background: rgba(8,18,12,.75);
+    backdrop-filter: blur(5px);
+}
+
+.dialog-header {
+    padding: 24px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+
+    background: var(--forest);
+    color: white;
+}
+
+.dialog-header h2 {
+    font-family: "Cormorant Garamond",Georgia,serif;
+    font-size: 43px;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.close-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    background: transparent;
+    color: white;
+    font-size: 25px;
+}
+
+.close-btn:hover {
+    background: var(--gold);
+    color: var(--dark);
+}
+
+.dialog-body {
+    padding: 28px;
+}
+
+.dialog-row {
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.dialog-row h3 {
+    color: #86623d;
+    margin: 0 0 5px;
+    font-size: 15px;
+}
+
+.dialog-row p {
+    margin: 0;
+    color: #665c50;
+}
+
+/* ================================
+   COMPARISON TABLE
+================================ */
+.table-scroll {
+    max-width: 1200px;
+    margin: auto;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--paper);
+}
+
+.comparison-table {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.comparison-table th {
+    padding: 20px;
+    background: var(--forest);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.comparison-table td {
+    padding: 21px 20px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+}
+
+.comparison-table tr:last-child td {
+    border-bottom: none;
+}
+
+.comparison-table tbody tr:hover {
+    background: #f4e8d5;
+}
+
+.comparison-table td:first-child {
+    font-weight: 700;
+    color: #685034;
+}
+
+/* ================================
+   ARRIVAL GUIDE
+================================ */
+.arrival-grid {
+    max-width: 1200px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 20px;
+}
+
+.arrival-card {
+    padding: 30px;
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--gold);
+    background: var(--paper);
+    border-radius: 8px;
+}
+
+.arrival-icon {
+    font-size: 37px;
+    margin-bottom: 15px;
+}
+
+.arrival-card h3 {
+    font-family: "Cormorant Garamond",Georgia,serif;
+    font-size: 27px;
+    line-height: 1.2;
+    margin: 0 0 15px;
+}
+
+.arrival-card p {
+    color: var(--muted);
+}
+
+.arrival-card.warning {
+    border-top-color: #ac7448;
+    background: #f6eadb;
+}
+
+/* ================================
+   ESSENTIAL TRAVEL INFORMATION
+================================ */
+.essential-grid {
+    max-width: 1200px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 22px;
+}
+
+.essential-card {
+    padding: 32px 27px;
+    border: 1px solid rgba(216,180,124,.45);
+    border-radius: 12px;
+    background: #fffaf2;
+    color: var(--ink);
+}
+
+.essential-icon {
+    font-size: 38px;
+    margin-bottom: 13px;
+}
+
+.essential-card h3 {
+    font-family: "Cormorant Garamond",Georgia,serif;
+    font-size: 31px;
+    line-height: 1.15;
+    margin: 0 0 15px;
+}
+
+.essential-card p {
+    color: #6c6256;
+    margin: 0 0 15px;
+}
+
+.essential-card .small-note {
+    font-size: 13px;
+    color: #856b4b;
+}
+
+/* ================================
+   USEFUL PHRASES
+================================ */
+.phrases {
+    max-width: 960px;
+    margin: 32px auto 0;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+    color: var(--ink);
+}
+
+.phrases h3 {
+    font-family: "Cormorant Garamond",Georgia,serif;
+    font-size: 33px;
+    margin: 0 0 16px;
+}
+
+.phrase-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    padding: 17px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.phrase-row:last-child {
+    border-bottom: none;
+}
+
+.phrase-text {
+    min-width: 0;
+}
+
+.phrase-text strong {
+    display: block;
+    font-size: 17px;
+}
+
+.phrase-text small {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.copy-btn {
+    flex-shrink: 0;
+    border: 1px solid #b99b6f;
+    background: transparent;
+    border-radius: 5px;
+    color: #715736;
+    padding: 10px 15px;
+    font-weight: 700;
+}
+
+.copy-btn:hover {
+    background: var(--gold);
+    color: var(--dark);
+}
+
+.copy-status {
+    min-height: 25px;
+    font-size: 13px;
+    color: #6d5735;
+    margin: 12px 0 0;
+}
+
+/* ================================
+   BEFORE YOU TRAVEL
+================================ */
+.tips-grid {
+    max-width: 1150px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 22px;
+}
+
+.tip-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--gold);
+    padding: 28px;
+}
+
+.tip-card h3 {
+    margin: 0 0 12px;
+    font-size: 20px;
+}
+
+.tip-card p {
+    margin: 0;
+    color: var(--muted);
+}
+
+footer {
+    background: var(--dark);
+    color: #f5ead8;
+    padding: 47px 20px;
+    text-align: center;
+}
+
+footer h2 {
+    font: 600 36px "Cormorant Garamond",Georgia,serif;
+    letter-spacing: 3px;
+    margin: 0 0 8px;
+}
+
+footer p {
+    color: #cfc3b2;
+}
+
+/* ================================
+   SENIOR MODE
+================================ */
+body.senior-mode .hero p,
+body.senior-mode .section-heading p,
+body.senior-mode .arrival-card p,
+body.senior-mode .essential-card p,
+body.senior-mode .tip-card p,
+body.senior-mode .dialog-row p,
+body.senior-mode .comparison-table td {
+    font-size: 21px;
+}
+
+body.senior-mode .vehicle-label {
+    font-size: 18px;
+}
+
+body.senior-mode .phrase-text small {
+    font-size: 18px;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media(max-width:1000px) {
+    .arrival-grid,
+    .essential-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media(max-width:760px) {
+    .site-header {
+        position: sticky;
+        flex-wrap: wrap;
+        justify-content: center;
+        min-height: 0;
+        padding: 12px;
+    }
+
+    .logo {
+        font-size: 29px;
+    }
+
+    .nav-actions {
+        justify-content: center;
+    }
+
+    .nav-actions button,
+    .home-link {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .hero {
+        padding: 70px 5% 65px;
+    }
+
+    .section {
+        padding: 65px 5%;
+    }
+
+    .landscape {
+        height: 510px;
+    }
+
+    .vehicle {
+        padding: 9px;
+    }
+
+    .vehicle .vehicle-icon {
+        font-size: 42px;
+    }
+
+    .vehicle .vehicle-label {
+        font-size: 11px;
+    }
+
+    .flight {left: 9%;top: 14%;}
+    .train {left: 38%;top: 44%;}
+    .bus {left: 12%;bottom: 18%;}
+    .taxi {right: 8%;bottom: 9%;}
+
+    .arrival-grid,
+    .essential-grid,
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .phrases {
+        padding: 20px;
+    }
+
+    .phrase-row {
+        align-items: flex-start;
+    }
+
+    .copy-btn {
+        padding: 8px 10px;
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* ======================================
+   JOURNEY PAGE NAVIGATION
+====================================== */
+
+.journey-page-nav {
+    background: #171c19;
+    padding: 65px 6%;
+    color: #f5efe5;
+}
+
+.journey-page-nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.journey-page-nav-label {
+    text-align: center;
+    color: #d8b47c;
+    letter-spacing: 3px;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.journey-page-nav-links {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.journey-page-link {
+    flex: 1;
+    min-width: 0;
+    padding: 22px 25px;
+
+    border: 1px solid rgba(216,180,124,0.5);
+    border-radius: 8px;
+
+    color: #f5efe5;
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.journey-page-link:hover {
+    background: #d8b47c;
+    color: #171c19;
+}
+
+.journey-page-link.next {
+    text-align: right;
+}
+
+.journey-page-link span {
+    display: block;
+    font-size: 13px;
+    opacity: 0.75;
+    margin-bottom: 7px;
+}
+
+.journey-page-link strong {
+    display: block;
+    font-size: 20px;
+}
+
+.journey-page-nav-spacer {
+    flex: 1;
+}
+
+@media (max-width: 600px) {
+    .journey-page-nav-links {
+        flex-direction: column;
+    }
+
+    .journey-page-nav-spacer {
+        display: none;
+    }
+
+    .journey-page-link.next {
+        text-align: left;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================================
+     NAVIGATION
+================================ -->
+<header class="site-header">
+
+    <a id="homeLogo"
+       class="logo"
+       href="Dunhuang%20AI.html">
+        DUNHUANG<span>.</span>
+    </a>
+
+    <div class="nav-actions">
+
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中文</button>
+        <button class="lang-btn" data-lang="ms">BM</button>
+
+        <button id="seniorButton" class="senior-btn">
+            👓 <span data-i18n="senior">Senior Mode</span>
+        </button>
+
+        <a id="backHome"
+           class="home-link"
+           href="Dunhuang%20AI.html"
+           data-i18n="back">
+            ← BACK TO HOME
+        </a>
+
+    </div>
+</header>
+
+<main>
+
+<!-- ================================
+     HERO
+================================ -->
+<section class="hero">
+
+    <div class="eyebrow" data-i18n="heroLabel">
+        SILK ROAD JOURNEY
+    </div>
+
+    <h1 data-i18n="heroTitle">
+        TRANSPORTATION
+    </h1>
+
+    <p data-i18n="heroDesc">
+        Explore ways to reach Dunhuang, plan your arrival
+        and prepare for a smooth journey in China.
+    </p>
+
+</section>
+
+<!-- ================================
+     ANIMATION
+================================ -->
+<section class="animation-section">
+
+    <div class="landscape">
+
+        <div class="sun"></div>
+
+        <div class="cloud one">☁️</div>
+        <div class="cloud two">☁️</div>
+
+        <div class="mountain back"></div>
+        <div class="mountain"></div>
+
+        <div class="dune one"></div>
+        <div class="dune two"></div>
+
+        <div class="railway"></div>
+        <div class="road"></div>
+
+        <button class="vehicle flight"
+                data-transport="flight">
+            <span class="vehicle-icon">✈️</span>
+            <span class="vehicle-label"
+                  data-i18n="flight">
+                FLIGHT
+            </span>
+        </button>
+
+        <button class="vehicle train"
+                data-transport="train">
+            <span class="vehicle-icon">🚄</span>
+            <span class="vehicle-label"
+                  data-i18n="train">
+                TRAIN
+            </span>
+        </button>
+
+        <button class="vehicle bus"
+                data-transport="bus">
+            <span class="vehicle-icon">🚌</span>
+            <span class="vehicle-label"
+                  data-i18n="bus">
+                BUS
+            </span>
+        </button>
+
+        <button class="vehicle taxi"
+                data-transport="taxi">
+            <span class="vehicle-icon">🚕</span>
+            <span class="vehicle-label"
+                  data-i18n="taxi">
+                TAXI
+            </span>
+        </button>
+
+    </div>
+
+    <p class="animation-hint" data-i18n="animationHint">
+        ✦ Click an animated vehicle to learn more.
+    </p>
+
+</section>
+
+<!-- ================================
+     COMPARISON TABLE
+================================ -->
+<section class="section">
+
+    <div class="section-heading">
+
+        <span class="eyebrow" data-i18n="compareLabel">
+            PLAN YOUR ROUTE
+        </span>
+
+        <h2 data-i18n="compareTitle">
+            Compare Your Travel Options
+        </h2>
+
+        <p data-i18n="compareDesc">
+            Choose the transportation method that best
+            suits your schedule and travel preferences.
+        </p>
+
+    </div>
+
+    <div class="table-scroll">
+
+        <table class="comparison-table">
+
+            <thead>
+                <tr>
+                    <th data-i18n="tableType">Transport</th>
+                    <th data-i18n="tableBenefit">Main Benefit</th>
+                    <th data-i18n="tableSuitable">Best For</th>
+                    <th data-i18n="tableNotice">Things to Check</th>
+                </tr>
+            </thead>
+
+            <tbody id="comparisonBody"></tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+<!-- ================================
+     ARRIVAL GUIDE
+================================ -->
+<section class="section alt">
+
+    <div class="section-heading">
+
+        <span class="eyebrow" data-i18n="arrivalLabel">
+            AFTER YOU ARRIVE
+        </span>
+
+        <h2 data-i18n="arrivalTitle">
+            Arrival & Transfer Guide
+        </h2>
+
+        <p data-i18n="arrivalDesc">
+            Understand the main arrival points before
+            travelling to your hotel.
+        </p>
+
+    </div>
+
+    <div class="arrival-grid" id="arrivalGrid"></div>
+
+</section>
+
+<!-- ================================
+     ESSENTIAL TRAVEL INFO
+================================ -->
+<section class="section dark">
+
+    <div class="section-heading">
+
+        <span class="eyebrow" data-i18n="essentialLabel">
+            INTERNATIONAL TRAVEL GUIDE
+        </span>
+
+        <h2 data-i18n="essentialTitle">
+            Essential Travel Information
+        </h2>
+
+        <p data-i18n="essentialDesc">
+            Prepare payment methods, internet access
+            and language tools before arriving in China.
+        </p>
+
+    </div>
+
+    <div class="essential-grid" id="essentialGrid"></div>
+
+    <!-- USEFUL CHINESE PHRASES -->
+
+    <div class="phrases">
+
+        <h3 data-i18n="phraseTitle">
+            Useful Chinese Phrases
+        </h3>
+
+        <div id="phraseList"></div>
+
+        <p id="copyStatus"
+           class="copy-status"
+           role="status"
+           aria-live="polite"></p>
+
+    </div>
+
+</section>
+
+<!-- ================================
+     BEFORE YOU TRAVEL
+================================ -->
+<section class="section">
+
+    <div class="section-heading">
+
+        <span class="eyebrow" data-i18n="tipsLabel">
+            FINAL CHECKLIST
+        </span>
+
+        <h2 data-i18n="tipsTitle">
+            Before You Travel
+        </h2>
+
+        <p data-i18n="tipsDesc">
+            A little preparation can make your
+            journey much easier.
+        </p>
+
+    </div>
+
+    <div class="tips-grid" id="tipsGrid"></div>
+
+</section>
+
+</main>
+<!-- JOURNEY PAGE NAVIGATION -->
+<div id="journeyPageNavigation"></div>
+<script>
+/* ======================================
+   JOURNEY PREVIOUS / NEXT NAVIGATION
+====================================== */
+
+(function () {
+
+    const pages = [
+        {
+            file: "ticket.html",
+            en: "Ticket Booking",
+            zh: "门票预约",
+            ms: "Tempahan Tiket"
+        },
+        {
+            file: "transport.html",
+            en: "Transportation",
+            zh: "交通指南",
+            ms: "Pengangkutan"
+        },
+        {
+            file: "accommodation.html",
+            en: "Accommodation",
+            zh: "住宿推荐",
+            ms: "Penginapan"
+        },
+        {
+            file: "season.html",
+            en: "Best Time to Visit",
+            zh: "最佳旅行季节",
+            ms: "Masa Terbaik untuk Melawat"
+        }
+    ];
+
+    const currentFile =
+        decodeURIComponent(
+            window.location.pathname.split("/").pop()
+        ).toLowerCase();
+
+    const currentIndex = pages.findIndex(
+        page => page.file.toLowerCase() === currentFile
+    );
+
+    if (currentIndex === -1) return;
+
+    const params = new URLSearchParams(
+        window.location.search
+    );
+
+    let currentLang = params.get("lang");
+
+    if (!["en", "zh", "ms"].includes(currentLang)) {
+        currentLang = "en";
+    }
+
+    const labels = {
+        en: {
+            heading: "CONTINUE YOUR JOURNEY",
+            previous: "← PREVIOUS",
+            next: "NEXT →",
+            home: "BACK TO HOME"
+        },
+        zh: {
+            heading: "继续探索敦煌",
+            previous: "← 上一页",
+            next: "下一页 →",
+            home: "返回首页"
+        },
+        ms: {
+            heading: "TERUSKAN PERJALANAN",
+            previous: "← SEBELUMNYA",
+            next: "SETERUSNYA →",
+            home: "KEMBALI KE LAMAN UTAMA"
+        }
+    };
+
+    const container = document.getElementById(
+        "journeyPageNavigation"
+    );
+
+    if (!container) return;
+
+    function makeLink(page, direction, label) {
+
+        const link = document.createElement("a");
+
+        link.className =
+            "journey-page-link " + direction;
+
+        link.href =
+            page.file +
+            "?lang=" +
+            encodeURIComponent(currentLang);
+
+        const small = document.createElement("span");
+        small.textContent = label;
+
+        const strong = document.createElement("strong");
+        strong.textContent = page[currentLang];
+
+        link.append(small, strong);
+
+        return link;
+    }
+
+    function renderNavigation(lang) {
+
+        currentLang = lang;
+
+        const t = labels[currentLang];
+
+        container.replaceChildren();
+
+        const section = document.createElement("section");
+        section.className = "journey-page-nav";
+
+        const inner = document.createElement("div");
+        inner.className = "journey-page-nav-inner";
+
+        const heading = document.createElement("p");
+        heading.className = "journey-page-nav-label";
+        heading.textContent = t.heading;
+
+        const links = document.createElement("div");
+        links.className = "journey-page-nav-links";
+
+        if (currentIndex > 0) {
+
+            links.appendChild(
+                makeLink(
+                    pages[currentIndex - 1],
+                    "previous",
+                    t.previous
+                )
+            );
+
+        } else {
+
+            const spacer = document.createElement("div");
+            spacer.className = "journey-page-nav-spacer";
+            links.appendChild(spacer);
+
+        }
+
+        if (currentIndex < pages.length - 1) {
+
+            links.appendChild(
+                makeLink(
+                    pages[currentIndex + 1],
+                    "next",
+                    t.next
+                )
+            );
+
+        } else {
+
+            links.appendChild(
+                makeLink(
+                    {
+                        file: "Dunhuang%20AI.html",
+                        en: "Home",
+                        zh: "首页",
+                        ms: "Laman Utama"
+                    },
+                    "next",
+                    t.home
+                )
+            );
+
+        }
+
+        inner.append(heading, links);
+        section.appendChild(inner);
+        container.appendChild(section);
+    }
+
+    renderNavigation(currentLang);
+
+    /* Synchronise with existing language buttons */
+
+    document.querySelectorAll("[data-lang]")
+        .forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const newLang = button.dataset.lang;
+
+                if (labels[newLang]) {
+                    renderNavigation(newLang);
+                }
+
+            });
+
+        });
+
+})();
+</script>
+
+<footer>
+    <h2>DUNHUANG.</h2>
+    <p data-i18n="footer">
+        Discover the ancient Silk Road.
+    </p>
+</footer>
+
+<!-- ================================
+     POPUP
+================================ -->
+<dialog id="infoDialog" class="info-dialog">
+
+    <div class="dialog-header">
+
+        <h2 id="dialogTitle"></h2>
+
+        <button class="close-btn"
+                id="closeDialog"
+                aria-label="Close">
+            ×
+        </button>
+
+    </div>
+
+    <div class="dialog-body" id="dialogBody"></div>
+
+</dialog>
+
+<script>
+
+/* ================================
+   THREE LANGUAGES
+================================ */
+
+const translations = {
+
+en: {
+
+    senior:"Senior Mode",
+    back:"← BACK TO HOME",
+
+    heroLabel:"SILK ROAD JOURNEY",
+    heroTitle:"TRANSPORTATION",
+    heroDesc:"Explore ways to reach Dunhuang, plan your arrival and prepare for a smooth journey in China.",
+
+    flight:"FLIGHT",
+    train:"TRAIN",
+    bus:"BUS",
+    taxi:"TAXI",
+
+    animationHint:"✦ Click an animated vehicle to learn more.",
+
+    compareLabel:"PLAN YOUR ROUTE",
+    compareTitle:"Compare Your Travel Options",
+    compareDesc:"Choose the transportation method that best suits your schedule and travel preferences.",
+
+    tableType:"Transport",
+    tableBenefit:"Main Benefit",
+    tableSuitable:"Best For",
+    tableNotice:"Things to Check",
+
+    comparison:[
+        ["✈️ Flight","Fast arrival","Short holidays and luggage","Flight schedule and airport transfer"],
+        ["🚄 Train","Scenic rail journey","Rail travellers and flexible trips","Correct railway station"],
+        ["🚌 Bus","Shared road transport","Budget travellers","Routes, departure points and timetable"],
+        ["🚕 Taxi","Flexible door-to-door travel","Families and small groups","Fare, destination and licensed vehicles"]
+    ],
+
+    arrivalLabel:"AFTER YOU ARRIVE",
+    arrivalTitle:"Arrival & Transfer Guide",
+    arrivalDesc:"Understand the main arrival points before travelling to your hotel.",
+
+    arrivals:[
+        {
+            icon:"✈️",
+            title:"Dunhuang Mogao International Airport",
+            text:"The airport is approximately 13 km from central Dunhuang. Check current airport transport, taxi services and your hotel location before arrival."
+        },
+        {
+            icon:"🚄",
+            title:"Dunhuang Railway Station",
+            text:"Dunhuang Station (敦煌站) is around 10 km from the city centre. Check your hotel transfer after arriving."
+        },
+        {
+            icon:"⚠️",
+            title:"Liuyuan South Railway Station",
+            text:"Liuyuan South (柳园南站) is roughly 120–130 km from Dunhuang. It requires a longer road transfer. Check your station carefully before booking."
+        }
+    ],
+
+    essentialLabel:"INTERNATIONAL TRAVEL GUIDE",
+    essentialTitle:"Essential Travel Information",
+    essentialDesc:"Prepare payment methods, internet access and language tools before arriving in China.",
+
+    essentials:[
+        {
+            icon:"💳",
+            title:"Payment Methods",
+            body:"Set up Alipay or WeChat Pay before travelling and check whether your international bank card is supported. These services are widely used for taxis, restaurants, shopping and many tickets, although acceptance varies.",
+            note:"Carry some RMB cash as backup. Use ATMs belonging to established banks and check card fees."
+        },
+        {
+            icon:"📶",
+            title:"Internet Connection",
+            body:"Some overseas services, including Google, Instagram and WhatsApp, are restricted on mainland Chinese networks. Check roaming or travel eSIM coverage and service access before departure.",
+            note:"Download offline maps, translation tools, hotel details and important reservations in advance. eSIM functionality varies by provider."
+        },
+        {
+            icon:"🌐",
+            title:"Language & Communication",
+            body:"Some signs, ticket machines and booking systems mainly use Chinese. Save your hotel name, station names and important travel phrases in Chinese.",
+            note:"Showing written Chinese to a driver or staff member may be easier than explaining your destination verbally."
+        }
+    ],
+
+    phraseTitle:"Useful Chinese Phrases",
+
+    phrases:[
+        {zh:"请带我去敦煌站。",translation:"Please take me to Dunhuang Railway Station."},
+        {zh:"我想去敦煌莫高国际机场。",translation:"I want to go to Dunhuang Mogao International Airport."},
+        {zh:"我想要英文讲解，谢谢。",translation:"I would like an English-speaking guide, please."},
+        {zh:"请问多少钱？",translation:"How much does it cost?"},
+        {zh:"请带我去这个酒店。",translation:"Please take me to this hotel."}
+    ],
+
+    copy:"Copy",
+    copied:"Chinese phrase copied!",
+    copyFailed:"Copy failed. Please select and copy the phrase manually.",
+
+    tipsLabel:"FINAL CHECKLIST",
+    tipsTitle:"Before You Travel",
+    tipsDesc:"A little preparation can make your journey much easier.",
+
+    tips:[
+        ["🎫 Book Early","Book flights or trains ahead of holidays and busy travel periods."],
+        ["📍 Save Your Address","Keep your hotel address and station names in Chinese."],
+        ["🧳 Check Your Arrival","Confirm your arrival time, luggage needs and onward transfer."]
+    ],
+
+    footer:"Discover the ancient Silk Road.",
+
+    popupLabels:["Route","Travel Planning","Best For","Travel Tips"],
+
+    transport:{
+        flight:[
+            "✈️ Flight",
+            "Fly to Dunhuang Mogao International Airport (DNH). Flight routes and connections depend on the city and season.",
+            "The airport is approximately 13 km from the city centre. Plan your onward transfer.",
+            "Travellers who prefer faster journeys.",
+            "Check flight availability and arrange transport to your hotel."
+        ],
+        train:[
+            "🚄 Train",
+            "Travel by rail to Dunhuang Station (敦煌站). Some journeys use Liuyuan South (柳园南站), which is considerably farther away.",
+            "Journey times depend on your departure city and train service.",
+            "Visitors who enjoy railway journeys.",
+            "Confirm the Chinese station name before booking."
+        ],
+        bus:[
+            "🚌 Bus",
+            "Local and regional buses connect selected transport hubs, urban areas and attractions.",
+            "Schedules depend on the operator and route.",
+            "Travellers who prefer shared transport.",
+            "Check current routes, fares and operating hours."
+        ],
+        taxi:[
+            "🚕 Taxi",
+            "Licensed taxis or pre-booked private cars can connect the airport, stations, hotels and attractions.",
+            "Time and price vary according to distance and traffic.",
+            "Families, groups and visitors with luggage.",
+            "Confirm the destination and estimated fare before travelling."
+        ]
+    }
+
+},
+
+zh: {
+
+    senior:"长辈模式",
+    back:"← 返回首页",
+
+    heroLabel:"丝绸之路旅行",
+    heroTitle:"敦煌交通指南",
+    heroDesc:"探索前往敦煌的交通方式、抵达后的换乘安排，以及到中国旅行前需要准备的重要信息。",
+
+    flight:"飞机",
+    train:"火车",
+    bus:"巴士",
+    taxi:"出租车",
+
+    animationHint:"✦ 点击动画中的交通工具，查看详细信息。",
+
+    compareLabel:"规划交通路线",
+    compareTitle:"交通方式对比",
+    compareDesc:"根据时间、预算和旅行偏好，选择适合自己的出行方式。",
+
+    tableType:"交通方式",
+    tableBenefit:"主要优势",
+    tableSuitable:"适合人群",
+    tableNotice:"注意事项",
+
+    comparison:[
+        ["✈️ 飞机","到达速度快","假期短、行李较多的游客","航班时间与机场接送"],
+        ["🚄 火车","沿途风景丰富","喜欢铁路旅行的游客","确认到达车站"],
+        ["🚌 巴士","公共交通选择","预算有限的游客","线路、发车位置和时间表"],
+        ["🚕 出租车","灵活的点对点出行","家庭、朋友团体","费用、目的地及正规车辆"]
+    ],
+
+    arrivalLabel:"抵达敦煌以后",
+    arrivalTitle:"抵达与换乘指南",
+    arrivalDesc:"提前了解机场和火车站的位置，让抵达后的旅程更加顺利。",
+
+    arrivals:[
+        {
+            icon:"✈️",
+            title:"敦煌莫高国际机场",
+            text:"机场距离敦煌市中心约13公里。抵达前建议确认机场交通、出租车服务和酒店位置。"
+        },
+        {
+            icon:"🚄",
+            title:"敦煌站",
+            text:"敦煌站距离市区约10公里。抵达后可根据酒店位置安排交通接驳。"
+        },
+        {
+            icon:"⚠️",
+            title:"柳园南站",
+            text:"柳园南站距离敦煌市区约120—130公里，需要较长时间的公路换乘。购票前务必核对车站名称。"
+        }
+    ],
+
+    essentialLabel:"国际游客旅行指南",
+    essentialTitle:"旅行必备信息",
+    essentialDesc:"来到中国之前，提前准备好支付方式、网络连接和语言工具。",
+
+    essentials:[
+        {
+            icon:"💳",
+            title:"支付方式",
+            body:"建议出发前设置支付宝或微信支付，并确认国际银行卡是否支持绑定。它们可用于许多出租车、餐厅、商店和门票消费，但实际支持情况因商户和银行卡而异。",
+            note:"建议携带适量人民币现金备用。需要取现时优先选择正规银行的ATM，并了解手续费。"
+        },
+        {
+            icon:"📶",
+            title:"网络连接",
+            body:"中国大陆网络对Google、Instagram、WhatsApp等部分境外应用存在访问限制。出发前应确认国际漫游或旅行eSIM的覆盖范围与服务使用条件。",
+            note:"提前下载离线地图、翻译工具、酒店地址及预约资料。不同eSIM运营商提供的服务并不相同。"
+        },
+        {
+            icon:"🌐",
+            title:"语言与沟通",
+            body:"部分交通标识、售票机和预约系统主要使用中文。建议提前保存酒店名称、火车站名称和常用旅行中文短句。",
+            note:"直接向司机或工作人员展示中文文字，通常比只用英语口头解释更加方便。"
+        }
+    ],
+
+    phraseTitle:"实用中文短句",
+
+    phrases:[
+        {zh:"请带我去敦煌站。",translation:"前往敦煌火车站"},
+        {zh:"我想去敦煌莫高国际机场。",translation:"前往敦煌机场"},
+        {zh:"我想要英文讲解，谢谢。",translation:"请求英文讲解"},
+        {zh:"请问多少钱？",translation:"询问价格"},
+        {zh:"请带我去这个酒店。",translation:"向司机展示酒店地址"}
+    ],
+
+    copy:"复制",
+    copied:"已复制中文短句！",
+    copyFailed:"复制失败，请手动选择文字复制。",
+
+    tipsLabel:"出发前检查",
+    tipsTitle:"出发之前",
+    tipsDesc:"提前做好准备，可以让敦煌之旅更加顺利。",
+
+    tips:[
+        ["🎫 提前购票","节假日和旅游旺季建议提前预订交通票务。"],
+        ["📍 保存中文地址","保存酒店地址、机场和火车站的中文名称。"],
+        ["🧳 确认抵达安排","确认抵达时间、行李需求和后续交通方式。"]
+    ],
+
+    footer:"探索古代丝绸之路。",
+
+    popupLabels:["交通路线","时间与规划","适合人群","旅行建议"],
+
+    transport:{
+        flight:[
+            "✈️ 飞机",
+            "乘飞机抵达敦煌莫高国际机场（DNH），具体航线和转机安排因出发城市、季节而异。",
+            "机场距离市中心约13公里，需要提前安排后续交通。",
+            "希望节省交通时间的游客。",
+            "确认航班信息，并安排从机场前往酒店的交通。"
+        ],
+        train:[
+            "🚄 火车",
+            "可以乘火车抵达敦煌站（敦煌站）。部分行程涉及距离市区较远的柳园南站。",
+            "乘车时间取决于出发城市和列车班次。",
+            "喜欢火车旅行与沿途风景的游客。",
+            "订票前认真核对中文车站名称。"
+        ],
+        bus:[
+            "🚌 巴士",
+            "部分公共巴士和接驳服务连接交通枢纽、市区及景点。",
+            "具体时间取决于运营线路。",
+            "喜欢公共交通、控制预算的游客。",
+            "提前确认路线、车费和运营时间。"
+        ],
+        taxi:[
+            "🚕 出租车",
+            "可以选择正规出租车或提前预约车辆，在机场、车站、酒店和景点之间出行。",
+            "时间及费用根据距离和路况变化。",
+            "家庭出行、朋友团体及携带行李的游客。",
+            "上车前确认目的地及大致费用。"
+        ]
+    }
+
+},
+
+ms: {
+
+    senior:"Mod Warga Emas",
+    back:"← KEMBALI KE LAMAN UTAMA",
+
+    heroLabel:"PERJALANAN LALUAN SUTERA",
+    heroTitle:"PANDUAN PENGANGKUTAN",
+    heroDesc:"Terokai pengangkutan ke Dunhuang, rancang pemindahan selepas tiba dan sediakan maklumat penting untuk perjalanan di China.",
+
+    flight:"KAPAL TERBANG",
+    train:"KERETA API",
+    bus:"BAS",
+    taxi:"TEKSI",
+
+    animationHint:"✦ Klik kenderaan bergerak untuk maklumat lanjut.",
+
+    compareLabel:"RANCANG LALUAN ANDA",
+    compareTitle:"Bandingkan Pilihan Pengangkutan",
+    compareDesc:"Pilih pengangkutan berdasarkan masa, bajet dan gaya perjalanan.",
+
+    tableType:"Pengangkutan",
+    tableBenefit:"Kelebihan",
+    tableSuitable:"Sesuai Untuk",
+    tableNotice:"Perkara Penting",
+
+    comparison:[
+        ["✈️ Kapal terbang","Ketibaan cepat","Percutian singkat dan banyak bagasi","Jadual penerbangan dan pemindahan"],
+        ["🚄 Kereta api","Pemandangan sepanjang perjalanan","Pengembara kereta api","Nama stesen yang betul"],
+        ["🚌 Bas","Pengangkutan berkongsi","Pengembara berjimat","Laluan dan jadual"],
+        ["🚕 Teksi","Perjalanan fleksibel","Keluarga dan kumpulan","Tambang dan kenderaan berlesen"]
+    ],
+
+    arrivalLabel:"SELEPAS TIBA",
+    arrivalTitle:"Panduan Ketibaan & Pemindahan",
+    arrivalDesc:"Kenali lapangan terbang dan stesen sebelum pergi ke hotel.",
+
+    arrivals:[
+        {
+            icon:"✈️",
+            title:"Lapangan Terbang Dunhuang Mogao",
+            text:"Lapangan terbang kira-kira 13 km dari pusat bandar. Semak pengangkutan dan lokasi hotel sebelum tiba."
+        },
+        {
+            icon:"🚄",
+            title:"Stesen Kereta Api Dunhuang",
+            text:"Stesen Dunhuang (敦煌站) kira-kira 10 km dari pusat bandar. Rancang perjalanan ke hotel."
+        },
+        {
+            icon:"⚠️",
+            title:"Stesen Liuyuan South",
+            text:"Liuyuan South (柳园南站) kira-kira 120–130 km dari Dunhuang dan memerlukan perjalanan jalan raya yang lebih jauh."
+        }
+    ],
+
+    essentialLabel:"PANDUAN PELANCONG ANTARABANGSA",
+    essentialTitle:"Maklumat Perjalanan Penting",
+    essentialDesc:"Sediakan pembayaran, internet dan alat bahasa sebelum tiba di China.",
+
+    essentials:[
+        {
+            icon:"💳",
+            title:"Kaedah Pembayaran",
+            body:"Sediakan Alipay atau WeChat Pay sebelum perjalanan dan semak sokongan kad bank antarabangsa. Perkhidmatan ini digunakan secara meluas, tetapi penerimaan bergantung pada peniaga dan kad.",
+            note:"Bawa wang tunai RMB sebagai pilihan tambahan. Gunakan ATM bank yang dipercayai dan semak caj."
+        },
+        {
+            icon:"📶",
+            title:"Sambungan Internet",
+            body:"Sesetengah perkhidmatan antarabangsa seperti Google, Instagram dan WhatsApp mempunyai sekatan pada rangkaian China. Semak perayauan atau eSIM sebelum berlepas.",
+            note:"Muat turun peta luar talian, aplikasi terjemahan dan maklumat tempahan. Perkhidmatan eSIM berbeza mengikut penyedia."
+        },
+        {
+            icon:"🌐",
+            title:"Bahasa & Komunikasi",
+            body:"Sesetengah papan tanda, mesin tiket dan sistem tempahan menggunakan bahasa Cina. Simpan nama hotel, stesen dan ayat perjalanan dalam bahasa Cina.",
+            note:"Menunjukkan tulisan Cina kepada pemandu selalunya lebih mudah daripada penerangan lisan."
+        }
+    ],
+
+    phraseTitle:"Frasa Bahasa Cina Berguna",
+
+    phrases:[
+        {zh:"请带我去敦煌站。",translation:"Tolong bawa saya ke Stesen Dunhuang."},
+        {zh:"我想去敦煌莫高国际机场。",translation:"Saya mahu ke Lapangan Terbang Dunhuang Mogao."},
+        {zh:"我想要英文讲解，谢谢。",translation:"Saya mahu penerangan dalam bahasa Inggeris."},
+        {zh:"请问多少钱？",translation:"Berapakah harganya?"},
+        {zh:"请带我去这个酒店。",translation:"Tolong bawa saya ke hotel ini."}
+    ],
+
+    copy:"Salin",
+    copied:"Frasa Cina disalin!",
+    copyFailed:"Gagal menyalin. Sila salin secara manual.",
+
+    tipsLabel:"SENARAI SEMAK AKHIR",
+    tipsTitle:"Sebelum Bertolak",
+    tipsDesc:"Persediaan awal menjadikan perjalanan lebih mudah.",
+
+    tips:[
+        ["🎫 Tempah Awal","Tempah tiket pengangkutan lebih awal semasa cuti."],
+        ["📍 Simpan Alamat","Simpan alamat hotel dan nama stesen dalam bahasa Cina."],
+        ["🧳 Semak Ketibaan","Pastikan waktu tiba, bagasi dan pengangkutan sambungan."]
+    ],
+
+    footer:"Terokai Laluan Sutera purba.",
+
+    popupLabels:["Laluan","Perancangan","Sesuai Untuk","Tip Perjalanan"],
+
+    transport:{
+        flight:[
+            "✈️ Kapal Terbang",
+            "Terbang ke Lapangan Terbang Dunhuang Mogao (DNH). Laluan berbeza mengikut bandar dan musim.",
+            "Lapangan terbang kira-kira 13 km dari pusat bandar.",
+            "Pelawat yang mahu tiba lebih cepat.",
+            "Semak jadual penerbangan dan pengangkutan ke hotel."
+        ],
+        train:[
+            "🚄 Kereta Api",
+            "Gunakan Stesen Dunhuang (敦煌站). Liuyuan South (柳园南站) terletak lebih jauh.",
+            "Masa perjalanan bergantung pada laluan dan perkhidmatan kereta api.",
+            "Pelawat yang suka perjalanan kereta api.",
+            "Pastikan nama stesen sebelum menempah."
+        ],
+        bus:[
+            "🚌 Bas",
+            "Bas tempatan dan serantau menghubungkan beberapa kawasan dan tarikan.",
+            "Jadual bergantung pada laluan.",
+            "Pengembara yang memilih pengangkutan berkongsi.",
+            "Semak jadual, tambang dan lokasi berlepas."
+        ],
+        taxi:[
+            "🚕 Teksi",
+            "Teksi berlesen atau kereta ditempah boleh membawa anda ke hotel dan tarikan.",
+            "Masa dan harga bergantung pada jarak dan trafik.",
+            "Keluarga, kumpulan dan pelawat dengan bagasi.",
+            "Sahkan destinasi dan tambang sebelum bertolak."
+        ]
+    }
+
+}
+
+};
+
+/* ================================
+   GLOBAL STATE
+================================ */
+
+let lang = "en";
+let seniorMode = false;
+let activeTransport = null;
+
+const $ = id => document.getElementById(id);
+
+const dialog = $("infoDialog");
+
+/* ================================
+   POPUP
+================================ */
+
+function openTransport(type) {
+
+    activeTransport = type;
+
+    updatePopup();
+
+    if (!dialog.open) {
+        dialog.showModal();
+    }
+}
+
+function updatePopup() {
+
+    if (!activeTransport) return;
+
+    const t = translations[lang];
+
+    const info = t.transport[activeTransport];
+
+    $("dialogTitle").textContent = info[0];
+
+    const body = $("dialogBody");
+    body.replaceChildren();
+
+    for (let i = 1; i <= 4; i++) {
+
+        const row = document.createElement("div");
+        row.className = "dialog-row";
+
+        const heading = document.createElement("h3");
+        heading.textContent = t.popupLabels[i - 1];
+
+        const paragraph = document.createElement("p");
+        paragraph.textContent = info[i];
+
+        row.append(heading,paragraph);
+        body.appendChild(row);
+    }
+}
+
+document.querySelectorAll("[data-transport]")
+    .forEach(button => {
+
+        button.addEventListener("click", () => {
+            openTransport(button.dataset.transport);
+        });
+
+    });
+
+$("closeDialog").onclick = () => dialog.close();
+
+dialog.addEventListener("close", () => {
+    activeTransport = null;
+});
+
+dialog.addEventListener("click", event => {
+
+    const rect = dialog.getBoundingClientRect();
+
+    const outside =
+        event.clientX < rect.left ||
+        event.clientX > rect.right ||
+        event.clientY < rect.top ||
+        event.clientY > rect.bottom;
+
+    if (outside) dialog.close();
+});
+
+/* ================================
+   COMPARISON TABLE
+================================ */
+
+function renderComparison() {
+
+    const t = translations[lang];
+
+    const body = $("comparisonBody");
+    body.replaceChildren();
+
+    t.comparison.forEach(data => {
+
+        const row = document.createElement("tr");
+
+        data.forEach(value => {
+
+            const cell = document.createElement("td");
+            cell.textContent = value;
+
+            row.appendChild(cell);
+        });
+
+        body.appendChild(row);
+    });
+}
+
+/* ================================
+   ARRIVAL GUIDE
+================================ */
+
+function renderArrivals() {
+
+    const root = $("arrivalGrid");
+    root.replaceChildren();
+
+    translations[lang].arrivals.forEach((item,index) => {
+
+        const card = document.createElement("article");
+        card.className =
+            "arrival-card" + (index === 2 ? " warning" : "");
+
+        const icon = document.createElement("div");
+        icon.className = "arrival-icon";
+        icon.textContent = item.icon;
+
+        const title = document.createElement("h3");
+        title.textContent = item.title;
+
+        const desc = document.createElement("p");
+        desc.textContent = item.text;
+
+        card.append(icon,title,desc);
+        root.appendChild(card);
+    });
+}
+
+/* ================================
+   ESSENTIAL INFO
+================================ */
+
+function renderEssentials() {
+
+    const root = $("essentialGrid");
+    root.replaceChildren();
+
+    translations[lang].essentials.forEach(item => {
+
+        const card = document.createElement("article");
+        card.className = "essential-card";
+
+        const icon = document.createElement("div");
+        icon.className = "essential-icon";
+        icon.textContent = item.icon;
+
+        const title = document.createElement("h3");
+        title.textContent = item.title;
+
+        const body = document.createElement("p");
+        body.textContent = item.body;
+
+        const note = document.createElement("p");
+        note.className = "small-note";
+        note.textContent = item.note;
+
+        card.append(icon,title,body,note);
+        root.appendChild(card);
+    });
+}
+
+/* ================================
+   CHINESE PHRASES
+================================ */
+
+async function copyPhrase(text) {
+
+    const status = $("copyStatus");
+    const t = translations[lang];
+
+    try {
+
+        if (!navigator.clipboard) {
+            throw new Error("Clipboard unavailable");
+        }
+
+        await navigator.clipboard.writeText(text);
+
+        status.textContent = t.copied;
+
+    } catch (error) {
+
+        status.textContent = t.copyFailed;
+
+    }
+}
+
+function renderPhrases() {
+
+    const t = translations[lang];
+
+    const root = $("phraseList");
+    root.replaceChildren();
+
+    $("copyStatus").textContent = "";
+
+    t.phrases.forEach(item => {
+
+        const row = document.createElement("div");
+        row.className = "phrase-row";
+
+        const text = document.createElement("div");
+        text.className = "phrase-text";
+
+        const chinese = document.createElement("strong");
+        chinese.textContent = item.zh;
+
+        const translated = document.createElement("small");
+        translated.textContent = item.translation;
+
+        text.append(chinese,translated);
+
+        const button = document.createElement("button");
+        button.className = "copy-btn";
+        button.type = "button";
+        button.textContent = "📋 " + t.copy;
+
+        button.onclick = () => copyPhrase(item.zh);
+
+        row.append(text,button);
+        root.appendChild(row);
+    });
+}
+
+/* ================================
+   TRAVEL TIPS
+================================ */
+
+function renderTips() {
+
+    const root = $("tipsGrid");
+    root.replaceChildren();
+
+    translations[lang].tips.forEach(item => {
+
+        const card = document.createElement("article");
+        card.className = "tip-card";
+
+        const title = document.createElement("h3");
+        title.textContent = item[0];
+
+        const body = document.createElement("p");
+        body.textContent = item[1];
+
+        card.append(title,body);
+        root.appendChild(card);
+    });
+}
+
+/* ================================
+   LANGUAGE SWITCH
+================================ */
+
+function setLanguage(value) {
+
+    if (!translations[value]) {
+        value = "en";
+    }
+
+    lang = value;
+
+    document.documentElement.lang =
+        value === "zh" ? "zh-CN" : value;
+
+    const t = translations[value];
+
+    document.querySelectorAll("[data-i18n]")
+        .forEach(element => {
+
+            const key = element.dataset.i18n;
+
+            if (t[key] !== undefined) {
+                element.textContent = t[key];
+            }
+
+        });
+
+    document.querySelectorAll(".lang-btn")
+        .forEach(button => {
+
+            button.classList.toggle(
+                "active",
+                button.dataset.lang === value
+            );
+
+        });
+
+    const home =
+        "Dunhuang%20AI.html?lang=" +
+        encodeURIComponent(value);
+
+    $("homeLogo").href = home;
+    $("backHome").href = home;
+
+    renderComparison();
+    renderArrivals();
+    renderEssentials();
+    renderPhrases();
+    renderTips();
+    updatePopup();
+}
+
+/* ================================
+   NAVIGATION BUTTONS
+================================ */
+
+document.querySelectorAll(".lang-btn")
+    .forEach(button => {
+
+        button.onclick = () => {
+            setLanguage(button.dataset.lang);
+        };
+
+    });
+
+$("seniorButton").onclick = () => {
+
+    seniorMode = !seniorMode;
+
+    document.body.classList.toggle(
+        "senior-mode",
+        seniorMode
+    );
+
+    $("seniorButton").classList.toggle(
+        "active",
+        seniorMode
+    );
+};
+
+/* ================================
+   INITIALISE
+================================ */
+
+const params =
+    new URLSearchParams(window.location.search);
+
+setLanguage(params.get("lang") || "en");
+
+</script>
+
+</body>
+</html>

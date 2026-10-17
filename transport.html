@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -502,6 +501,10 @@ a:focus-visible {
     background: transparent;
     color: white;
     font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 
 .close-btn:hover {
@@ -612,8 +615,10 @@ a:focus-visible {
 }
 
 .arrival-card.warning {
-    border-top-color: #ac7448;
-    background: #f6eadb;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--clay);
+    border-radius: 8px；
 }
 
 /* ================================
@@ -967,6 +972,269 @@ body.senior-mode .phrase-text small {
 
     .journey-page-link.next {
         text-align: left;
+    }
+}
+
+/* =========================================
+   DUNHUANG TRANSPORTATION REDESIGN
+   敦煌交通指南 · 统一暖色配色
+========================================= */
+
+/* 全局颜色 */
+:root {
+    --dark: #5e3d2f;
+    --forest: #8f5f3d;
+    --forest-light: #ac744e;
+    --gold: #d8b47c;
+    --paper: #fff9ed;
+    --cream: #f5eee1;
+    --sand: #e4c39b;
+    --ink: #3b2d24;
+    --muted: #726052;
+    --border: #dcc6a6;
+    --clay: #b86e4b;
+    --clay-dark: #96563a;
+}
+
+/* 整体页面 */
+body {
+    background: var(--cream);
+    color: var(--ink);
+}
+
+/* 顶部导航 */
+.site-header {
+    background: rgba(94, 61, 47, 0.97);
+    border-bottom: 1px solid rgba(216, 180, 124, 0.30);
+}
+
+/* 首页大标题区域 */
+.hero {
+    background:
+        radial-gradient(
+            circle at 75% 16%,
+            rgba(255, 210, 148, 0.15),
+            transparent 33%
+        ),
+        linear-gradient(
+            135deg,
+            #a76c49 0%,
+            #8f5f42 46%,
+            #5e3d2f 100%
+        );
+}
+
+.hero p {
+    color: #f6e8d7;
+}
+
+/* 小标题 */
+.eyebrow {
+    color: #d2a36c;
+}
+
+.hero .eyebrow,
+.section.dark .eyebrow,
+.journey-page-nav-label {
+    color: #f0c88e;
+}
+
+/* 浅色内容区 */
+.section.alt {
+    background: #eedcc4;
+}
+
+/* 原来的深绿色信息区 */
+.section.dark {
+    background: #7d523b;
+    color: #fff8ec;
+}
+
+.dark .section-heading p {
+    color: #f3e3d1;
+}
+
+/* ================================
+   TRANSPORT ANIMATION
+   交通工具互动动画区域
+================================ */
+
+/* 动画外部背景 */
+.animation-section {
+    background: #8f5f42;
+    border-top: 1px solid rgba(216,180,124,.35);
+}
+
+/* 沙漠场景 */
+.landscape {
+    border: 2px solid #e1b782;
+
+    background: linear-gradient(
+        180deg,
+        #e4b78e 0%,
+        #f2d3a7 49%,
+        #d7a073 100%
+    );
+
+    box-shadow: 0 24px 55px rgba(58,32,22,.17);
+}
+
+/* 太阳 */
+.sun {
+    background: #ffe4aa;
+    box-shadow: 0 0 78px rgba(255,217,150,.9);
+}
+
+/* 远处山脉 */
+.mountain {
+    background: #bd8158;
+}
+
+.mountain.back {
+    background: #996647;
+}
+
+/* 沙丘 */
+.dune.one {
+    background: #edc08b;
+}
+
+.dune.two {
+    background: #ce905f;
+}
+
+/* 交通工具按钮 */
+.vehicle {
+    color: #fff9f0;
+    background: rgba(94,61,47,.92);
+    border-color: #f0c997;
+}
+
+.vehicle:hover,
+.vehicle:focus-visible {
+    background: var(--clay-dark);
+    border-color: #ffe3b5;
+}
+
+/* 动画下方提示 */
+.animation-hint {
+    color: #fff2e1;
+}
+
+/* ================================
+   POPUP
+   点击交通工具的弹窗
+================================ */
+
+.dialog-header {
+    background: #8f5f42;
+}
+
+.info-dialog::backdrop {
+    background: rgba(53,30,21,.73);
+}
+
+/* ================================
+   TRANSPORT COMPARISON
+   交通对比表格
+================================ */
+
+.comparison-table th {
+    background: #8f5f42;
+    color: #fff9ee;
+}
+
+.comparison-table tbody tr:hover {
+    background: #faead5;
+}
+
+.comparison-table td:first-child {
+    color: #865437;
+}
+
+/* ================================
+   ARRIVAL INFORMATION
+   机场、火车站、到达指南
+================================ */
+
+.arrival-card,
+.tip-card {
+    border-top-color: var(--clay);
+    box-shadow: 0 8px 22px rgba(94,61,47,.06);
+}
+
+.arrival-card.warning {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--clay);
+    border-radius: 8px;
+}
+
+
+/* 支付、网络、语言卡片 */
+.essential-card {
+    border-color: #d7b28b;
+    box-shadow: 0 8px 22px rgba(94,61,47,.08);
+}
+
+/* 中文短句的复制按钮 */
+.copy-btn {
+    border-color: #b86e4b;
+    color: #835039;
+}
+
+.copy-btn:hover {
+    background: #f0cfaa;
+    color: #5e3d2f;
+}
+
+/* ================================
+   CONTINUE YOUR JOURNEY
+   底部上一页 / 下一页
+================================ */
+
+.journey-page-nav {
+    background: #5e3d2f;
+    color: #fff7ea;
+}
+
+.journey-page-link {
+    border: 1px solid rgba(240,200,142,.60);
+    background: rgba(255,250,241,.04);
+    color: #fff7ea;
+}
+
+.journey-page-link:hover {
+    background: #edc494;
+    color: #5e3d2f;
+}
+
+/* 页面底部 */
+footer {
+    background: #4c3028;
+}
+
+footer p {
+    color: #f0d9bf;
+}
+
+/* 长辈模式 */
+body.senior-mode .vehicle {
+    border-width: 2px;
+}
+
+/* 手机适配 */
+@media (max-width: 760px) {
+    .site-header {
+        background: #5e3d2f;
+    }
+
+    .hero {
+        background: linear-gradient(
+            145deg,
+            #ad7855,
+            #5e3d2f
+        );
     }
 }
 

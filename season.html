@@ -714,6 +714,169 @@ body.senior-mode .back-home {
     }
 }
 
+/* DUNHUANG SEASON — WARM COLOR REDESIGN */
+
+:root {
+  --dark: #5e3d2f;
+  --forest: #8f5f42;
+  --paper: #f5eee1;
+  --gold: #d8b47c;
+  --ink: #3b2d24;
+  --muted: #726052;
+  --border: #dcc6a6;
+  --clay: #b86e4b;
+  --clay-dark: #96563a;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* 顶部导航 */
+.site-header {
+  background: rgba(94,61,47,.97);
+  border-bottom: 1px solid rgba(216,180,124,.3);
+}
+
+/* Hero：保留你原来的沙漠背景图片 */
+.guide-hero {
+  background:
+    linear-gradient(
+      rgba(79,45,30,.40),
+      rgba(79,45,30,.72)
+    ),
+    url("shamo.png") center / cover,
+    #8f5f42;
+}
+
+/* 浅色内容区 */
+.section.alt {
+  background: #eedcc4;
+}
+
+.section-label {
+  color: #a66b45;
+}
+
+.section-heading h2 {
+  color: #4f342a;
+}
+
+/* 四季卡片与旅行提示 */
+.season-card,
+.essential-card,
+.tip-card {
+  background: #fff9ed;
+  border-color: #dcc6a6;
+  box-shadow: 0 8px 22px rgba(94,61,47,.06);
+}
+
+.season-card {
+  border-top-color: var(--clay);
+}
+
+/* 小女孩十二个月换装区域 */
+.outfit-section {
+  background: linear-gradient(
+    135deg,
+    #a76c49 0%,
+    #8f5f42 47%,
+    #5e3d2f 100%
+  );
+  color: #fff9ed;
+}
+
+.outfit-section .section-heading h2 {
+  color: #fff9ed;
+}
+
+.outfit-section .section-heading p {
+  color: #f5e4cf;
+}
+
+.outfit-section .section-label {
+  color: #f0c88e;
+}
+
+/* 小女孩展示框 */
+.character-panel {
+  background: radial-gradient(
+    circle at center,
+    #fff6e7,
+    #ebcdaa
+  );
+  border-color: rgba(216,180,124,.7);
+  color: #3b2d24;
+}
+
+/* 十二个月按钮 */
+.month-card {
+  background: #fff8eb;
+  border-color: #d7b28b;
+  color: #543b2e;
+}
+
+.month-card:hover {
+  background: #fff0d9;
+  border-color: var(--clay);
+}
+
+.month-card.active {
+  background: #eac69b;
+  border: 2px solid #b86e4b;
+  color: #4b3025;
+}
+
+/* 天气信息 */
+.weather-panel {
+  background: #fff9ed;
+  color: #3b2d24;
+  border: 1px solid #d7b28b;
+}
+
+.temperature-box {
+  background: #f2dec3;
+}
+
+.weather-detail h4 {
+  color: #99613e;
+}
+
+.speech-button {
+  background: var(--clay);
+}
+
+.speech-button:hover {
+  background: var(--clay-dark);
+}
+
+/* 底部页面导航 */
+.journey-page-nav {
+  background: #5e3d2f;
+  color: #fff9ed;
+}
+
+.journey-page-nav-label {
+  color: #f0c88e;
+}
+
+.journey-page-link {
+  border-color: rgba(240,200,142,.6);
+  color: #fff9ed;
+}
+
+.journey-page-link:hover {
+  background: #edc494;
+  color: #5e3d2f;
+}
+
+/* Footer */
+footer {
+  background: #4c3028;
+  color: #fff1df;
+}
+
 </style>
 </head>
 

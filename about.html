@@ -1,0 +1,1277 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>About Us | DUNHUANG</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --dark: #171c19;
+  --forest: #26342e;
+  --paper: #f5f0e6;
+  --gold: #d8b47c;
+  --red: #b44c2b;
+  --ink: #292723;
+  --muted: #706a60;
+  --title-font: 'Cormorant Garamond', 'Noto Serif SC', serif;
+  --body-font: 'DM Sans', 'Noto Sans SC', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body-font);
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+}
+
+/* ===============================
+   NAVIGATION
+================================ */
+
+.navbar {
+  width: 100%;
+  min-height: 90px;
+  padding: 20px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  background: var(--dark);
+  color: white;
+  border-bottom: 1px solid rgba(216,180,124,.3);
+}
+
+.logo {
+  font-family: var(--title-font);
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  line-height: 1.1;
+}
+
+.logo span {
+  color: var(--gold);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.home-link {
+  color: #e9d9be;
+  font-size: 14px;
+  letter-spacing: 1px;
+  transition: color .3s;
+}
+
+.home-link:hover {
+  color: var(--gold);
+}
+
+.language-switcher {
+  display: flex;
+  gap: 6px;
+}
+
+.language-switcher button,
+.senior-button {
+  padding: 9px 13px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.45);
+  color: white;
+  font-size: 13px;
+  border-radius: 4px;
+}
+
+.language-switcher button.active,
+.language-switcher button:hover,
+.senior-button.active,
+.senior-button:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--dark);
+}
+
+/* ===============================
+   HERO
+================================ */
+
+.about-hero {
+  position: relative;
+  min-height: 490px;
+  padding: 100px 6%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+
+  background:
+    radial-gradient(circle at 50% 80%,
+      rgba(216,180,124,.17), transparent 45%),
+    linear-gradient(125deg, #26342e, #171c19 75%);
+}
+
+.about-hero::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border: 1px solid rgba(216,180,124,.20);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.about-hero::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border: 1px solid rgba(216,180,124,.17);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  display: block;
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.about-hero h1 {
+  margin: 18px 0;
+  font-family: var(--title-font);
+  font-size: clamp(58px, 9vw, 115px);
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.hero-divider {
+  width: 70px;
+  height: 1px;
+  background: var(--gold);
+  margin: 25px auto;
+}
+
+.hero-subtitle {
+  color: #eddfc9;
+  font-size: clamp(16px, 2vw, 21px);
+  letter-spacing: .5px;
+}
+
+/* ===============================
+   SECTION HEADINGS
+================================ */
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-heading h2 {
+  margin: 12px 0;
+  font-family: var(--title-font);
+  font-size: clamp(43px, 5vw, 66px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.section-heading p {
+  max-width: 760px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.9;
+}
+
+.decor-line {
+  width: 70px;
+  height: 2px;
+  background: var(--gold);
+  margin: 22px auto;
+}
+
+/* ===============================
+   WHO WE ARE
+================================ */
+
+.intro-section {
+  padding: 100px 6% 75px;
+  background: #f5f0e6;
+}
+
+.intro-content {
+  max-width: 900px;
+  margin: auto;
+}
+
+/* ===============================
+   CREATORS
+================================ */
+
+.creators-section {
+  padding: 75px 6% 115px;
+  background: #fffdf8;
+}
+
+.creators-container {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* 合照区域 */
+
+.creators-image-frame {
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto 48px;
+  padding: 30px;
+  background: #fffefa;
+  border: 1px solid #e4d7c2;
+  border-radius: 22px;
+  box-shadow: 0 18px 55px rgba(69,49,30,.08);
+}
+
+.creators-image-frame::before,
+.creators-image-frame::after {
+  position: absolute;
+  color: #b89260;
+  font-size: 28px;
+}
+
+.creators-image-frame::before {
+  content: "✦";
+  top: 15px;
+  left: 18px;
+}
+
+.creators-image-frame::after {
+  content: "✦";
+  bottom: 15px;
+  right: 18px;
+}
+
+.creators-image {
+  display: block;
+  width: 100%;
+  max-height: 720px;
+  object-fit: contain;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+.image-caption {
+  margin-top: 25px;
+  text-align: center;
+  color: #94754f;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* 两个人的文字介绍 */
+
+.creators-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 25px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.creator-card {
+  padding: 42px 30px;
+  background: #f7f1e7;
+  border: 1px solid #e6d9c6;
+  border-top: 4px solid var(--gold);
+  border-radius: 12px;
+  text-align: center;
+  transition: transform .3s, box-shadow .3s;
+}
+
+.creator-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(40,30,20,.08);
+}
+
+.creator-number {
+  display: block;
+  color: #a47c43;
+  font-family: var(--title-font);
+  font-size: 31px;
+  margin-bottom: 8px;
+}
+
+.creator-card h3 {
+  color: #3a332c;
+  font-family: var(--title-font);
+  font-size: clamp(32px, 3vw, 43px);
+  line-height: 1.25;
+}
+
+.creator-initials {
+  color: #9a6947;
+  font-size: 13px;
+  letter-spacing: 3px;
+  margin: 12px 0 22px;
+}
+
+.creator-divider {
+  width: 45px;
+  height: 1px;
+  background: #c9aa79;
+  margin: 0 auto 23px;
+}
+
+.creator-info {
+  color: #62584d;
+  font-size: 16px;
+  line-height: 2;
+}
+
+.creator-info strong {
+  color: #3b332b;
+}
+
+/* ===============================
+   WHY DUNHUANG
+================================ */
+
+.project-section {
+  padding: 110px 6%;
+  background: #eae0d0;
+}
+
+.project-container {
+  max-width: 1150px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 65px;
+  align-items: center;
+}
+
+.project-decoration {
+  min-height: 360px;
+  padding: 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 15px;
+
+  background:
+    radial-gradient(circle at 50% 50%,
+      rgba(216,180,124,.15), transparent 65%),
+    #26342e;
+  color: var(--gold);
+}
+
+.project-symbol {
+  font-size: 65px;
+  margin-bottom: 25px;
+}
+
+.project-decoration h3 {
+  font-family: var(--title-font);
+  font-size: clamp(38px, 4vw, 58px);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.project-decoration p {
+  color: #e9ddc9;
+  margin-top: 18px;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.project-text h2 {
+  font-family: var(--title-font);
+  font-size: clamp(43px, 5vw, 65px);
+  line-height: 1.1;
+  margin: 15px 0 25px;
+}
+
+.project-text p {
+  color: #62584d;
+  font-size: 18px;
+  line-height: 2;
+}
+
+/* ===============================
+   DESIGN CONCEPT
+================================ */
+
+.concept-section {
+  padding: 110px 6%;
+  background: #fffdf8;
+}
+
+.concept-grid {
+  max-width: 1250px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+}
+
+.concept-card {
+  padding: 45px 32px;
+  text-align: center;
+  border: 1px solid #e6d8c3;
+  border-radius: 12px;
+  background: #f8f3eb;
+}
+
+.concept-icon {
+  font-size: 45px;
+  color: #ab7d45;
+  margin-bottom: 22px;
+}
+
+.concept-card h3 {
+  font-family: var(--title-font);
+  font-size: 31px;
+  margin-bottom: 15px;
+}
+
+.concept-card p {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+
+.footer {
+  background: var(--dark);
+  text-align: center;
+  color: #e9ddc9;
+  padding: 70px 20px 40px;
+}
+
+.footer h2 {
+  color: var(--gold);
+  font-family: var(--title-font);
+  font-size: 45px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.footer p {
+  font-size: 15px;
+}
+
+.back-home {
+  display: inline-block;
+  margin: 30px auto 40px;
+  padding: 14px 35px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 14px;
+  letter-spacing: 1px;
+  transition: .3s;
+}
+
+.back-home:hover {
+  background: var(--gold);
+  color: var(--dark);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(216,180,124,.25);
+  padding-top: 28px;
+  color: #bfb4a4;
+  font-size: 13px;
+}
+
+/* ===============================
+   SENIOR MODE
+================================ */
+
+body.senior-mode {
+  font-size: 23px;
+}
+
+body.senior-mode .section-heading p,
+body.senior-mode .project-text p,
+body.senior-mode .creator-info,
+body.senior-mode .concept-card p {
+  font-size: 23px;
+}
+
+body.senior-mode .home-link,
+body.senior-mode .back-home,
+body.senior-mode .language-switcher button,
+body.senior-mode .senior-button {
+  font-size: 19px;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 800px) {
+  .navbar {
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+  }
+
+  .nav-right {
+    justify-content: center;
+  }
+
+  .creators-grid,
+  .project-container {
+    grid-template-columns: 1fr;
+  }
+
+  .concept-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-container {
+    gap: 35px;
+  }
+
+  .creators-image-frame {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 22px 4%;
+  }
+
+  .logo {
+    font-size: 29px;
+  }
+
+  .nav-right {
+    gap: 10px;
+  }
+
+  .about-hero {
+    min-height: 400px;
+  }
+
+  .about-hero::before {
+    width: 340px;
+    height: 340px;
+  }
+
+  .about-hero::after {
+    width: 280px;
+    height: 280px;
+  }
+
+  .creator-card {
+    padding: 35px 20px;
+  }
+
+  .intro-section,
+  .creators-section,
+  .project-section,
+  .concept-section {
+    padding-top: 75px;
+    padding-bottom: 75px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===============================
+     NAVIGATION
+================================ -->
+
+<nav class="navbar">
+
+  <a href="./index.html" class="logo">
+    DUNHUANG<span>.</span>
+  </a>
+
+  <div class="nav-right">
+
+    <a href="./Dunhuang AI.html"
+       class="home-link"
+       data-i18n="backHome">
+      ← BACK TO HOME
+    </a>
+
+    <div class="language-switcher">
+
+      <button type="button" data-lang="en" class="active">
+        EN
+      </button>
+
+      <button type="button" data-lang="zh">
+        中文
+      </button>
+
+      <button type="button" data-lang="ms">
+        BM
+      </button>
+
+    </div>
+
+    <button type="button"
+            class="senior-button"
+            id="seniorButton"
+            aria-pressed="false">
+      👓 <span data-i18n="seniorMode">Senior Mode</span>
+    </button>
+
+  </div>
+
+</nav>
+
+<!-- ===============================
+     HERO
+================================ -->
+
+<header class="about-hero">
+
+  <div class="hero-content">
+
+    <span class="eyebrow" data-i18n="heroLabel">
+      THE PEOPLE BEHIND THE JOURNEY
+    </span>
+
+    <h1 data-i18n="heroTitle">
+      Behind the Journey
+    </h1>
+
+    <div class="hero-divider"></div>
+
+    <p class="hero-subtitle" data-i18n="heroSubtitle">
+      Meet the creators of our Dunhuang website.
+    </p>
+
+  </div>
+
+</header>
+
+<!-- ===============================
+     WHO WE ARE
+================================ -->
+
+<section class="intro-section">
+
+  <div class="intro-content">
+
+    <div class="section-heading">
+
+      <span class="eyebrow" data-i18n="introLabel">
+        OUR STORY
+      </span>
+
+      <h2 data-i18n="introTitle">
+        Who We Are
+      </h2>
+
+      <div class="decor-line"></div>
+
+      <p data-i18n="introText">
+        We are two Creative Media Design students from
+        Taylor's University. We created this website
+        to introduce Dunhuang's history, culture,
+        and travel experiences through digital design.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ===============================
+     MEET THE CREATORS
+================================ -->
+
+<section class="creators-section" id="creators">
+
+  <div class="creators-container">
+
+    <div class="section-heading">
+
+      <span class="eyebrow" data-i18n="creatorsLabel">
+        THE DESIGN TEAM
+      </span>
+
+      <h2 data-i18n="creatorsTitle">
+        Meet the Creators
+      </h2>
+
+      <div class="decor-line"></div>
+
+    </div>
+
+    <!--
+      这里放你们两个的Q版合照。
+      图片文件名：creators.jpg
+      不需要拆开两个人。
+    -->
+
+    <div class="creators-image-frame">
+
+      <img
+        src="./creators.jpg"
+        alt="Chibi illustration of Xie Feifei and Wang Zijia"
+        class="creators-image"
+      >
+
+      <p class="image-caption" data-i18n="photoCaption">
+        XFF & WZJ · OUR CREATIVE TEAM
+      </p>
+
+    </div>
+
+    <!-- 两位创作者的介绍 -->
+
+    <div class="creators-grid">
+
+      <!-- 左边 XIE FEIFEI -->
+
+      <article class="creator-card">
+
+        <span class="creator-number">01</span>
+
+        <h3>Xie Feifei</h3>
+
+        <p class="creator-initials">XFF</p>
+
+        <div class="creator-divider"></div>
+
+        <p class="creator-info">
+          <strong data-i18n="universityLabel">University:</strong>
+          Taylor's University
+        </p>
+
+        <p class="creator-info">
+          <strong data-i18n="majorLabel">Programme:</strong>
+          Creative Media Design
+        </p>
+
+        <p class="creator-info">
+          <strong data-i18n="yearLabel">Year:</strong>
+          <span data-i18n="yearValue">Year 1 · Semester 2</span>
+        </p>
+
+      </article>
+
+      <!-- 右边 WANG ZIJIA -->
+
+      <article class="creator-card">
+
+        <span class="creator-number">02</span>
+
+        <h3>Wang Zijia</h3>
+
+        <p class="creator-initials">WZJ</p>
+
+        <div class="creator-divider"></div>
+
+        <p class="creator-info">
+          <strong data-i18n="universityLabel">University:</strong>
+          Taylor's University
+        </p>
+
+        <p class="creator-info">
+          <strong data-i18n="majorLabel">Programme:</strong>
+          Creative Media Design
+        </p>
+
+        <p class="creator-info">
+          <strong data-i18n="yearLabel">Year:</strong>
+          <span data-i18n="yearValue">Year 1 · Semester 2</span>
+        </p>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ===============================
+     WHY DUNHUANG
+================================ -->
+
+<section class="project-section">
+
+  <div class="project-container">
+
+    <div class="project-decoration">
+
+      <div class="project-symbol">✦</div>
+
+      <h3>
+        A Thousand Years,<br>
+        A Thousand Stories
+      </h3>
+
+      <p>THE ANCIENT SILK ROAD</p>
+
+    </div>
+
+    <div class="project-text">
+
+      <span class="eyebrow" data-i18n="projectLabel">
+        OUR PROJECT
+      </span>
+
+      <h2 data-i18n="projectTitle">
+        Why Dunhuang?
+      </h2>
+
+      <p data-i18n="projectText">
+        Dunhuang is known for its history, art,
+        and important role along the ancient Silk Road.
+
+        Through this project, we hope to make
+        information about Dunhuang easier to explore.
+
+        Our website brings together cultural stories,
+        travel guides, and interactive experiences
+        to help visitors discover Dunhuang
+        in a more enjoyable way.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ===============================
+     DESIGN CONCEPT
+================================ -->
+
+<section class="concept-section">
+
+  <div class="section-heading">
+
+    <span class="eyebrow" data-i18n="conceptLabel">
+      OUR DESIGN APPROACH
+    </span>
+
+    <h2 data-i18n="conceptTitle">
+      Our Design Concept
+    </h2>
+
+    <div class="decor-line"></div>
+
+    <p data-i18n="conceptSubtitle">
+      Making cultural exploration more accessible,
+      interactive, and enjoyable.
+    </p>
+
+  </div>
+
+  <div class="concept-grid">
+
+    <div class="concept-card">
+
+      <div class="concept-icon">文</div>
+
+      <h3 data-i18n="concept1Title">
+        Accessibility
+      </h3>
+
+      <p data-i18n="concept1Text">
+        Three languages and a senior-friendly mode
+        help different visitors use the website.
+      </p>
+
+    </div>
+
+    <div class="concept-card">
+
+      <div class="concept-icon">✦</div>
+
+      <h3 data-i18n="concept2Title">
+        Interaction
+      </h3>
+
+      <p data-i18n="concept2Text">
+        Interactive cultural activities and stories
+        create a more engaging experience.
+      </p>
+
+    </div>
+
+    <div class="concept-card">
+
+      <div class="concept-icon">敦</div>
+
+      <h3 data-i18n="concept3Title">
+        Cultural Heritage
+      </h3>
+
+      <p data-i18n="concept3Text">
+        Digital design helps introduce Dunhuang's
+        history, art, and traditional culture.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ===============================
+     FOOTER
+================================ -->
+
+<footer class="footer">
+
+  <h2>DUNHUANG.</h2>
+
+  <p data-i18n="footerText">
+    The journey ends, but the stories live on.
+  </p>
+
+  <a href="./Dunhuang AI.html"
+     class="back-home"
+     data-i18n="footerButton">
+    ← RETURN TO HOME
+  </a>
+
+  <div class="footer-bottom">
+    © 2026 DUNHUANG · Xie Feifei & Wang Zijia
+  </div>
+
+</footer>
+
+<!-- ===============================
+     THREE LANGUAGES
+================================ -->
+
+<script>
+
+const translations = {
+
+  en: {
+    backHome: "← BACK TO HOME",
+    seniorMode: "Senior Mode",
+
+    heroLabel: "THE PEOPLE BEHIND THE JOURNEY",
+    heroTitle: "Behind the Journey",
+    heroSubtitle: "Meet the creators of our Dunhuang website.",
+
+    introLabel: "OUR STORY",
+    introTitle: "Who We Are",
+    introText:
+      "We are two Creative Media Design students from Taylor's University. We created this website to introduce Dunhuang's history, culture, and travel experiences through digital design.",
+
+    creatorsLabel: "THE DESIGN TEAM",
+    creatorsTitle: "Meet the Creators",
+    photoCaption: "XFF & WZJ · OUR CREATIVE TEAM",
+
+    universityLabel: "University:",
+    majorLabel: "Programme:",
+    yearLabel: "Year:",
+    yearValue: "Year 1 · Semester 2",
+
+    projectLabel: "OUR PROJECT",
+    projectTitle: "Why Dunhuang?",
+    projectText:
+      "Dunhuang is known for its history, art, and important role along the ancient Silk Road. Through this project, we hope to make information about Dunhuang easier to explore. Our website brings together cultural stories, travel guides, and interactive experiences to help visitors discover Dunhuang in a more enjoyable way.",
+
+    conceptLabel: "OUR DESIGN APPROACH",
+    conceptTitle: "Our Design Concept",
+    conceptSubtitle:
+      "Making cultural exploration more accessible, interactive, and enjoyable.",
+
+    concept1Title: "Accessibility",
+    concept1Text:
+      "Three languages and a senior-friendly mode help different visitors use the website.",
+
+    concept2Title: "Interaction",
+    concept2Text:
+      "Interactive cultural activities and stories create a more engaging experience.",
+
+    concept3Title: "Cultural Heritage",
+    concept3Text:
+      "Digital design helps introduce Dunhuang's history, art, and traditional culture.",
+
+    footerText:
+      "The journey ends, but the stories live on.",
+    footerButton: "← RETURN TO HOME"
+  },
+
+  zh: {
+    backHome: "← 返回首页",
+    seniorMode: "长辈模式",
+
+    heroLabel: "旅程背后的创作者",
+    heroTitle: "旅程背后的我们",
+    heroSubtitle: "认识敦煌网站背后的两位创作者。",
+
+    introLabel: "我们的故事",
+    introTitle: "关于我们",
+    introText:
+      "我们是来自泰莱大学的两名创意媒体设计专业学生。我们希望通过数字设计，向更多人介绍敦煌的历史、文化以及旅游体验。",
+
+    creatorsLabel: "设计团队",
+    creatorsTitle: "认识创作者",
+    photoCaption: "XFF & WZJ · 我们的创作团队",
+
+    universityLabel: "学校：",
+    majorLabel: "专业：",
+    yearLabel: "年级：",
+    yearValue: "大学一年级 · 第二学期",
+
+    projectLabel: "我们的项目",
+    projectTitle: "为什么选择敦煌？",
+    projectText:
+      "敦煌拥有悠久的历史、独特的艺术文化，也是古丝绸之路上的重要城市。通过这个项目，我们希望让敦煌的信息更容易被了解。我们的网站结合了文化故事、旅游指南和互动体验，让游客可以通过更有趣的方式探索敦煌。",
+
+    conceptLabel: "我们的设计方向",
+    conceptTitle: "设计理念",
+    conceptSubtitle:
+      "让文化探索变得更容易、更有互动性，也更有趣。",
+
+    concept1Title: "无障碍体验",
+    concept1Text:
+      "通过三语言切换和长辈模式，让不同用户更容易使用网站。",
+
+    concept2Title: "互动体验",
+    concept2Text:
+      "通过文化互动活动和故事体验，让探索过程更加有趣。",
+
+    concept3Title: "文化传承",
+    concept3Text:
+      "使用数字设计介绍敦煌的历史、艺术和传统文化。",
+
+    footerText:
+      "旅程终有尽时，故事千年不息。",
+    footerButton: "← 返回首页"
+  },
+
+  ms: {
+    backHome: "← KEMBALI KE UTAMA",
+    seniorMode: "Mod Warga Emas",
+
+    heroLabel: "PENCIPTA DI SEBALIK PENGEMBARAAN",
+    heroTitle: "Di Sebalik Pengembaraan",
+    heroSubtitle:
+      "Kenali pencipta laman web Dunhuang kami.",
+
+    introLabel: "KISAH KAMI",
+    introTitle: "Tentang Kami",
+    introText:
+      "Kami ialah dua pelajar Creative Media Design dari Taylor's University. Kami membina laman web ini untuk memperkenalkan sejarah, budaya dan pengalaman pelancongan Dunhuang melalui reka bentuk digital.",
+
+    creatorsLabel: "PASUKAN REKA BENTUK",
+    creatorsTitle: "Kenali Pencipta",
+    photoCaption: "XFF & WZJ · PASUKAN KREATIF KAMI",
+
+    universityLabel: "Universiti:",
+    majorLabel: "Program:",
+    yearLabel: "Tahun:",
+    yearValue: "Tahun 1 · Semester 2",
+
+    projectLabel: "PROJEK KAMI",
+    projectTitle: "Mengapa Dunhuang?",
+    projectText:
+      "Dunhuang terkenal dengan sejarah, seni dan peranannya dalam Laluan Sutera purba. Melalui projek ini, kami berharap maklumat tentang Dunhuang lebih mudah diterokai. Laman web kami menggabungkan kisah budaya, panduan pelancongan dan pengalaman interaktif supaya pelawat dapat mengenali Dunhuang dengan cara yang lebih menarik.",
+
+    conceptLabel: "PENDEKATAN REKA BENTUK",
+    conceptTitle: "Konsep Reka Bentuk Kami",
+    conceptSubtitle:
+      "Menjadikan penerokaan budaya lebih mudah, interaktif dan menyeronokkan.",
+
+    concept1Title: "Kebolehcapaian",
+    concept1Text:
+      "Tiga bahasa dan mod mesra warga emas membantu pelbagai pengguna menggunakan laman web.",
+
+    concept2Title: "Interaksi",
+    concept2Text:
+      "Aktiviti budaya dan kisah interaktif menjadikan pengalaman lebih menarik.",
+
+    concept3Title: "Warisan Budaya",
+    concept3Text:
+      "Reka bentuk digital membantu memperkenalkan sejarah, seni dan budaya tradisional Dunhuang.",
+
+    footerText:
+      "Perjalanan berakhir, namun kisah terus hidup.",
+    footerButton: "← KEMBALI KE UTAMA"
+  }
+
+};
+
+/* ===============================
+   LANGUAGE SWITCHING
+================================ */
+
+function changeLanguage(lang) {
+
+  if (!translations[lang]) return;
+
+  const t = translations[lang];
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+
+    if (t[key] !== undefined) {
+      el.textContent = t[key];
+    }
+  });
+
+  document.querySelectorAll("[data-lang]").forEach(btn => {
+    btn.classList.toggle(
+      "active",
+      btn.dataset.lang === lang
+    );
+  });
+
+  document.documentElement.lang =
+    lang === "zh" ? "zh-CN" :
+    lang === "ms" ? "ms" : "en";
+
+  try {
+    localStorage.setItem("dunhuang-language", lang);
+  } catch (error) {}
+
+}
+
+document.querySelectorAll("[data-lang]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    changeLanguage(btn.dataset.lang);
+  });
+});
+
+/* ===============================
+   SENIOR MODE
+================================ */
+
+const seniorButton =
+  document.getElementById("seniorButton");
+
+function setSeniorMode(enabled) {
+
+  document.body.classList.toggle(
+    "senior-mode",
+    enabled
+  );
+
+  seniorButton.classList.toggle(
+    "active",
+    enabled
+  );
+
+  seniorButton.setAttribute(
+    "aria-pressed",
+    String(enabled)
+  );
+
+  try {
+    localStorage.setItem(
+      "dunhuang-senior-mode",
+      String(enabled)
+    );
+  } catch (error) {}
+
+}
+
+seniorButton.addEventListener("click", () => {
+
+  setSeniorMode(
+    !document.body.classList.contains("senior-mode")
+  );
+
+});
+
+/* ===============================
+   INITIALIZATION
+================================ */
+
+let savedLanguage = "en";
+let savedSeniorMode = false;
+
+try {
+  savedLanguage =
+    localStorage.getItem("dunhuang-language") || "en";
+
+  savedSeniorMode =
+    localStorage.getItem("dunhuang-senior-mode") === "true";
+} catch (error) {}
+
+const urlLang =
+  new URLSearchParams(window.location.search).get("lang");
+
+changeLanguage(
+  translations[urlLang] ? urlLang :
+  translations[savedLanguage] ? savedLanguage :
+  "en"
+);
+
+setSeniorMode(savedSeniorMode);
+
+</script>
+
+</body>
+</html>

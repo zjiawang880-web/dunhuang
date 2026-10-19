@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -661,6 +662,17 @@ body {
   padding: 100px 6% !important;
 }
 
+.creator-info a {
+  color: #9a6947;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  overflow-wrap: anywhere;
+}
+
+.creator-info a:hover {
+  color: #b44c2b;
+}
+
 </style>
 </head>
 
@@ -842,6 +854,19 @@ body {
           <strong data-i18n="yearLabel">Year:</strong>
           <span data-i18n="yearValue">Year 1 · Semester 2</span>
         </p>
+        
+        <p class="creator-info">
+          <strong data-i18n="studentIdLabel">Student ID:</strong>
+          <span>0394392</span>
+        </p>
+
+        <p class="creator-info">
+          <strong>Email:</strong>
+          <a href="mailto:0394392@sd.taylors.edu.my">
+            0394392@sd.taylors.edu.my
+          </a>
+        </p>
+
 
       </article>
 
@@ -871,6 +896,19 @@ body {
           <strong data-i18n="yearLabel">Year:</strong>
           <span data-i18n="yearValue">Year 1 · Semester 2</span>
         </p>
+        
+        <p class="creator-info">
+          <strong data-i18n="studentIdLabel">Student ID:</strong>
+          <span>0393824</span>
+        </p>
+
+        <p class="creator-info">
+          <strong>Email:</strong>
+          <a href="mailto:0393824@sd.taylors.edu.my">
+            0393824@sd.taylors.edu.my
+          </a>
+        </p>
+
 
       </article>
 
@@ -1085,6 +1123,8 @@ const translations = {
     footerText:
       "The journey ends, but the stories live on.",
     footerButton: "← RETURN TO HOME"
+    // en 英文
+    studentIdLabel: "Student ID:",
   },
 
   zh: {
@@ -1134,6 +1174,8 @@ const translations = {
     footerText:
       "旅程终有尽时，故事千年不息。",
     footerButton: "← 返回首页"
+    // zh 中文
+    studentIdLabel: "学号：",
   },
 
   ms: {
@@ -1184,6 +1226,8 @@ const translations = {
     footerText:
       "Perjalanan berakhir, namun kisah terus hidup.",
     footerButton: "← KEMBALI KE UTAMA"
+    // ms 马来文
+    studentIdLabel: "Nombor Pelajar:",
   }
 
 };

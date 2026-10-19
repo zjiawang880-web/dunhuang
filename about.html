@@ -635,6 +635,32 @@ body.senior-mode .senior-button {
     scroll-behavior: auto !important;
   }
 }
+
+/* ABOUT 页面导航栏始终跟随屏幕 */
+
+body > .navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 99999 !important;
+
+  background: rgba(23, 28, 25, 0.97) !important;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 给顶部导航栏预留空间 */
+body {
+  padding-top: 90px;
+}
+
+/* 避免顶部标题被导航栏挡住 */
+.about-hero {
+  padding: 100px 6% !important;
+}
+
 </style>
 </head>
 
@@ -652,7 +678,7 @@ body.senior-mode .senior-button {
 
   <div class="nav-right">
 
-    <a href="./index.html"
+    <a href="./Dunhuang AI.html"
        class="home-link"
        data-i18n="backHome">
       ← BACK TO HOME
@@ -732,7 +758,7 @@ body.senior-mode .senior-button {
       <div class="decor-line"></div>
 
       <p data-i18n="introText">
-        We are two Creative Media Design students from
+        We are two Design in Creative Media students from
         Taylor's University. We created this website
         to introduce Dunhuang's history, culture,
         and travel experiences through digital design.
@@ -809,7 +835,7 @@ body.senior-mode .senior-button {
 
         <p class="creator-info">
           <strong data-i18n="majorLabel">Programme:</strong>
-          Creative Media Design
+          Design in Creative Media
         </p>
 
         <p class="creator-info">
@@ -838,7 +864,7 @@ body.senior-mode .senior-button {
 
         <p class="creator-info">
           <strong data-i18n="majorLabel">Programme:</strong>
-          Creative Media Design
+          Design in Creative Media
         </p>
 
         <p class="creator-info">
@@ -992,7 +1018,7 @@ body.senior-mode .senior-button {
     The journey ends, but the stories live on.
   </p>
 
-  <a href="./index.html"
+  <a href="./Dunhuang AI.html"
      class="back-home"
      data-i18n="footerButton">
     ← RETURN TO HOME
@@ -1023,11 +1049,11 @@ const translations = {
     introLabel: "OUR STORY",
     introTitle: "Who We Are",
     introText:
-      "We are two Creative Media Design students from Taylor's University. We created this website to introduce Dunhuang's history, culture, and travel experiences through digital design.",
+      "We are two Design in Creative Media students from Taylor's University. We created this website to introduce Dunhuang's history, culture, and travel experiences through digital design.",
 
     creatorsLabel: "THE DESIGN TEAM",
     creatorsTitle: "Meet the Creators",
-    photoCaption: "XFF & WZJ · OUR CREATIVE TEAM",
+    photoCaption: "XEI FEIFEI & WANG ZIJIA · OUR CREATIVE TEAM",
 
     universityLabel: "University:",
     majorLabel: "Programme:",
@@ -1076,7 +1102,7 @@ const translations = {
 
     creatorsLabel: "设计团队",
     creatorsTitle: "认识创作者",
-    photoCaption: "XFF & WZJ · 我们的创作团队",
+    photoCaption: "XEI FEIFEI & WWANG ZIJIA · 我们的创作团队",
 
     universityLabel: "学校：",
     majorLabel: "专业：",
@@ -1122,11 +1148,11 @@ const translations = {
     introLabel: "KISAH KAMI",
     introTitle: "Tentang Kami",
     introText:
-      "Kami ialah dua pelajar Creative Media Design dari Taylor's University. Kami membina laman web ini untuk memperkenalkan sejarah, budaya dan pengalaman pelancongan Dunhuang melalui reka bentuk digital.",
+      "Kami ialah dua pelajar Reka Bentuk dalam Media Kreatifdari Taylor's University. Kami membina laman web ini untuk memperkenalkan sejarah, budaya dan pengalaman pelancongan Dunhuang melalui reka bentuk digital.",
 
     creatorsLabel: "PASUKAN REKA BENTUK",
     creatorsTitle: "Kenali Pencipta",
-    photoCaption: "XFF & WZJ · PASUKAN KREATIF KAMI",
+    photoCaption: "XEI FEIFEI & WWANG ZIJIA · PASUKAN KREATIF KAMI",
 
     universityLabel: "Universiti:",
     majorLabel: "Program:",

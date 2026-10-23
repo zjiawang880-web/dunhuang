@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
+/* ================================
+   GLOBAL
+================================ */
+
 :root {
   --dark: #171c19;
   --forest: #26342e;
@@ -18,6 +24,8 @@
   --red: #b44c2b;
   --ink: #292723;
   --muted: #706a60;
+  --nav-height: 90px;
+
   --title-font: 'Cormorant Garamond', 'Noto Serif SC', serif;
   --body-font: 'DM Sans', 'Noto Sans SC', sans-serif;
 }
@@ -30,6 +38,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-height) + 15px);
 }
 
 body {
@@ -38,6 +47,7 @@ body {
   font-family: var(--body-font);
   line-height: 1.8;
   overflow-x: hidden;
+  padding-top: var(--nav-height);
 }
 
 a {
@@ -46,8 +56,8 @@ a {
 }
 
 button {
-  cursor: pointer;
   font-family: inherit;
+  cursor: pointer;
 }
 
 button:focus-visible,
@@ -56,67 +66,104 @@ a:focus-visible {
   outline-offset: 4px;
 }
 
-/* ===============================
-   NAVIGATION
+/* ================================
+   UNIFIED NAVIGATION
 ================================ */
 
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   min-height: 90px;
-  padding: 20px 5%;
-  display: flex;
-  justify-content: space-between;
+  z-index: 9999;
+
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 25px;
-  flex-wrap: wrap;
-  background: var(--dark);
+
+  padding: 15px 4%;
+
+  background: rgba(23, 28, 25, 0.97);
+  backdrop-filter: blur(12px);
   color: white;
+
   border-bottom: 1px solid rgba(216,180,124,.3);
+  box-shadow: 0 5px 25px rgba(0,0,0,.15);
 }
+
+/* LOGO */
 
 .logo {
   font-family: var(--title-font);
   font-size: 36px;
   font-weight: 600;
   letter-spacing: 3px;
-  line-height: 1.1;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .logo span {
   color: var(--gold);
 }
 
-.nav-right {
+/* CENTER NAVIGATION */
+
+.nav-links {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 18px;
   flex-wrap: wrap;
+  gap: 25px;
 }
 
-.home-link {
-  color: #e9d9be;
-  font-size: 14px;
+.nav-links a {
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
   letter-spacing: 1px;
+  white-space: nowrap;
   transition: color .3s;
 }
 
-.home-link:hover {
+.nav-links a:hover,
+.nav-links a:focus-visible,
+.nav-links a.active {
   color: var(--gold);
+}
+
+/* RIGHT ACTIONS */
+
+.nav-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
 }
 
 .language-switcher {
   display: flex;
-  gap: 6px;
+  gap: 5px;
 }
 
 .language-switcher button,
 .senior-button {
-  padding: 9px 13px;
+  min-height: 44px;
+  padding: 8px 12px;
+
   background: transparent;
-  border: 1px solid rgba(255,255,255,.45);
+  border: 1px solid rgba(255,255,255,.5);
   color: white;
-  font-size: 13px;
-  border-radius: 4px;
+
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.senior-button {
+  border-color: var(--gold);
+  border-radius: 5px;
 }
 
 .language-switcher button.active,
@@ -124,11 +171,10 @@ a:focus-visible {
 .senior-button.active,
 .senior-button:hover {
   background: var(--gold);
-  border-color: var(--gold);
   color: var(--dark);
 }
 
-/* ===============================
+/* ================================
    HERO
 ================================ */
 
@@ -136,38 +182,45 @@ a:focus-visible {
   position: relative;
   min-height: 490px;
   padding: 100px 6%;
+
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+
   text-align: center;
   color: white;
   overflow: hidden;
 
   background:
-    radial-gradient(circle at 50% 80%,
-      rgba(216,180,124,.17), transparent 45%),
-    linear-gradient(125deg, #26342e, #171c19 75%);
+    radial-gradient(
+      circle at 50% 80%,
+      rgba(216,180,124,.17),
+      transparent 45%
+    ),
+    linear-gradient(
+      125deg,
+      #26342e,
+      #171c19 75%
+    );
 }
 
-.about-hero::before {
+.about-hero::before,
+.about-hero::after {
   content: "";
   position: absolute;
-  width: 520px;
-  height: 520px;
   border: 1px solid rgba(216,180,124,.20);
   border-radius: 50%;
   pointer-events: none;
 }
 
+.about-hero::before {
+  width: 520px;
+  height: 520px;
+}
+
 .about-hero::after {
-  content: "";
-  position: absolute;
   width: 420px;
   height: 420px;
-  border: 1px solid rgba(216,180,124,.17);
-  border-radius: 50%;
-  pointer-events: none;
 }
 
 .hero-content {
@@ -178,6 +231,7 @@ a:focus-visible {
 .eyebrow {
   display: block;
   color: var(--gold);
+
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 4px;
@@ -195,17 +249,16 @@ a:focus-visible {
 .hero-divider {
   width: 70px;
   height: 1px;
-  background: var(--gold);
   margin: 25px auto;
+  background: var(--gold);
 }
 
 .hero-subtitle {
   color: #eddfc9;
   font-size: clamp(16px, 2vw, 21px);
-  letter-spacing: .5px;
 }
 
-/* ===============================
+/* ================================
    SECTION HEADINGS
 ================================ */
 
@@ -233,11 +286,11 @@ a:focus-visible {
 .decor-line {
   width: 70px;
   height: 2px;
-  background: var(--gold);
   margin: 22px auto;
+  background: var(--gold);
 }
 
-/* ===============================
+/* ================================
    WHO WE ARE
 ================================ */
 
@@ -251,7 +304,7 @@ a:focus-visible {
   margin: auto;
 }
 
-/* ===============================
+/* ================================
    CREATORS
 ================================ */
 
@@ -262,37 +315,38 @@ a:focus-visible {
 
 .creators-container {
   max-width: 1180px;
-  margin: 0 auto;
+  margin: auto;
 }
 
-/* 合照区域 */
+/* SHARED CHIBI IMAGE */
 
 .creators-image-frame {
   position: relative;
   max-width: 980px;
   margin: 0 auto 48px;
   padding: 30px;
+
   background: #fffefa;
   border: 1px solid #e4d7c2;
   border-radius: 22px;
+
   box-shadow: 0 18px 55px rgba(69,49,30,.08);
 }
 
 .creators-image-frame::before,
 .creators-image-frame::after {
+  content: "✦";
   position: absolute;
   color: #b89260;
   font-size: 28px;
 }
 
 .creators-image-frame::before {
-  content: "✦";
   top: 15px;
   left: 18px;
 }
 
 .creators-image-frame::after {
-  content: "✦";
   bottom: 15px;
   right: 18px;
 }
@@ -300,37 +354,40 @@ a:focus-visible {
 .creators-image {
   display: block;
   width: 100%;
+  height: auto;
   max-height: 720px;
   object-fit: contain;
-  margin: 0 auto;
+  margin: auto;
   border-radius: 12px;
 }
 
 .image-caption {
   margin-top: 25px;
-  text-align: center;
   color: #94754f;
   font-size: 13px;
   letter-spacing: 3px;
-  text-transform: uppercase;
+  text-align: center;
 }
 
-/* 两个人的文字介绍 */
+/* CREATOR INFORMATION */
 
 .creators-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 25px;
+
   max-width: 980px;
-  margin: 0 auto;
+  margin: auto;
 }
 
 .creator-card {
   padding: 42px 30px;
   background: #f7f1e7;
+
   border: 1px solid #e6d9c6;
   border-top: 4px solid var(--gold);
   border-radius: 12px;
+
   text-align: center;
   transition: transform .3s, box-shadow .3s;
 }
@@ -373,13 +430,24 @@ a:focus-visible {
   color: #62584d;
   font-size: 16px;
   line-height: 2;
+  overflow-wrap: anywhere;
 }
 
 .creator-info strong {
   color: #3b332b;
 }
 
-/* ===============================
+.creator-info a {
+  color: #9a6947;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.creator-info a:hover {
+  color: var(--red);
+}
+
+/* ================================
    WHY DUNHUANG
 ================================ */
 
@@ -391,26 +459,33 @@ a:focus-visible {
 .project-container {
   max-width: 1150px;
   margin: auto;
+
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 65px;
   align-items: center;
+  gap: 65px;
 }
 
 .project-decoration {
   min-height: 360px;
   padding: 45px;
+
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
   text-align: center;
   border-radius: 15px;
 
   background:
-    radial-gradient(circle at 50% 50%,
-      rgba(216,180,124,.15), transparent 65%),
+    radial-gradient(
+      circle at center,
+      rgba(216,180,124,.15),
+      transparent 65%
+    ),
     #26342e;
+
   color: var(--gold);
 }
 
@@ -446,7 +521,7 @@ a:focus-visible {
   line-height: 2;
 }
 
-/* ===============================
+/* ================================
    DESIGN CONCEPT
 ================================ */
 
@@ -458,17 +533,20 @@ a:focus-visible {
 .concept-grid {
   max-width: 1250px;
   margin: auto;
+
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0,1fr));
   gap: 25px;
 }
 
 .concept-card {
   padding: 45px 32px;
-  text-align: center;
+  background: #f8f3eb;
+
   border: 1px solid #e6d8c3;
   border-radius: 12px;
-  background: #f8f3eb;
+
+  text-align: center;
 }
 
 .concept-icon {
@@ -484,12 +562,12 @@ a:focus-visible {
 }
 
 .concept-card p {
-  font-size: 16px;
   color: var(--muted);
+  font-size: 16px;
   line-height: 1.8;
 }
 
-/* ===============================
+/* ================================
    FOOTER
 ================================ */
 
@@ -516,8 +594,10 @@ a:focus-visible {
   display: inline-block;
   margin: 30px auto 40px;
   padding: 14px 35px;
+
   border: 1px solid var(--gold);
   color: var(--gold);
+
   font-size: 14px;
   letter-spacing: 1px;
   transition: .3s;
@@ -529,18 +609,27 @@ a:focus-visible {
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(216,180,124,.25);
   padding-top: 28px;
+  border-top: 1px solid rgba(216,180,124,.25);
   color: #bfb4a4;
   font-size: 13px;
 }
 
-/* ===============================
+/* ================================
    SENIOR MODE
 ================================ */
 
 body.senior-mode {
   font-size: 23px;
+}
+
+body.senior-mode .nav-links a {
+  font-size: 19px;
+}
+
+body.senior-mode .language-switcher button,
+body.senior-mode .senior-button {
+  font-size: 18px;
 }
 
 body.senior-mode .section-heading p,
@@ -550,28 +639,34 @@ body.senior-mode .concept-card p {
   font-size: 23px;
 }
 
-body.senior-mode .home-link,
-body.senior-mode .back-home,
-body.senior-mode .language-switcher button,
-body.senior-mode .senior-button {
-  font-size: 19px;
-}
-
-/* ===============================
+/* ================================
    RESPONSIVE
 ================================ */
 
-@media (max-width: 800px) {
+@media (max-width: 1250px) {
   .navbar {
-    flex-direction: column;
-    justify-content: center;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+  }
+
+  .logo {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .nav-actions {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .nav-links {
+    grid-column: 1 / -1;
+    grid-row: 2;
     gap: 18px;
   }
+}
 
-  .nav-right {
-    justify-content: center;
-  }
-
+@media (max-width: 800px) {
   .creators-grid,
   .project-container {
     grid-template-columns: 1fr;
@@ -590,17 +685,33 @@ body.senior-mode .senior-button {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 650px) {
   .navbar {
-    padding: 22px 4%;
+    padding: 12px 4%;
+    gap: 10px;
   }
 
   .logo {
-    font-size: 29px;
+    font-size: 28px;
   }
 
-  .nav-right {
-    gap: 10px;
+  .nav-actions {
+    gap: 5px;
+  }
+
+  .language-switcher button,
+  .senior-button {
+    padding: 6px 8px;
+    min-height: 38px;
+    font-size: 12px;
+  }
+
+  .nav-links {
+    gap: 10px 14px;
+  }
+
+  .nav-links a {
+    font-size: 12px;
   }
 
   .about-hero {
@@ -617,16 +728,35 @@ body.senior-mode .senior-button {
     height: 280px;
   }
 
-  .creator-card {
-    padding: 35px 20px;
-  }
-
   .intro-section,
   .creators-section,
   .project-section,
   .concept-section {
     padding-top: 75px;
     padding-bottom: 75px;
+  }
+}
+
+@media (max-width: 450px) {
+  .navbar {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .logo,
+  .nav-actions,
+  .nav-links {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .nav-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .creator-card {
+    padding: 35px 20px;
   }
 }
 
@@ -637,40 +767,46 @@ body.senior-mode .senior-button {
   }
 }
 
-/* ABOUT 页面导航栏始终跟随屏幕 */
+/* =====================================
+   NAVBAR POSITION — MATCH HOME PAGE
+===================================== */
 
-body > .navbar {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  width: 100% !important;
-  z-index: 99999 !important;
+@media (min-width: 1450px) {
 
-  background: rgba(23, 28, 25, 0.97) !important;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
-}
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+  }
 
-/* 给顶部导航栏预留空间 */
-body {
-  padding-top: 90px;
-}
+  /* 导航菜单向右调整，与首页对齐 */
+  .navbar .nav-links {
+    position: absolute;
+    left: 57.5%;
+    transform: translateX(-50%);
 
-/* 避免顶部标题被导航栏挡住 */
-.about-hero {
-  padding: 100px 6% !important;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
 
-.creator-info a {
-  color: #9a6947;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  overflow-wrap: anywhere;
-}
+    gap: 25px;
+    width: max-content;
+    padding: 0;
+  }
 
-.creator-info a:hover {
-  color: #b44c2b;
+  /* Logo 保持在最左侧 */
+  .navbar .logo {
+    flex-shrink: 0;
+  }
+
+  /* 语言切换和长辈模式保持在最右侧 */
+  .navbar .nav-actions {
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
 }
 
 </style>
@@ -678,35 +814,75 @@ body {
 
 <body>
 
-<!-- ===============================
+<!-- ================================
      NAVIGATION
 ================================ -->
 
-<nav class="navbar">
+<nav class="navbar" id="navbar">
 
-  <a href="./index.html" class="logo">
+  <!-- LOGO -->
+
+  <a href="./index.html#home" class="logo">
     DUNHUANG<span>.</span>
   </a>
 
-  <div class="nav-right">
+  <!-- MAIN NAVIGATION -->
 
-    <a href="./index.html"
-       class="home-link"
-       data-i18n="backHome">
-      ← BACK TO HOME
+  <div class="nav-links">
+
+    <a href="./index.html#home"
+       data-i18n="navHome">
+      HOME
     </a>
+
+    <a href="./index.html#experiences"
+       data-i18n="navExplore">
+      EXPLORE
+    </a>
+
+    <a href="./index.html#journey"
+       data-i18n="navJourney">
+      JOURNEY
+    </a>
+
+    <a href="./index.html#stories"
+       data-i18n="navStories">
+      STORIES
+    </a>
+
+    <a href="./index.html#faq"
+       data-i18n="navFAQ">
+      FAQ
+    </a>
+
+    <a href="./about.html"
+       class="active"
+       aria-current="page"
+       data-i18n="navAbout">
+      ABOUT
+    </a>
+
+  </div>
+
+  <!-- LANGUAGE AND SENIOR MODE -->
+
+  <div class="nav-actions">
 
     <div class="language-switcher">
 
-      <button type="button" data-lang="en" class="active">
+      <button type="button"
+              data-lang="en"
+              class="active">
         EN
       </button>
 
-      <button type="button" data-lang="zh">
+      <button type="button"
+              data-lang="zh">
         中文
       </button>
 
-      <button type="button" data-lang="ms">
+      <button type="button"
+              data-lang="ms">
         BM
       </button>
 
@@ -716,14 +892,16 @@ body {
             class="senior-button"
             id="seniorButton"
             aria-pressed="false">
+
       👓 <span data-i18n="seniorMode">Senior Mode</span>
+
     </button>
 
   </div>
 
 </nav>
 
-<!-- ===============================
+<!-- ================================
      HERO
 ================================ -->
 
@@ -749,7 +927,7 @@ body {
 
 </header>
 
-<!-- ===============================
+<!-- ================================
      WHO WE ARE
 ================================ -->
 
@@ -770,10 +948,11 @@ body {
       <div class="decor-line"></div>
 
       <p data-i18n="introText">
-        We are two Design in Creative Media students from
-        Taylor's University. We created this website
-        to introduce Dunhuang's history, culture,
-        and travel experiences through digital design.
+        We are two Design in Creative Media students
+        from Taylor's University.
+        We created this website to introduce Dunhuang's
+        history, culture, and travel experiences
+        through digital design.
       </p>
 
     </div>
@@ -782,7 +961,7 @@ body {
 
 </section>
 
-<!-- ===============================
+<!-- ================================
      MEET THE CREATORS
 ================================ -->
 
@@ -804,31 +983,27 @@ body {
 
     </div>
 
-    <!--
-      这里放你们两个的Q版合照。
-      图片文件名：creators.jpg
-      不需要拆开两个人。
-    -->
+    <!-- SHARED CHIBI IMAGE -->
 
     <div class="creators-image-frame">
 
       <img
         src="./creators.jpg"
-        alt="Chibi illustration of Xie Feifei and Wang Zijia"
+        alt="Xie Feifei and Wang Zijia"
         class="creators-image"
       >
 
       <p class="image-caption" data-i18n="photoCaption">
-        XFF & WZJ · OUR CREATIVE TEAM
+        XIE FEIFEI & WANG ZIJIA · OUR CREATIVE TEAM
       </p>
 
     </div>
 
-    <!-- 两位创作者的介绍 -->
+    <!-- CREATOR CARDS -->
 
     <div class="creators-grid">
 
-      <!-- 左边 XIE FEIFEI -->
+      <!-- XIE FEIFEI -->
 
       <article class="creator-card">
 
@@ -841,23 +1016,33 @@ body {
         <div class="creator-divider"></div>
 
         <p class="creator-info">
-          <strong data-i18n="universityLabel">University:</strong>
+          <strong data-i18n="universityLabel">
+            University:
+          </strong>
           Taylor's University
         </p>
 
         <p class="creator-info">
-          <strong data-i18n="majorLabel">Programme:</strong>
+          <strong data-i18n="majorLabel">
+            Programme:
+          </strong>
           Design in Creative Media
         </p>
 
         <p class="creator-info">
-          <strong data-i18n="yearLabel">Year:</strong>
-          <span data-i18n="yearValue">Year 1 · Semester 2</span>
+          <strong data-i18n="yearLabel">
+            Year:
+          </strong>
+          <span data-i18n="yearValue">
+            Year 1 · Semester 2
+          </span>
         </p>
-        
+
         <p class="creator-info">
-          <strong data-i18n="studentIdLabel">Student ID:</strong>
-          <span>0394392</span>
+          <strong data-i18n="studentIdLabel">
+            Student ID:
+          </strong>
+          0394392
         </p>
 
         <p class="creator-info">
@@ -867,10 +1052,9 @@ body {
           </a>
         </p>
 
-
       </article>
 
-      <!-- 右边 WANG ZIJIA -->
+      <!-- WANG ZIJIA -->
 
       <article class="creator-card">
 
@@ -883,23 +1067,33 @@ body {
         <div class="creator-divider"></div>
 
         <p class="creator-info">
-          <strong data-i18n="universityLabel">University:</strong>
+          <strong data-i18n="universityLabel">
+            University:
+          </strong>
           Taylor's University
         </p>
 
         <p class="creator-info">
-          <strong data-i18n="majorLabel">Programme:</strong>
+          <strong data-i18n="majorLabel">
+            Programme:
+          </strong>
           Design in Creative Media
         </p>
 
         <p class="creator-info">
-          <strong data-i18n="yearLabel">Year:</strong>
-          <span data-i18n="yearValue">Year 1 · Semester 2</span>
+          <strong data-i18n="yearLabel">
+            Year:
+          </strong>
+          <span data-i18n="yearValue">
+            Year 1 · Semester 2
+          </span>
         </p>
-        
+
         <p class="creator-info">
-          <strong data-i18n="studentIdLabel">Student ID:</strong>
-          <span>0393824</span>
+          <strong data-i18n="studentIdLabel">
+            Student ID:
+          </strong>
+          0393824
         </p>
 
         <p class="creator-info">
@@ -909,7 +1103,6 @@ body {
           </a>
         </p>
 
-
       </article>
 
     </div>
@@ -918,7 +1111,7 @@ body {
 
 </section>
 
-<!-- ===============================
+<!-- ================================
      WHY DUNHUANG
 ================================ -->
 
@@ -968,7 +1161,7 @@ body {
 
 </section>
 
-<!-- ===============================
+<!-- ================================
      DESIGN CONCEPT
 ================================ -->
 
@@ -1044,7 +1237,7 @@ body {
 
 </section>
 
-<!-- ===============================
+<!-- ================================
      FOOTER
 ================================ -->
 
@@ -1068,21 +1261,31 @@ body {
 
 </footer>
 
-<!-- ===============================
-     THREE LANGUAGES
+<!-- ================================
+     TRANSLATIONS
 ================================ -->
 
 <script>
 
 const translations = {
 
+  /* ENGLISH */
+
   en: {
-    backHome: "← BACK TO HOME",
+
+    navHome: "HOME",
+    navExplore: "EXPLORE",
+    navJourney: "JOURNEY",
+    navStories: "STORIES",
+    navFAQ: "FAQ",
+    navAbout: "ABOUT",
+
     seniorMode: "Senior Mode",
 
     heroLabel: "THE PEOPLE BEHIND THE JOURNEY",
     heroTitle: "Behind the Journey",
-    heroSubtitle: "Meet the creators of our Dunhuang website.",
+    heroSubtitle:
+      "Meet the creators of our Dunhuang website.",
 
     introLabel: "OUR STORY",
     introTitle: "Who We Are",
@@ -1091,12 +1294,14 @@ const translations = {
 
     creatorsLabel: "THE DESIGN TEAM",
     creatorsTitle: "Meet the Creators",
-    photoCaption: "XEI FEIFEI & WANG ZIJIA · OUR CREATIVE TEAM",
+    photoCaption:
+      "XIE FEIFEI & WANG ZIJIA · OUR CREATIVE TEAM",
 
     universityLabel: "University:",
     majorLabel: "Programme:",
     yearLabel: "Year:",
     yearValue: "Year 1 · Semester 2",
+    studentIdLabel: "Student ID:",
 
     projectLabel: "OUR PROJECT",
     projectTitle: "Why Dunhuang?",
@@ -1122,18 +1327,29 @@ const translations = {
 
     footerText:
       "The journey ends, but the stories live on.",
-    footerButton: "← RETURN TO HOME"
-    // en 英文
-    studentIdLabel: "Student ID:",
+
+    footerButton:
+      "← RETURN TO HOME"
+
   },
 
+  /* CHINESE */
+
   zh: {
-    backHome: "← 返回首页",
+
+    navHome: "首页",
+    navExplore: "探索",
+    navJourney: "旅程",
+    navStories: "历史故事",
+    navFAQ: "常见问题",
+    navAbout: "关于我们",
+
     seniorMode: "长辈模式",
 
     heroLabel: "旅程背后的创作者",
     heroTitle: "旅程背后的我们",
-    heroSubtitle: "认识敦煌网站背后的两位创作者。",
+    heroSubtitle:
+      "认识敦煌网站背后的两位创作者。",
 
     introLabel: "我们的故事",
     introTitle: "关于我们",
@@ -1142,12 +1358,14 @@ const translations = {
 
     creatorsLabel: "设计团队",
     creatorsTitle: "认识创作者",
-    photoCaption: "XEI FEIFEI & WWANG ZIJIA · 我们的创作团队",
+    photoCaption:
+      "XIE FEIFEI & WANG ZIJIA · 我们的创作团队",
 
     universityLabel: "学校：",
     majorLabel: "专业：",
     yearLabel: "年级：",
     yearValue: "大学一年级 · 第二学期",
+    studentIdLabel: "学号：",
 
     projectLabel: "我们的项目",
     projectTitle: "为什么选择敦煌？",
@@ -1173,41 +1391,61 @@ const translations = {
 
     footerText:
       "旅程终有尽时，故事千年不息。",
-    footerButton: "← 返回首页"
-    // zh 中文
-    studentIdLabel: "学号：",
+
+    footerButton:
+      "← 返回首页"
+
   },
 
+  /* BAHASA MELAYU */
+
   ms: {
-    backHome: "← KEMBALI KE UTAMA",
+
+    navHome: "UTAMA",
+    navExplore: "TEROKAI",
+    navJourney: "KEMBARA",
+    navStories: "KISAH",
+    navFAQ: "SOALAN LAZIM",
+    navAbout: "TENTANG KAMI",
+
     seniorMode: "Mod Warga Emas",
 
-    heroLabel: "PENCIPTA DI SEBALIK PENGEMBARAAN",
-    heroTitle: "Di Sebalik Pengembaraan",
+    heroLabel:
+      "PENCIPTA DI SEBALIK PENGEMBARAAN",
+
+    heroTitle:
+      "Di Sebalik Pengembaraan",
+
     heroSubtitle:
       "Kenali pencipta laman web Dunhuang kami.",
 
     introLabel: "KISAH KAMI",
     introTitle: "Tentang Kami",
     introText:
-      "Kami ialah dua pelajar Reka Bentuk dalam Media Kreatifdari Taylor's University. Kami membina laman web ini untuk memperkenalkan sejarah, budaya dan pengalaman pelancongan Dunhuang melalui reka bentuk digital.",
+      "Kami ialah dua pelajar Reka Bentuk dalam Media Kreatif dari Taylor's University. Kami membina laman web ini untuk memperkenalkan sejarah, budaya dan pengalaman pelancongan Dunhuang melalui reka bentuk digital.",
 
     creatorsLabel: "PASUKAN REKA BENTUK",
     creatorsTitle: "Kenali Pencipta",
-    photoCaption: "XEI FEIFEI & WWANG ZIJIA · PASUKAN KREATIF KAMI",
+    photoCaption:
+      "XIE FEIFEI & WANG ZIJIA · PASUKAN KREATIF KAMI",
 
     universityLabel: "Universiti:",
     majorLabel: "Program:",
     yearLabel: "Tahun:",
     yearValue: "Tahun 1 · Semester 2",
+    studentIdLabel: "Nombor Pelajar:",
 
     projectLabel: "PROJEK KAMI",
     projectTitle: "Mengapa Dunhuang?",
     projectText:
       "Dunhuang terkenal dengan sejarah, seni dan peranannya dalam Laluan Sutera purba. Melalui projek ini, kami berharap maklumat tentang Dunhuang lebih mudah diterokai. Laman web kami menggabungkan kisah budaya, panduan pelancongan dan pengalaman interaktif supaya pelawat dapat mengenali Dunhuang dengan cara yang lebih menarik.",
 
-    conceptLabel: "PENDEKATAN REKA BENTUK",
-    conceptTitle: "Konsep Reka Bentuk Kami",
+    conceptLabel:
+      "PENDEKATAN REKA BENTUK",
+
+    conceptTitle:
+      "Konsep Reka Bentuk Kami",
+
     conceptSubtitle:
       "Menjadikan penerokaan budaya lebih mudah, interaktif dan menyeronokkan.",
 
@@ -1225,14 +1463,15 @@ const translations = {
 
     footerText:
       "Perjalanan berakhir, namun kisah terus hidup.",
-    footerButton: "← KEMBALI KE UTAMA"
-    // ms 马来文
-    studentIdLabel: "Nombor Pelajar:",
+
+    footerButton:
+      "← KEMBALI KE UTAMA"
+
   }
 
 };
 
-/* ===============================
+/* ================================
    LANGUAGE SWITCHING
 ================================ */
 
@@ -1243,37 +1482,46 @@ function changeLanguage(lang) {
   const t = translations[lang];
 
   document.querySelectorAll("[data-i18n]").forEach(el => {
+
     const key = el.dataset.i18n;
 
     if (t[key] !== undefined) {
       el.textContent = t[key];
     }
+
   });
 
   document.querySelectorAll("[data-lang]").forEach(btn => {
+
     btn.classList.toggle(
       "active",
       btn.dataset.lang === lang
     );
+
   });
 
   document.documentElement.lang =
     lang === "zh" ? "zh-CN" :
-    lang === "ms" ? "ms" : "en";
+    lang === "ms" ? "ms" :
+    "en";
 
   try {
     localStorage.setItem("dunhuang-language", lang);
   } catch (error) {}
 
+  updateNavigationHeight();
+
 }
 
 document.querySelectorAll("[data-lang]").forEach(btn => {
+
   btn.addEventListener("click", () => {
     changeLanguage(btn.dataset.lang);
   });
+
 });
 
-/* ===============================
+/* ================================
    SENIOR MODE
 ================================ */
 
@@ -1304,6 +1552,8 @@ function setSeniorMode(enabled) {
     );
   } catch (error) {}
 
+  updateNavigationHeight();
+
 }
 
 seniorButton.addEventListener("click", () => {
@@ -1314,7 +1564,36 @@ seniorButton.addEventListener("click", () => {
 
 });
 
-/* ===============================
+/* ================================
+   NAVIGATION HEIGHT
+================================ */
+
+function updateNavigationHeight() {
+
+  const navbar = document.getElementById("navbar");
+
+  if (!navbar) return;
+
+  document.documentElement.style.setProperty(
+    "--nav-height",
+    navbar.offsetHeight + "px"
+  );
+
+}
+
+window.addEventListener(
+  "resize",
+  updateNavigationHeight
+);
+
+if ("ResizeObserver" in window) {
+
+  new ResizeObserver(updateNavigationHeight)
+    .observe(document.getElementById("navbar"));
+
+}
+
+/* ================================
    INITIALIZATION
 ================================ */
 
@@ -1322,11 +1601,13 @@ let savedLanguage = "en";
 let savedSeniorMode = false;
 
 try {
+
   savedLanguage =
     localStorage.getItem("dunhuang-language") || "en";
 
   savedSeniorMode =
     localStorage.getItem("dunhuang-senior-mode") === "true";
+
 } catch (error) {}
 
 const urlLang =
@@ -1339,6 +1620,8 @@ changeLanguage(
 );
 
 setSeniorMode(savedSeniorMode);
+
+updateNavigationHeight();
 
 </script>
 

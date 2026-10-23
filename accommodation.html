@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -607,6 +608,32 @@ footer p {color:#f0d9bf}
   }
   html {scroll-behavior:auto}
 }
+
+/* Accommodation navbar alignment */
+
+@media (min-width: 1450px) {
+
+  .site-header {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .site-header .site-nav {
+    position: absolute;
+    left: 57.5%;
+    transform: translateX(-50%);
+    width: max-content;
+    flex-wrap: nowrap;
+    gap: 25px;
+  }
+
+  .site-header .nav-actions {
+    margin-left: auto;
+  }
+
+}
+
 </style>
 </head>
 
@@ -614,7 +641,7 @@ footer p {color:#f0d9bf}
 
 <!-- NAVIGATION -->
 <header class="site-header">
-  <a id="homeLogo" class="logo" href="index.html">
+  <a id="homeLogo" class="logo" href="Dunhuang%20AI.html">
     DUNHUANG<span>.</span>
   </a>
 
@@ -628,7 +655,7 @@ footer p {color:#f0d9bf}
     </button>
 
     <a class="home-link" id="backHome"
-       href="index.html" data-i18n="back">
+       href="Dunhuang%20AI.html" data-i18n="back">
       ← BACK TO HOME
     </a>
   </div>
@@ -1500,7 +1527,7 @@ function setLanguage(value) {
     );
   });
 
-  const home="index.html?lang="+encodeURIComponent(value);
+  const home="Dunhuang%20AI.html?lang="+encodeURIComponent(value);
   $("homeLogo").href=home;
   $("backHome").href=home;
 
@@ -1551,6 +1578,311 @@ const params=new URLSearchParams(window.location.search);
 setLanguage(params.get("lang")||"en");
 renderPhoto();
 
+</script>
+
+<!-- =====================================
+     UNIFIED DUNHUANG NAVIGATION
+     Accommodation Page
+===================================== -->
+
+<style>
+:root {
+  --accommodation-nav-height: 90px;
+}
+
+html {
+  scroll-padding-top:
+    calc(var(--accommodation-nav-height) + 15px);
+}
+
+body {
+  padding-top: var(--accommodation-nav-height);
+}
+
+/* 顶部导航与 About 页面保持一致 */
+.site-header {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 9999;
+
+  display: grid !important;
+  grid-template-columns:
+    auto minmax(0, 1fr) auto;
+
+  align-items: center;
+  gap: 25px;
+  min-height: 90px;
+  padding: 15px 4%;
+
+  background: rgba(94,61,47,.97);
+  backdrop-filter: blur(12px);
+}
+
+/* 中间导航 */
+.site-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.site-nav a {
+  color: #fff9ed;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .25s;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  color: #d8b47c;
+}
+
+/* 右侧语言与长辈模式 */
+.site-header .nav-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+
+/* 原本的 Back to Home 不再显示，
+   但保留元素，避免原来的 JS 报错 */
+.site-header #backHome {
+  display: none !important;
+}
+
+/* 避免标题出现多余的上方空间 */
+.hero {
+  padding-top: 80px;
+}
+
+/* 长辈模式 */
+.senior-mode .site-nav a {
+  font-size: 19px;
+}
+
+/* 平板 */
+@media (max-width: 1250px) {
+  .site-header {
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+  }
+
+  .site-header .logo {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .site-header .nav-actions {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .site-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    gap: 18px;
+  }
+}
+
+/* 手机 */
+@media (max-width: 760px) {
+  .site-header {
+    position: fixed !important;
+    padding: 12px 4%;
+  }
+
+  .site-nav {
+    gap: 10px 15px;
+  }
+
+  .site-nav a {
+    font-size: 12px;
+  }
+
+  .hero {
+    padding: 65px 5%;
+  }
+}
+
+@media (max-width: 450px) {
+  .site-header {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .site-header .logo,
+  .site-header .nav-actions,
+  .site-nav {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .site-header .nav-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+</style>
+
+<script>
+(function () {
+  const header =
+    document.querySelector(".site-header");
+
+  if (!header) return;
+
+  const logo = header.querySelector(".logo");
+  const actions =
+    header.querySelector(".nav-actions");
+
+  if (!logo || !actions) return;
+
+  /* 创建与首页相同的六个导航链接 */
+
+  const nav = document.createElement("nav");
+  nav.className = "site-nav";
+  nav.setAttribute(
+    "aria-label",
+    "Main navigation"
+  );
+
+  const menuItems = [
+    ["home", "HOME"],
+    ["experiences", "EXPLORE"],
+    ["journey", "JOURNEY"],
+    ["stories", "STORIES"],
+    ["faq", "FAQ"],
+    ["about", "ABOUT"]
+  ];
+
+  menuItems.forEach(([section, label]) => {
+    const a = document.createElement("a");
+
+    a.dataset.section = section;
+    a.textContent = label;
+
+    nav.appendChild(a);
+  });
+
+  header.insertBefore(nav, actions);
+
+  /* 导航三语言 */
+
+  const menuLanguages = {
+    en: [
+      "HOME",
+      "EXPLORE",
+      "JOURNEY",
+      "STORIES",
+      "FAQ",
+      "ABOUT"
+    ],
+    zh: [
+      "首页",
+      "探索",
+      "旅程",
+      "历史故事",
+      "常见问题",
+      "关于我们"
+    ],
+    ms: [
+      "UTAMA",
+      "TEROKAI",
+      "KEMBARA",
+      "KISAH",
+      "SOALAN LAZIM",
+      "TENTANG KAMI"
+    ]
+  };
+
+  function currentLanguage() {
+    const current =
+      document.documentElement.lang;
+
+    if (current.startsWith("zh")) return "zh";
+    if (current === "ms") return "ms";
+    return "en";
+  }
+
+  function updateMenu() {
+    const language = currentLanguage();
+
+    const home =
+      "./Dunhuang%20AI.html?lang=" +
+      encodeURIComponent(language);
+
+    logo.href = home + "#home";
+
+    nav.querySelectorAll("a").forEach((a, i) => {
+      const section = a.dataset.section;
+
+      a.textContent = menuLanguages[language][i];
+
+      if (section === "about") {
+        a.href =
+          "./about.html?lang=" +
+          encodeURIComponent(language);
+      } else {
+        a.href = home + "#" + section;
+      }
+    });
+
+    updateHeaderHeight();
+  }
+
+  /* 计算固定导航真实高度 */
+  function updateHeaderHeight() {
+    document.documentElement.style.setProperty(
+      "--accommodation-nav-height",
+      header.offsetHeight + "px"
+    );
+  }
+
+  /* 跟随原页面的语言按钮 */
+  document.querySelectorAll(".language").forEach(
+    button => {
+      button.addEventListener(
+        "click",
+        updateMenu
+      );
+    }
+  );
+
+  /* 长辈模式可能改变导航高度 */
+  const seniorButton =
+    document.getElementById("seniorButton");
+
+  if (seniorButton) {
+    seniorButton.addEventListener(
+      "click",
+      updateHeaderHeight
+    );
+  }
+
+  window.addEventListener(
+    "resize",
+    updateHeaderHeight
+  );
+
+  if ("ResizeObserver" in window) {
+    new ResizeObserver(
+      updateHeaderHeight
+    ).observe(header);
+  }
+
+  /* 初始化 */
+  updateMenu();
+})();
 </script>
 
 </body>

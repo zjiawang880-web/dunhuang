@@ -2210,6 +2210,12 @@ body.senior-mode .ai-message {
       <a href="#faq" data-i18n="navFAQ">FAQ</a>
     </li>
 
+    <li>
+      <a href="./about.html" data-i18n="navAbout">
+        ABOUT
+      </a>
+    </li>
+
   </ul>
 
   <div class="nav-actions">
@@ -2924,6 +2930,7 @@ const translations = {
     navJourney: "JOURNEY",
     navStories: "STORIES",
     navFAQ: "FAQ",
+    navAbout: "ABOUT",
 
     seniorMode: "Senior Mode",
 
@@ -3014,6 +3021,7 @@ const translations = {
     navJourney: "旅程",
     navStories: "历史故事",
     navFAQ: "常见问题",
+    navAbout: "关于我们",
 
     seniorMode: "长辈模式",
 
@@ -3104,6 +3112,7 @@ const translations = {
     navJourney: "KEMBARA",
     navStories: "KISAH",
     navFAQ: "SOALAN LAZIM",
+    navAbout: "TENTANG KAMI",
 
     seniorMode: "Mod Warga Emas",
 
@@ -15663,6 +15672,34 @@ apsCards.addEventListener("keydown", event => {
   }
 
   makePaths();
+  /* ===== CLAY TEXTURE 泥土颗粒 ===== */
+
+const clayTexture = document.createElement("canvas");
+clayTexture.width = 510;
+clayTexture.height = 340;
+
+const grainCtx = clayTexture.getContext("2d");
+
+// 固定随机数，避免拖动泥板时颗粒闪烁
+let grainSeed = 2026;
+
+function grainRandom() {
+  grainSeed = (grainSeed * 1664525 + 1013904223) >>> 0;
+  return grainSeed / 4294967296;
+}
+
+// 生成深浅不同的细砂颗粒
+for (let i = 0; i < 2800; i++) {
+  const x = grainRandom() * 510;
+  const y = grainRandom() * 340;
+  const size = 0.5 + grainRandom() * 1.4;
+
+  grainCtx.fillStyle = grainRandom() > 0.45
+    ? "rgba(68, 42, 27, 0.15)"
+    : "rgba(255, 230, 196, 0.22)";
+
+  grainCtx.fillRect(x, y, size, size);
+}
 
   function drawBase() {
     ctx.clearRect(0,0,W,H);
@@ -15678,7 +15715,20 @@ apsCards.addEventListener("keydown", event => {
       : "#c29a74";
     ctx.beginPath();
     ctx.roundRect(70,35,510,340,22);
-    ctx.fill();
+       ctx.fill();
+    ctx.restore();
+
+    /* ===== 绘制泥土颗粒 ===== */
+    ctx.save();
+
+    ctx.beginPath();
+    ctx.roundRect(70, 35, 510, 340, 22);
+    ctx.clip();
+
+    // 保留轻微的自然颗粒感
+    ctx.globalAlpha = 0.8;
+    ctx.drawImage(clayTexture, 70, 35);
+
     ctx.restore();
 
     ctx.strokeStyle = "rgba(94,57,35,.35)";
@@ -19209,6 +19259,3798 @@ body.senior-mode .dhs-audio button {
 </script>
 
 <!-- ===== END DUNHUANG STORY READING WORKSHOP ===== -->
+
+<!-- =========================================
+     DUNHUANG FOOD MATCHING EXPERIENCE
+     Paste before </body>
+========================================= -->
+
+<style>
+#exploreInteractive .dfm-lab {
+  background: linear-gradient(115deg, #a36b4b, #684331 75%);
+  color: #fff2df;
+  padding: clamp(25px, 4vw, 52px);
+  border-radius: 17px;
+  font-family: inherit;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.13);
+}
+
+#exploreInteractive .dfm-kicker {
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-weight: 700;
+  color: #f1cd91;
+  margin-bottom: 16px;
+}
+
+#exploreInteractive .dfm-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 600;
+  line-height: 1.15;
+  color: #fff7eb;
+  margin: 0 0 12px;
+}
+
+#exploreInteractive .dfm-subtitle {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #f6e5d6;
+  max-width: 750px;
+  margin: 0 0 24px;
+}
+
+#exploreInteractive .dfm-start,
+#exploreInteractive .dfm-next,
+#exploreInteractive .dfm-back,
+#exploreInteractive .dfm-reset {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  min-height: 46px;
+  padding: 11px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform .2s, background .2s;
+}
+
+#exploreInteractive .dfm-start,
+#exploreInteractive .dfm-next {
+  background: #f1d09c;
+  color: #473022;
+  border: 1px solid #f1d09c;
+}
+
+#exploreInteractive .dfm-back,
+#exploreInteractive .dfm-reset {
+  background: transparent;
+  color: #fff5e9;
+  border: 1px solid #eac6a1;
+}
+
+#exploreInteractive button:hover {
+  transform: translateY(-2px);
+}
+
+#exploreInteractive button:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 3px;
+}
+
+#exploreInteractive .dfm-next:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#exploreInteractive .dfm-progress {
+  color: #efd2b2;
+  font-size: 13px;
+  letter-spacing: 1px;
+  margin: 4px 0 20px;
+}
+
+#exploreInteractive .dfm-bar {
+  height: 5px;
+  border-radius: 5px;
+  background: rgba(255,255,255,.22);
+  margin-bottom: 28px;
+  overflow: hidden;
+}
+
+#exploreInteractive .dfm-bar span {
+  display: block;
+  height: 100%;
+  background: #f0cc93;
+  transition: width .25s;
+}
+
+#exploreInteractive .dfm-question {
+  font-size: clamp(23px, 3vw, 33px);
+  font-weight: 650;
+  line-height: 1.4;
+  margin: 0 0 23px;
+  color: white;
+}
+
+#exploreInteractive .dfm-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+#exploreInteractive .dfm-option {
+  text-align: left;
+  padding: 17px 19px;
+  min-height: 66px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: inherit;
+  color: #fff6ec;
+  background: rgba(255,255,255,.085);
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#exploreInteractive .dfm-option[aria-pressed="true"] {
+  background: #f3dfbf;
+  color: #50382a;
+  border-color: #f3dfbf;
+}
+
+#exploreInteractive .dfm-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+#exploreInteractive .dfm-hint {
+  color: #f0d8c1;
+  font-size: 14px;
+  margin: 0 0 17px;
+}
+
+#exploreInteractive .dfm-results {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 20px 0 23px;
+}
+
+#exploreInteractive .dfm-dish {
+  background: #fff8ef;
+  color: #463428;
+  border-radius: 12px;
+  overflow: hidden;
+  min-width: 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+}
+
+#exploreInteractive .dfm-dish img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  display: block;
+}
+
+#exploreInteractive .dfm-dish-body {
+  padding: 17px;
+}
+
+#exploreInteractive .dfm-dish h4 {
+  font-size: 22px;
+  line-height: 1.25;
+  margin: 0 0 12px;
+  color: #60402e;
+}
+
+#exploreInteractive .dfm-dish p {
+  font-size: 14px;
+  line-height: 1.75;
+  margin: 0 0 10px;
+  color: #675144;
+}
+
+#exploreInteractive .dfm-dish strong {
+  color: #9d5e37;
+}
+
+#exploreInteractive .dfm-view {
+  display: inline-block;
+  border: 1px solid #a76f4f;
+  background: transparent;
+  border-radius: 6px;
+  padding: 10px 13px;
+  margin-top: 6px;
+  color: #6b432d;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+#exploreInteractive .dfm-guides {
+  background: rgba(32,19,11,.20);
+  border: 1px solid rgba(255,255,255,.25);
+  padding: 20px 22px;
+  border-radius: 12px;
+  margin-bottom: 22px;
+}
+
+#exploreInteractive .dfm-guides h4 {
+  font-size: 20px;
+  margin: 0 0 10px;
+  color: #fff5e7;
+}
+
+#exploreInteractive .dfm-guides p {
+  color: #ffe7ce;
+  line-height: 1.9;
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+#exploreInteractive .dfm-warning {
+  color: #ffe1c2;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 14px 0 22px;
+}
+
+body.senior-mode #exploreInteractive .dfm-subtitle,
+body.senior-mode #exploreInteractive .dfm-dish p,
+body.senior-mode #exploreInteractive .dfm-guides p {
+  font-size: 21px;
+}
+
+body.senior-mode #exploreInteractive .dfm-option {
+  font-size: 21px;
+}
+
+@media (max-width: 800px) {
+  #exploreInteractive .dfm-results {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  #exploreInteractive .dfm-options,
+  #exploreInteractive .dfm-results {
+    grid-template-columns: 1fr;
+  }
+
+  #exploreInteractive .dfm-dish img {
+    aspect-ratio: 16/9;
+  }
+}
+
+/* 防止重新匹配时页面跳动 */
+#exploreInteractive {
+  overflow-anchor: none;
+}
+
+</style>
+
+<script>
+(function () {
+
+  /*
+    Uses your existing:
+    - renderExploreInteractive()
+    - experienceData
+    - experienceCards
+    - Gastronomy food detail dialog
+  */
+
+  if (typeof renderExploreInteractive !== "function") {
+    return;
+  }
+
+  /* =========================================
+     THREE LANGUAGE CONTENT
+  ========================================= */
+
+  const languagePack = {
+
+    en: {
+      kicker: "✦ INTERACTIVE FOOD EXPERIENCE",
+      title: "Discover Your Dunhuang Flavour",
+      subtitle:
+        "Answer four quick questions to find local food that suits your taste, with useful ordering tips.",
+
+      start: "FIND MY FLAVOUR →",
+      progress: "QUESTION {n} OF 4",
+
+      questions: [
+        "Which flavour do you like most?",
+        "How spicy do you like your food?",
+        "What kind of dish do you prefer?",
+        "Do you have any dietary restrictions?"
+      ],
+
+      options: [
+        [
+          ["spicy", "🌶 Spicy"],
+          ["sour", "🍋 Tangy"],
+          ["savory", "🍲 Savoury"],
+          ["sweet", "🍯 Sweet"]
+        ],
+        [
+          ["none", "No spice"],
+          ["mild", "A little spicy"],
+          ["hot", "Very spicy"]
+        ],
+        [
+          ["noodles", "Noodles / flatbread"],
+          ["soup", "Soup / broth"],
+          ["snack", "Snack / dessert"],
+          ["any", "Anything"]
+        ],
+        [
+          ["none", "No restrictions"],
+          ["donkey", "No donkey meat"],
+          ["lamb", "No lamb"],
+          ["vegetarian", "Vegetarian preference"]
+        ]
+      ],
+
+      multi: "You can select more than one restriction.",
+      back: "← BACK",
+      next: "NEXT →",
+      reveal: "SHOW MY RESULTS →",
+
+      resultsTitle: "Your Dunhuang Food Matches",
+      resultsSubtitle:
+        "Based on your answers, here are our best suggestions.",
+
+      why: "Why it suits you",
+      guide: "Food tip",
+      view: "VIEW DISH DETAILS ↗",
+
+      guideTitle: "A little guide before you eat",
+
+      guide1:
+        "Where: Explore local eateries and food streets in Dunhuang city; confirm menus and opening hours on arrival.",
+
+      guide2:
+        "Ordering: Ask the staff about spice level, ingredients, portion size and price before ordering.",
+
+      guide3:
+        "Useful Chinese: “请问这个辣吗？可以少辣吗？” (Is it spicy? Can it be less spicy?)",
+
+      warning:
+        "Dietary note: Recipes vary by restaurant. Vegetarian, allergy and religious dietary suitability must be confirmed with staff; these matches are suggestions, not guarantees.",
+
+      reset: "TRY AGAIN ↻",
+
+      empty:
+        "No suitable match among these six dishes. Please revise your dietary choices or ask a restaurant about ingredients."
+    },
+
+    zh: {
+      kicker: "✦ 敦煌美食互动体验",
+      title: "发现你的专属敦煌味道",
+      subtitle:
+        "回答四个简单问题，根据你的口味推荐敦煌美食，并送上实用点餐攻略。",
+
+      start: "开始美食匹配 →",
+      progress: "第 {n} 题 / 共 4 题",
+
+      questions: [
+        "你最喜欢哪种味道？",
+        "你能接受多辣？",
+        "你更喜欢哪种食物？",
+        "你有什么饮食限制吗？"
+      ],
+
+      options: [
+        [
+          ["spicy", "🌶 香辣"],
+          ["sour", "🍋 酸爽"],
+          ["savory", "🍲 咸香"],
+          ["sweet", "🍯 香甜"]
+        ],
+        [
+          ["none", "完全不辣"],
+          ["mild", "微辣"],
+          ["hot", "越辣越好"]
+        ],
+        [
+          ["noodles", "面食 / 饼类"],
+          ["soup", "汤类"],
+          ["snack", "小吃 / 甜点"],
+          ["any", "都可以"]
+        ],
+        [
+          ["none", "没有限制"],
+          ["donkey", "不吃驴肉"],
+          ["lamb", "不吃羊肉"],
+          ["vegetarian", "偏好素食"]
+        ]
+      ],
+
+      multi: "饮食限制可以多选。",
+      back: "← 上一题",
+      next: "下一题 →",
+      reveal: "查看我的推荐 →",
+
+      resultsTitle: "你的敦煌美食推荐",
+      resultsSubtitle:
+        "根据刚才的选择，为你挑选了这些美食。",
+
+      why: "推荐理由",
+      guide: "点餐提示",
+      view: "查看完整美食介绍 ↗",
+
+      guideTitle: "敦煌美食实用攻略",
+
+      guide1:
+        "去哪里：可以先逛敦煌市区的本地餐馆与美食街，出发前确认菜单和营业时间。",
+
+      guide2:
+        "如何点餐：先问辣度、食材、分量和价格；第一次尝试特色食物可以考虑点小份。",
+
+      guide3:
+        "实用点餐句：「请问这个辣吗？可以少辣吗？」",
+
+      warning:
+        "饮食提醒：不同店铺的做法可能不同。如有素食、过敏或宗教饮食要求，请务必向店家确认食材和制作方式，推荐结果不构成保证。",
+
+      reset: "重新匹配 ↻",
+
+      empty:
+        "这六道美食中暂时没有符合限制的推荐。可以调整限制条件，或向店家具体询问食材。"
+    },
+
+    ms: {
+      kicker: "✦ PENGALAMAN MAKANAN INTERAKTIF",
+      title: "Temui Cita Rasa Dunhuang Anda",
+      subtitle:
+        "Jawab empat soalan ringkas untuk mendapatkan cadangan makanan tempatan dan tip pesanan.",
+
+      start: "CARI CITA RASA SAYA →",
+      progress: "SOALAN {n} DARIPADA 4",
+
+      questions: [
+        "Rasa manakah yang paling anda suka?",
+        "Seberapa pedas makanan yang anda suka?",
+        "Apakah jenis hidangan pilihan anda?",
+        "Adakah anda mempunyai sekatan pemakanan?"
+      ],
+
+      options: [
+        [
+          ["spicy", "🌶 Pedas"],
+          ["sour", "🍋 Masam"],
+          ["savory", "🍲 Berperisa"],
+          ["sweet", "🍯 Manis"]
+        ],
+        [
+          ["none", "Tidak pedas"],
+          ["mild", "Sedikit pedas"],
+          ["hot", "Sangat pedas"]
+        ],
+        [
+          ["noodles", "Mi / roti leper"],
+          ["soup", "Sup"],
+          ["snack", "Snek / pencuci mulut"],
+          ["any", "Apa-apa sahaja"]
+        ],
+        [
+          ["none", "Tiada sekatan"],
+          ["donkey", "Tidak makan daging keldai"],
+          ["lamb", "Tidak makan daging kambing"],
+          ["vegetarian", "Memilih makanan vegetarian"]
+        ]
+      ],
+
+      multi:
+        "Anda boleh memilih lebih daripada satu sekatan.",
+
+      back: "← KEMBALI",
+      next: "SETERUSNYA →",
+      reveal: "LIHAT CADANGAN →",
+
+      resultsTitle: "Cadangan Makanan Dunhuang Anda",
+      resultsSubtitle:
+        "Cadangan ini berdasarkan pilihan rasa anda.",
+
+      why: "Mengapa sesuai",
+      guide: "Tip pesanan",
+      view: "LIHAT MAKLUMAT HIDANGAN ↗",
+
+      guideTitle: "Panduan ringkas sebelum makan",
+
+      guide1:
+        "Lokasi: Cuba restoran tempatan dan kawasan makanan di bandar Dunhuang. Semak menu dan waktu operasi dahulu.",
+
+      guide2:
+        "Pesanan: Tanya tentang kepedasan, bahan, saiz hidangan dan harga sebelum membuat pesanan.",
+
+      guide3:
+        "Ayat Cina berguna: “请问这个辣吗？可以少辣吗？” (Adakah ini pedas? Boleh kurangkan pedas?)",
+
+      warning:
+        "Nota pemakanan: Resipi berbeza mengikut restoran. Sahkan bahan makanan serta kesesuaian vegetarian, alahan dan keperluan agama dengan pihak restoran.",
+
+      reset: "CUBA LAGI ↻",
+
+      empty:
+        "Tiada padanan yang sesuai antara enam hidangan ini. Ubah pilihan atau tanya restoran tentang bahan."
+    }
+  };
+
+  /* =========================================
+     SIX DUNHUANG DISHES
+  ========================================= */
+
+  const dishes = [
+
+    {
+      id: "yellow",
+      card: 0,
+      flavors: ["savory"],
+      types: ["noodles"],
+      heat: "none",
+      meat: "donkey",
+      veg: false,
+
+      reason: {
+        zh: "黄面筋道，搭配驴肉和浓郁酱汁，适合喜欢咸香主食的人。",
+        en: "Chewy yellow noodles, donkey meat and rich sauce suit lovers of savoury meals.",
+        ms: "Mi kuning kenyal dengan daging keldai dan sos kaya sesuai untuk penggemar rasa berperisa."
+      },
+
+      tip: {
+        zh: "建议先确认肉类食材、分量及酱汁口味。",
+        en: "Check the meat ingredients, portion size and sauce before ordering.",
+        ms: "Semak bahan daging, saiz hidangan dan sos sebelum membuat pesanan."
+      }
+    },
+
+    {
+      id: "flatbread",
+      card: 1,
+      flavors: ["savory"],
+      types: ["noodles"],
+      heat: "none",
+      meat: "lamb",
+      veg: false,
+
+      reason: {
+        zh: "羊肉和薄饼焖煮入味，适合偏爱浓郁咸香的游客。",
+        en: "Lamb and thin flatbread are cooked together for a hearty savoury dish.",
+        ms: "Daging kambing dan roti leper dimasak bersama untuk hidangan yang berperisa."
+      },
+
+      tip: {
+        zh: "属于较饱腹的主食，点餐时先确认分量与是否加辣。",
+        en: "A filling main dish; ask about portion size and optional chilli.",
+        ms: "Hidangan utama yang mengenyangkan; tanya saiz hidangan dan cili."
+      }
+    },
+
+    {
+      id: "lambsoup",
+      card: 2,
+      flavors: ["savory"],
+      types: ["soup"],
+      heat: "none",
+      meat: "lamb",
+      veg: false,
+
+      reason: {
+        zh: "鲜香羊汤搭配粉条，适合想喝热汤的游客。",
+        en: "A warming lamb broth with vermicelli is ideal for soup lovers.",
+        ms: "Sup daging kambing panas bersama bihun sesuai untuk peminat sup."
+      },
+
+      tip: {
+        zh: "可以询问胡椒、香菜等调料能否调整。",
+        en: "Ask whether pepper, coriander and other seasonings can be adjusted.",
+        ms: "Tanya jika lada, daun ketumbar dan perasa lain boleh diubah."
+      }
+    },
+
+    {
+      id: "pastry",
+      card: 3,
+      flavors: ["sweet"],
+      types: ["snack"],
+      heat: "none",
+      meat: null,
+      veg: false,
+
+      reason: {
+        zh: "外皮酥脆、口味香甜，适合喜欢甜点与传统小吃的游客。",
+        en: "A crispy, sweet traditional pastry for dessert and snack lovers.",
+        ms: "Kuih tradisional rangup dan manis untuk peminat snek serta pencuci mulut."
+      },
+
+      tip: {
+        zh: "作为加餐更合适；如有素食或过敏要求，先问馅料与炸油。",
+        en: "Great as a snack; ask about filling and frying oil for dietary needs.",
+        ms: "Sesuai sebagai snek; tanya inti dan minyak menggoreng jika ada sekatan makanan."
+      }
+    },
+
+    {
+      id: "liangpi",
+      card: 4,
+      flavors: ["spicy", "sour"],
+      types: ["noodles", "snack"],
+      heat: "adjustable",
+      meat: null,
+      veg: true,
+
+      reason: {
+        zh: "酿皮口感爽滑，酸香调料和辣椒油可以带来刺激的风味。",
+        en: "Soft chewy liangpi with tangy dressing and optional chilli oil.",
+        ms: "Liangpi kenyal dengan sos masam dan minyak cili yang boleh diubah."
+      },
+
+      tip: {
+        zh: "怕辣就说「不要辣椒油」；素食者需确认酱汁与配料。",
+        en: "Ask for “no chilli oil” if needed; vegetarians should confirm sauce ingredients.",
+        ms: "Minta tanpa minyak cili jika perlu; vegetarian perlu sahkan ramuan sos."
+      }
+    },
+
+    {
+      id: "jiangshui",
+      card: 5,
+      flavors: ["sour"],
+      types: ["noodles", "soup"],
+      heat: "none",
+      meat: null,
+      veg: true,
+
+      reason: {
+        zh: "发酵浆水带来自然酸味，面汤清爽，适合喜欢酸爽口味的游客。",
+        en: "Fermented vegetable broth adds a naturally tangy, refreshing flavour.",
+        ms: "Kuah sayur diperam memberikan rasa masam yang segar."
+      },
+
+      tip: {
+        zh: "酸味较特别，可先试小份；素食者仍需确认汤底。",
+        en: "Its sour taste is distinctive; try a small portion and confirm the broth if vegetarian.",
+        ms: "Rasa masamnya unik; cuba sedikit dahulu dan sahkan kuah jika vegetarian."
+      }
+    }
+  ];
+
+  /* =========================================
+     QUIZ STATE
+  ========================================= */
+
+  let stage = "intro";
+  let step = 0;
+
+  const answers = [null, null, null, []];
+
+  function getFoodLang() {
+    const value =
+      (document.documentElement.lang || "en").toLowerCase();
+
+    if (value.startsWith("zh")) return "zh";
+    if (value.startsWith("ms")) return "ms";
+
+    return "en";
+  }
+
+  function tr() {
+    return languagePack[getFoodLang()];
+  }
+
+  function root() {
+    return document.getElementById("exploreInteractive");
+  }
+
+  function resetQuiz() {
+    stage = "intro";
+    step = 0;
+    answers[0] = null;
+    answers[1] = null;
+    answers[2] = null;
+    answers[3] = [];
+    renderFoodQuiz();
+  }
+
+  function isSelected(value) {
+    if (step === 3) {
+      return answers[3].includes(value);
+    }
+
+    return answers[step] === value;
+  }
+
+  function canContinue() {
+    if (step === 3) {
+      return answers[3].length > 0;
+    }
+
+    return answers[step] !== null;
+  }
+
+  /* =========================================
+     FOOD MATCHING ALGORITHM
+  ========================================= */
+
+  function getMatches() {
+
+    const [flavour, heat, type, restrictions] = answers;
+
+    return dishes
+
+      .filter(dish => {
+
+        if (
+          restrictions.includes("vegetarian") &&
+          !dish.veg
+        ) return false;
+
+        if (
+          restrictions.includes("donkey") &&
+          dish.meat === "donkey"
+        ) return false;
+
+        if (
+          restrictions.includes("lamb") &&
+          dish.meat === "lamb"
+        ) return false;
+
+        return true;
+
+      })
+
+      .map(dish => {
+
+        let score = 0;
+
+        if (dish.flavors.includes(flavour)) {
+          score += 6;
+        }
+
+        if (
+          type === "any" ||
+          dish.types.includes(type)
+        ) {
+          score += 4;
+        }
+
+        if (
+          heat === "hot" &&
+          (
+            dish.flavors.includes("spicy") ||
+            dish.heat === "adjustable"
+          )
+        ) {
+          score += 3;
+        }
+
+        if (
+          heat === "none" &&
+          dish.heat === "none"
+        ) {
+          score += 3;
+        }
+
+        if (
+          heat === "none" &&
+          dish.heat === "adjustable"
+        ) {
+          score += 1;
+        }
+
+        if (
+          heat === "mild" &&
+          dish.heat === "adjustable"
+        ) {
+          score += 3;
+        }
+
+        return {
+          ...dish,
+          score
+        };
+
+      })
+
+      .sort((a, b) => {
+        return b.score - a.score || a.card - b.card;
+      })
+
+      .slice(0, 3);
+
+  }
+
+  /* =========================================
+     GET EXISTING FOOD IMAGE AND NAME
+  ========================================= */
+
+  function getFoodInfo(dish) {
+
+    const source =
+      document.querySelectorAll(
+        "#experienceCards .experience-card"
+      )[dish.card];
+
+    const original =
+      typeof experienceData !== "undefined"
+        ? experienceData.food.cards[dish.card]
+        : null;
+
+    return {
+      image:
+        original?.image ||
+        source?.querySelector("img")?.getAttribute("src") ||
+        "",
+
+      name:
+        original?.title?.[getFoodLang()] ||
+        source?.querySelector("h3")?.textContent ||
+        dish.id
+    };
+
+  }
+
+  /* =========================================
+     RENDER FOOD QUIZ
+  ========================================= */
+
+  function renderFoodQuiz() {
+
+    const el = root();
+
+    if (!el) return;
+
+    const t = tr();
+
+    let main = "";
+
+    /* INTRO SCREEN */
+
+    if (stage === "intro") {
+
+      main = `
+        <button
+          class="dfm-start"
+          type="button"
+          data-dfm-action="start"
+        >
+          ${t.start}
+        </button>
+      `;
+
+    }
+
+    /* QUESTION SCREEN */
+
+    else if (stage === "quiz") {
+
+      const choices = t.options[step]
+
+        .map(([value, label]) => {
+
+          return `
+            <button
+              type="button"
+              class="dfm-option"
+              data-dfm-choice="${value}"
+              aria-pressed="${isSelected(value)}"
+            >
+              ${label}
+            </button>
+          `;
+
+        })
+
+        .join("");
+
+      main = `
+        <div class="dfm-progress">
+          ${t.progress.replace("{n}", step + 1)}
+        </div>
+
+        <div class="dfm-bar" aria-hidden="true">
+          <span style="width:${(step + 1) * 25}%"></span>
+        </div>
+
+        <h4 class="dfm-question">
+          ${t.questions[step]}
+        </h4>
+
+        ${
+          step === 3
+            ? `<p class="dfm-hint">${t.multi}</p>`
+            : ""
+        }
+
+        <div class="dfm-options">
+          ${choices}
+        </div>
+
+        <div class="dfm-buttons">
+
+          <button
+            type="button"
+            class="dfm-back"
+            data-dfm-action="back"
+          >
+            ${t.back}
+          </button>
+
+          <button
+            type="button"
+            class="dfm-next"
+            data-dfm-action="next"
+            ${canContinue() ? "" : "disabled"}
+          >
+            ${step === 3 ? t.reveal : t.next}
+          </button>
+
+        </div>
+      `;
+
+    }
+
+    /* RESULT SCREEN */
+
+    else {
+
+      const matches = getMatches();
+
+      const cards = matches
+
+        .map(dish => {
+
+          const info = getFoodInfo(dish);
+
+          return `
+            <article class="dfm-dish">
+
+              <img
+                src="${info.image}"
+                alt="${info.name}"
+                loading="lazy"
+              >
+
+              <div class="dfm-dish-body">
+
+                <h4>${info.name}</h4>
+
+                <p>
+                  <strong>${t.why}:</strong>
+                  ${dish.reason[getFoodLang()]}
+                </p>
+
+                <p>
+                  <strong>${t.guide}:</strong>
+                  ${dish.tip[getFoodLang()]}
+                </p>
+
+                <button
+                  type="button"
+                  class="dfm-view"
+                  data-dfm-view="${dish.card}"
+                >
+                  ${t.view}
+                </button>
+
+              </div>
+
+            </article>
+          `;
+
+        })
+
+        .join("");
+
+      main = `
+        <h4 class="dfm-question">
+          ${t.resultsTitle}
+        </h4>
+
+        <p class="dfm-subtitle">
+          ${t.resultsSubtitle}
+        </p>
+
+        ${
+          cards
+            ? `<div class="dfm-results">${cards}</div>`
+            : `<p>${t.empty}</p>`
+        }
+
+        <div class="dfm-guides">
+
+          <h4>${t.guideTitle}</h4>
+
+          <p>${t.guide1}</p>
+          <p>${t.guide2}</p>
+          <p>${t.guide3}</p>
+
+        </div>
+
+        <p class="dfm-warning">
+          ${t.warning}
+        </p>
+
+        <button
+          type="button"
+          class="dfm-reset"
+          data-dfm-action="reset"
+        >
+          ${t.reset}
+        </button>
+      `;
+
+    }
+
+    /* FULL SECTION */
+
+    el.innerHTML = `
+      <section
+        class="dfm-lab"
+        aria-label="Dunhuang food matching"
+      >
+
+        <div class="dfm-kicker">
+          ${t.kicker}
+        </div>
+
+        ${
+          stage === "intro"
+            ? `
+              <h3 class="dfm-title">
+                ${t.title}
+              </h3>
+
+              <p class="dfm-subtitle">
+                ${t.subtitle}
+              </p>
+            `
+            : ""
+        }
+
+        <div
+          class="dfm-content"
+          aria-live="polite"
+        >
+          ${main}
+        </div>
+
+      </section>
+    `;
+
+  }
+
+  /* =========================================
+     BUTTON INTERACTIONS
+  ========================================= */
+
+  const interactive = root();
+
+  if (!interactive) return;
+
+  interactive.addEventListener("click", event => {
+
+    /* SELECT ANSWER */
+
+    const choice =
+      event.target.closest("[data-dfm-choice]");
+
+    if (choice) {
+
+      const value = choice.dataset.dfmChoice;
+
+      if (step === 3) {
+
+        if (value === "none") {
+
+          answers[3] = ["none"];
+
+        } else if (value === "vegetarian") {
+
+          answers[3] = ["vegetarian"];
+
+        } else {
+
+          const previous = answers[3].filter(
+            item =>
+              item !== "none" &&
+              item !== "vegetarian"
+          );
+
+          answers[3] = previous.includes(value)
+            ? previous.filter(item => item !== value)
+            : [...previous, value];
+
+        }
+
+      } else {
+
+        answers[step] = value;
+
+      }
+
+      renderFoodQuiz();
+
+      return;
+    }
+
+    /* OPEN EXISTING FOOD DETAIL */
+
+    const view =
+      event.target.closest("[data-dfm-view]");
+
+    if (view) {
+
+      const card =
+        document.querySelectorAll(
+          "#experienceCards .experience-card"
+        )[Number(view.dataset.dfmView)];
+
+      if (card) {
+        card.click();
+      }
+
+      return;
+    }
+
+    /* ACTION BUTTONS */
+
+    const action =
+      event.target.closest("[data-dfm-action]")
+        ?.dataset.dfmAction;
+
+    if (action === "start") {
+
+      stage = "quiz";
+      step = 0;
+
+      renderFoodQuiz();
+
+    }
+
+  
+
+if (action === "reset") {
+
+  const section =
+    document.getElementById("exploreInteractive");
+
+  const navbar =
+    document.querySelector("#navbar") ||
+    document.querySelector(".nav");
+
+  const navHeight = navbar
+    ? navbar.getBoundingClientRect().height
+    : 90;
+
+  const targetY = section
+    ? section.getBoundingClientRect().top +
+      window.scrollY - navHeight - 20
+    : window.scrollY;
+
+  // 暂时关闭平滑滚动和滚动锚定
+  const html = document.documentElement;
+  const oldBehavior = html.style.scrollBehavior;
+  const oldAnchor = html.style.overflowAnchor;
+
+  html.style.scrollBehavior = "auto";
+  html.style.overflowAnchor = "none";
+
+  // 先移动到问卷顶部，再删除结果卡片
+  window.scrollTo(0, Math.max(0, targetY));
+
+  resetQuiz();
+
+  // 重置完成后再次固定位置
+  window.scrollTo(0, Math.max(0, targetY));
+
+  requestAnimationFrame(() => {
+    window.scrollTo(0, Math.max(0, targetY));
+
+    html.style.scrollBehavior = oldBehavior;
+    html.style.overflowAnchor = oldAnchor;
+  });
+
+}
+
+
+
+    if (action === "back") {
+
+      if (step === 0) {
+        stage = "intro";
+      } else {
+        step--;
+      }
+
+      renderFoodQuiz();
+
+    }
+
+    if (action === "next" && canContinue()) {
+
+      if (step === 3) {
+        stage = "results";
+      } else {
+        step++;
+      }
+
+      renderFoodQuiz();
+
+    }
+
+  });
+
+  /* =========================================
+     REPLACE ONLY GASTRONOMY EXPLORE MORE
+  ========================================= */
+
+  const originalRenderExplore =
+    renderExploreInteractive;
+
+  renderExploreInteractive = function (category) {
+
+    if (category === "food") {
+
+      renderFoodQuiz();
+
+    } else {
+
+      originalRenderExplore(category);
+
+    }
+
+  };
+
+  /* Refresh on language change */
+
+  new MutationObserver(() => {
+
+    if (
+      typeof currentCategory !== "undefined" &&
+      currentCategory === "food"
+    ) {
+      renderFoodQuiz();
+    }
+
+  }).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["lang"]
+  });
+
+  /* Initial state */
+
+  if (
+    typeof currentCategory !== "undefined" &&
+    currentCategory === "food"
+  ) {
+    renderFoodQuiz();
+  }
+
+})();
+</script>
+
+<!-- END DUNHUANG FOOD MATCHING -->
+
+<!-- ======================================
+     DUNHUANG FOOD TRAVEL GUIDE
+     Six real restaurant suggestions
+====================================== -->
+
+<style>
+#dunhuangFoodDialog .food-where-guide {
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid #dfcdb6;
+}
+
+#dunhuangFoodDialog .food-where-guide h3 {
+  color: #80543b;
+  font-size: 25px;
+  margin: 0 0 18px;
+}
+
+#dunhuangFoodDialog .food-where-card {
+  background: #f0e2ce;
+  border-radius: 13px;
+  padding: 24px;
+  border-left: 4px solid #a87852;
+  margin-bottom: 15px;
+}
+
+#dunhuangFoodDialog .food-where-label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #9b6945;
+  font-weight: 700;
+  margin-bottom: 9px;
+}
+
+#dunhuangFoodDialog .food-where-name {
+  font-size: clamp(20px, 3vw, 27px);
+  color: #684331;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0 0 20px;
+}
+
+#dunhuangFoodDialog .food-where-row {
+  margin: 0 0 15px;
+}
+
+#dunhuangFoodDialog .food-where-row strong {
+  display: block;
+  color: #825237;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+#dunhuangFoodDialog .food-where-row p {
+  color: #5d493b;
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+#dunhuangFoodDialog .food-where-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+#dunhuangFoodDialog .food-where-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 16px;
+  border-radius: 7px;
+  background: #77503a;
+  color: #fff7ed;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 650;
+  transition: background .2s;
+}
+
+#dunhuangFoodDialog .food-where-actions a:hover {
+  background: #a16c4a;
+}
+
+#dunhuangFoodDialog .food-where-actions a.secondary {
+  background: transparent;
+  border: 1px solid #9e7658;
+  color: #77503a;
+}
+
+#dunhuangFoodDialog .food-where-actions a.secondary:hover {
+  background: #e4d1ba;
+}
+
+#dunhuangFoodDialog .food-where-note {
+  background: #fff4e3;
+  border: 1px solid #e7d3ba;
+  border-radius: 10px;
+  padding: 15px 18px;
+  color: #74563f;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+body.senior-mode
+#dunhuangFoodDialog .food-where-row p,
+body.senior-mode
+#dunhuangFoodDialog .food-where-note {
+  font-size: 22px;
+}
+
+@media (max-width: 600px) {
+  #dunhuangFoodDialog .food-where-card {
+    padding: 17px;
+  }
+
+  #dunhuangFoodDialog .food-where-actions a {
+    width: 100%;
+  }
+}
+</style>
+
+<script>
+(function () {
+
+  const dialog =
+    document.getElementById("dunhuangFoodDialog");
+
+  const foodTitle =
+    document.getElementById("foodDetailTitle");
+
+  const foodTip =
+    document.getElementById("foodDetailTip");
+
+  if (!dialog || !foodTitle || !foodTip) return;
+
+  // 防止重复添加
+  if (document.getElementById("foodWhereGuide")) return;
+
+  /* ======================================
+     THREE LANGUAGE LABELS
+  ====================================== */
+
+  const labels = {
+    en: {
+      heading: "Where to Eat in Dunhuang",
+      recommended: "RESTAURANT SUGGESTION",
+      address: "Location",
+      why: "Why Visit",
+      order: "What to Order",
+      tip: "Travel Tip",
+      info: "VIEW RESTAURANT DETAILS ↗",
+      map: "FIND ON MAP ↗",
+      note:
+        "These restaurants are suggested places to explore, not guaranteed best choices. Menus, prices and opening hours may change. Check current details before visiting."
+    },
+
+    zh: {
+      heading: "敦煌美食攻略 · 去哪吃？",
+      recommended: "推荐店铺",
+      address: "店铺位置",
+      why: "推荐理由",
+      order: "推荐点法",
+      tip: "游客提示",
+      info: "查看店铺信息 ↗",
+      map: "地图查找 ↗",
+      note:
+        "以上为可参考的店铺，并非绝对的最佳排名。菜品、价格和营业时间可能发生变化，建议出发前查看最新信息。"
+    },
+
+    ms: {
+      heading: "Panduan Makanan · Di Mana Nak Makan?",
+      recommended: "CADANGAN RESTORAN",
+      address: "Lokasi",
+      why: "Sebab Dicadangkan",
+      order: "Cadangan Pesanan",
+      tip: "Tip Pelawat",
+      info: "LIHAT MAKLUMAT RESTORAN ↗",
+      map: "CARI DI PETA ↗",
+      note:
+        "Restoran ini merupakan cadangan untuk diterokai, bukan pilihan terbaik yang dijamin. Menu, harga dan waktu operasi mungkin berubah. Semak maklumat terkini sebelum melawat."
+    }
+  };
+
+  /* ======================================
+     SIX FOOD GUIDES
+  ====================================== */
+
+  const foodGuides = [
+
+    // 01 驴肉黄面
+    {
+      titles: [
+        "驴肉黄面",
+        "Donkey Meat Yellow Noodles",
+        "Mi Kuning Daging Keldai"
+      ],
+
+      shop: "顺张黄面馆",
+
+      address: {
+        zh: "敦煌市金山路缤河世纪家园1号楼附近。",
+        en: "Jinshan Road, Binhe Shiji Jiayuan, Dunhuang.",
+        ms: "Jalan Jinshan, Binhe Shiji Jiayuan, Dunhuang."
+      },
+
+      why: {
+        zh: "敦煌知名的黄面馆，主打传统黄面与驴肉组合，适合第一次来敦煌、想尝试经典地方面食的游客。",
+        en: "A well-known local noodle restaurant serving traditional yellow noodles and donkey meat.",
+        ms: "Restoran mi tempatan yang terkenal dengan mi kuning tradisional dan daging keldai."
+      },
+
+      order: {
+        zh: "可以点一份黄面，再搭配酱驴肉或卤驴肉。多人同行可以考虑加一份凉菜。",
+        en: "Order yellow noodles with a side of braised donkey meat. Add a cold side dish when sharing.",
+        ms: "Pesan mi kuning bersama daging keldai berperisa. Tambah hidangan sampingan jika berkongsi."
+      },
+
+      tip: {
+        zh: "黄面与驴肉可能分开计价。建议先确认价格及分量，热门时段可能需要排队。",
+        en: "Noodles and donkey meat may be charged separately. Check prices and portions first.",
+        ms: "Mi dan daging mungkin dikira berasingan. Semak harga dan saiz hidangan dahulu."
+      },
+
+      source:
+        "https://gs.ctrip.com/html5/you/foods/dunhuang8/4927134.html"
+    },
+
+    // 02 胡羊焖饼
+    {
+      titles: [
+        "胡羊焖饼",
+        "Lamb Stewed Flatbread",
+        "Roti Leper Rebusan Daging Kambing"
+      ],
+
+      shop: "回味斋·古法胡羊焖饼·旗舰店",
+
+      address: {
+        zh: "敦煌市鸣山北路248-1号，特色小吃街东口。",
+        en: "248-1 Mingshan North Road, near the east entrance of the snack street.",
+        ms: "248-1 Jalan Mingshan Utara, berhampiran pintu timur jalan makanan."
+      },
+
+      why: {
+        zh: "这家店以古法胡羊焖饼为特色，可以尝试羊肉与面饼一同焖煮的西北风味。",
+        en: "Known for its traditional lamb stewed flatbread, combining lamb, thin flatbread and rich gravy.",
+        ms: "Terkenal dengan roti leper rebusan daging kambing serta kuah yang kaya rasa."
+      },
+
+      order: {
+        zh: "推荐尝试招牌古法胡羊焖饼，也可以搭配一份蔬菜。两人以上适合先问清楚分量。",
+        en: "Try the signature lamb stewed flatbread with a vegetable side dish.",
+        ms: "Cuba roti leper rebusan kambing istimewa bersama hidangan sayur."
+      },
+
+      tip: {
+        zh: "这道菜比较饱腹。可以先询问小份选择、是否加辣和等待时间。",
+        en: "This is a filling dish. Ask about small portions, spice level and preparation time.",
+        ms: "Hidangan ini mengenyangkan. Tanya tentang saiz kecil, kepedasan dan masa penyediaan."
+      },
+
+      source:
+        "https://www.trip.com/restaurant/china/dunhuang/detail/restaurant-15795817/"
+    },
+
+    // 03 羊肉粉汤
+    {
+      titles: [
+        "羊肉粉汤",
+        "Lamb Vermicelli Soup",
+        "Sup Bihun Daging Kambing"
+      ],
+
+      shop: "米记·30年老字号羊肉粉汤（敦煌店）",
+
+      address: {
+        zh: "敦煌市佛光西路292号1栋104。",
+        en: "No. 104, Building 1, 292 Foguang West Road, Dunhuang.",
+        ms: "No. 104, Bangunan 1, 292 Jalan Foguang Barat, Dunhuang."
+      },
+
+      why: {
+        zh: "以羊肉粉汤为特色，适合喜欢热汤和西北传统早餐的游客。",
+        en: "A local-style soup shop suitable for visitors who enjoy warm lamb broth and traditional breakfast.",
+        ms: "Kedai sup tempatan yang sesuai untuk peminat sup kambing panas dan sarapan tradisional."
+      },
+
+      order: {
+        zh: "可以尝试一碗羊肉粉汤，搭配热饼。第一次吃可以先点小份。",
+        en: "Try lamb vermicelli soup with a warm flatbread. Start with a small portion if preferred.",
+        ms: "Cuba sup bihun kambing bersama roti leper panas. Pilih hidangan kecil jika mahu."
+      },
+
+      tip: {
+        zh: "推荐作为早餐或早午餐。羊汤适合趁热吃，出发前确认是否营业。",
+        en: "A good breakfast or brunch option. Enjoy it hot and check opening hours before visiting.",
+        ms: "Sesuai untuk sarapan atau makan lewat pagi. Nikmati ketika panas dan semak waktu operasi."
+      },
+
+      source:
+        "https://us.trip.com/restaurant/china/dunhuang/detail/restaurant-63373292/"
+    },
+
+    // 04 泡儿油糕
+    {
+      titles: [
+        "泡儿油糕",
+        "Pao'er Fried Pastry",
+        "Kuih Goreng Pao'er"
+      ],
+
+      shop: "泡儿油糕（敦煌商业步行街店）",
+
+      address: {
+        zh: "敦煌市鸣山北路特色小吃一条街22号。",
+        en: "No. 22, Snack Street, Mingshan North Road, Dunhuang.",
+        ms: "No. 22, Jalan Makanan, Jalan Mingshan Utara, Dunhuang."
+      },
+
+      why: {
+        zh: "以敦煌特色甜点泡儿油糕为主，适合喜欢香甜、酥脆口感的小吃爱好者。",
+        en: "A small shop specialising in the traditional sweet Pao'er fried pastry.",
+        ms: "Kedai kecil yang menawarkan kuih goreng Pao'er tradisional yang manis."
+      },
+
+      order: {
+        zh: "推荐尝试现炸的泡儿油糕，也可以询问是否有杏皮水等当地饮品。",
+        en: "Try freshly fried Pao'er pastry and ask about local drinks such as apricot juice.",
+        ms: "Cuba kuih Pao'er yang baru digoreng dan tanya tentang minuman aprikot tempatan."
+      },
+
+      tip: {
+        zh: "现炸口感通常更好，但刚出锅可能很烫。店铺可能存在季节性停业情况，请提前确认。",
+        en: "Best enjoyed freshly fried, but be careful when hot. Check seasonal opening availability.",
+        ms: "Lebih sedap dimakan selepas digoreng, tetapi berhati-hati ketika panas. Semak operasi bermusim."
+      },
+
+      source:
+        "https://gs.ctrip.com/html5/you/foods/fooddetail/8/7569234.html"
+    },
+
+    // 05 莫高酿皮
+    {
+      titles: [
+        "莫高酿皮",
+        "Mogao Liangpi",
+        "Mi Kulit Gandum Mogao"
+      ],
+
+      shop: "敦煌老马酿皮",
+
+      address: {
+        zh: "敦煌夜市名优小吃广场66号，大红门东侧。",
+        en: "Stall 66, Famous Snack Square, Dunhuang Night Market.",
+        ms: "Gerai 66, Dataran Snek Terkenal, Pasar Malam Dunhuang."
+      },
+
+      why: {
+        zh: "敦煌文旅部门曾介绍过这家传统酿皮店，主打手工酿皮、凉粉等地方小吃。",
+        en: "A traditional niangpi shop featured by Dunhuang's culture and tourism authority.",
+        ms: "Kedai niangpi tradisional yang pernah diperkenalkan oleh pihak pelancongan Dunhuang."
+      },
+
+      order: {
+        zh: "可以点敦煌酿皮，喜欢酸辣口味的游客可以尝试辣椒油与醋的搭配。",
+        en: "Try traditional Dunhuang niangpi with vinegar and chilli oil if you enjoy tangy, spicy food.",
+        ms: "Cuba niangpi Dunhuang bersama cuka dan minyak cili jika anda suka rasa masam pedas."
+      },
+
+      tip: {
+        zh: "不吃辣可以要求少辣或不辣，也可以询问是否能少放蒜。店里可能使用「敦煌酿皮」这一名称。",
+        en: "Ask for less chilli or garlic if needed. The menu may call this dish Dunhuang niangpi.",
+        ms: "Minta kurangkan cili atau bawang putih jika perlu. Menu mungkin menggunakan nama niangpi Dunhuang."
+      },
+
+      source:
+        "https://m.thepaper.cn/baijiahao_27085851"
+    },
+
+    // 06 浆水面
+    {
+      titles: [
+        "浆水面",
+        "Jiangshui Noodles",
+        "Mi Jiangshui"
+      ],
+
+      shop: "月泉浆水面（敦煌商业步行街店）",
+
+      address: {
+        zh: "敦煌市沙州镇鸣山路9号敦煌商业步行街。",
+        en: "No. 9 Mingshan Road, Dunhuang Commercial Pedestrian Street.",
+        ms: "No. 9 Jalan Mingshan, Jalan Pejalan Kaki Komersial Dunhuang."
+      },
+
+      why: {
+        zh: "以浆水面为特色，面汤带有发酵形成的酸香口味，适合喜欢清爽面食的游客。",
+        en: "Known for refreshing noodles with a lightly fermented, naturally sour broth.",
+        ms: "Terkenal dengan mi berkuah masam semula jadi hasil penapaian."
+      },
+
+      order: {
+        zh: "推荐尝试招牌浆水面。第一次吃可以先点一小碗，再根据口味添加调料。",
+        en: "Try the signature Jiangshui noodles. A small bowl is good for first-time visitors.",
+        ms: "Cuba mi Jiangshui istimewa. Mangkuk kecil sesuai untuk kali pertama."
+      },
+
+      tip: {
+        zh: "浆水面可能以凉面形式供应，建议先询问汤的温度和酸度。",
+        en: "Jiangshui noodles may be served cool. Ask about temperature and sourness first.",
+        ms: "Mi Jiangshui mungkin dihidangkan sejuk. Tanya tentang suhu dan kemasaman dahulu."
+      },
+
+      source:
+        "https://gs.ctrip.com/html5/you/foods/fooddetail/8/13649103.html"
+    }
+
+  ];
+
+  /* ======================================
+     CREATE THE GUIDE SECTION
+  ====================================== */
+
+  const guide = document.createElement("section");
+
+  guide.id = "foodWhereGuide";
+  guide.className =
+    "food-detail-section food-where-guide";
+
+  foodTip.insertAdjacentElement("afterend", guide);
+
+  function getLang() {
+    const lang =
+      (document.documentElement.lang || "en").toLowerCase();
+
+    if (lang.startsWith("zh")) return "zh";
+    if (lang.startsWith("ms") || lang === "bm") return "ms";
+
+    return "en";
+  }
+
+  function makeElement(tag, className, value) {
+    const el = document.createElement(tag);
+
+    if (className) {
+      el.className = className;
+    }
+
+    if (value !== undefined) {
+      el.textContent = value;
+    }
+
+    return el;
+  }
+
+  function addInfoRow(parent, heading, content) {
+    const row = makeElement("div", "food-where-row");
+
+    row.append(
+      makeElement("strong", "", heading),
+      makeElement("p", "", content)
+    );
+
+    parent.appendChild(row);
+  }
+
+  function addLink(parent, label, url, secondary) {
+    const link = document.createElement("a");
+
+    link.textContent = label;
+    link.href = url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+
+    if (secondary) {
+      link.className = "secondary";
+    }
+
+    parent.appendChild(link);
+  }
+
+  /* ======================================
+     RENDER THE CURRENT FOOD GUIDE
+  ====================================== */
+
+  function updateFoodGuide() {
+
+    const currentTitle =
+      foodTitle.textContent.trim();
+
+    const currentFood = foodGuides.find(food =>
+      food.titles.includes(currentTitle)
+    );
+
+    if (!currentFood) {
+      guide.hidden = true;
+      return;
+    }
+
+    guide.hidden = false;
+
+    const lang = getLang();
+    const t = labels[lang];
+
+    guide.replaceChildren();
+
+    // Section title
+    const heading = makeElement(
+      "h3",
+      "",
+      "📍 " + t.heading
+    );
+
+    // Recommendation card
+    const card = makeElement(
+      "div",
+      "food-where-card"
+    );
+
+    card.append(
+      makeElement(
+        "div",
+        "food-where-label",
+        t.recommended
+      ),
+
+      makeElement(
+        "h4",
+        "food-where-name",
+        currentFood.shop
+      )
+    );
+
+    addInfoRow(
+      card,
+      "📍 " + t.address,
+      currentFood.address[lang]
+    );
+
+    addInfoRow(
+      card,
+      "✦ " + t.why,
+      currentFood.why[lang]
+    );
+
+    addInfoRow(
+      card,
+      "🍽 " + t.order,
+      currentFood.order[lang]
+    );
+
+    addInfoRow(
+      card,
+      "💡 " + t.tip,
+      currentFood.tip[lang]
+    );
+
+    // Clickable restaurant and map links
+    const actions = makeElement(
+      "div",
+      "food-where-actions"
+    );
+
+    addLink(
+      actions,
+      t.info,
+      currentFood.source,
+      false
+    );
+
+    
+    const mapUrl =
+      "https://www.google.com/maps/search/?api=1&query=" +
+      encodeURIComponent(
+        currentFood.shop + " 敦煌市 甘肃省 中国"
+      );
+
+
+    addLink(
+      actions,
+      t.map,
+      mapUrl,
+      true
+    );
+
+    card.appendChild(actions);
+
+    // Important travel notice
+    const note = makeElement(
+      "div",
+      "food-where-note",
+      "ℹ " + t.note
+    );
+
+    guide.append(heading, card, note);
+  }
+
+  /* ======================================
+     AUTO UPDATE FOR ALL SIX FOOD DIALOGS
+  ====================================== */
+
+  // Every time the food title changes,
+  // show the corresponding restaurant guide.
+  new MutationObserver(updateFoodGuide).observe(
+    foodTitle,
+    {
+      childList: true,
+      characterData: true,
+      subtree: true
+    }
+  );
+
+  // Follow EN / 中文 / BM language changes.
+  new MutationObserver(updateFoodGuide).observe(
+    document.documentElement,
+    {
+      attributes: true,
+      attributeFilter: ["lang"]
+    }
+  );
+
+  // Update if the dialog is already open.
+  updateFoodGuide();
+
+})();
+</script>
+
+<!-- END DUNHUANG FOOD TRAVEL GUIDE -->
+
+<!-- ========================================
+     HU YANG STEWED FLATBREAD FOOD GUIDE
+     只添加攻略，不修改原来的美食内容
+======================================== -->
+
+<style>
+#lambFoodGuide {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #dfcdb6;
+  color: #604636;
+}
+
+#lambFoodGuide h3 {
+  font-size: 25px;
+  color: #80543b;
+  margin: 0 0 18px;
+}
+
+#lambFoodGuide .lamb-guide-card {
+  background: #f0e2ce;
+  border-left: 4px solid #a87852;
+  border-radius: 12px;
+  padding: 23px;
+}
+
+#lambFoodGuide .lamb-guide-label {
+  color: #a26f4b;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+#lambFoodGuide .lamb-guide-name {
+  color: #684331;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 8px 0 20px;
+}
+
+#lambFoodGuide .lamb-guide-row {
+  margin-bottom: 16px;
+}
+
+#lambFoodGuide .lamb-guide-row strong {
+  display: block;
+  color: #85573b;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+#lambFoodGuide .lamb-guide-row p {
+  font-size: 15px;
+  color: #5d493b;
+  line-height: 1.85;
+  margin: 0;
+}
+
+#lambFoodGuide .lamb-guide-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+#lambFoodGuide .lamb-guide-links a {
+  display: inline-block;
+  text-decoration: none;
+  padding: 11px 16px;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 700;
+  background: #77503a;
+  color: white;
+}
+
+#lambFoodGuide .lamb-guide-links a:last-child {
+  background: transparent;
+  color: #77503a;
+  border: 1px solid #a87852;
+}
+
+#lambFoodGuide .lamb-guide-note {
+  margin-top: 14px;
+  padding: 14px;
+  background: #fff4e3;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #74563f;
+}
+
+body.senior-mode #lambFoodGuide p {
+  font-size: 21px;
+}
+
+@media (max-width: 550px) {
+  #lambFoodGuide .lamb-guide-card {
+    padding: 16px;
+  }
+
+  #lambFoodGuide .lamb-guide-links a {
+    width: 100%;
+    text-align: center;
+  }
+}
+</style>
+
+<script>
+(function () {
+
+  const dialog =
+    document.getElementById("dunhuangFoodDialog");
+
+  const title =
+    document.getElementById("foodDetailTitle");
+
+  const tip =
+    document.getElementById("foodDetailTip");
+
+  if (!dialog || !title || !tip) return;
+
+  // 防止重复插入
+  if (document.getElementById("lambFoodGuide")) return;
+
+  // 如果之前的六道美食攻略已经安装，
+  // 不再重复添加相同的推荐餐厅。
+  if (document.getElementById("foodWhereGuide")) return;
+
+  const translations = {
+
+    en: {
+      heading: "Where to Eat in Dunhuang",
+      label: "RECOMMENDED RESTAURANT",
+      addressLabel: "Location",
+      reasonLabel: "Why Visit",
+      orderLabel: "What to Order",
+      tipLabel: "Travel Tip",
+
+      address:
+        "248-1 Mingshan North Road, near the east entrance of the local snack street, Dunhuang.",
+
+      reason:
+        "This restaurant specialises in traditional lamb stewed flatbread. Tender lamb and thin flatbread are cooked together in a rich sauce. It is a good choice for visitors who want to experience traditional Northwestern Chinese food.",
+
+      order:
+        "Try the signature lamb stewed flatbread. You can pair it with stir-fried desert onions and apricot drink.",
+
+      tip:
+        "This is a filling dish, suitable for lunch or dinner. Ask about portion size, price, spice level and preparation time before ordering.",
+
+      info: "VIEW RESTAURANT DETAILS ↗",
+      map: "GOOGLE MAPS ↗",
+
+      note:
+        "Menus, prices and opening hours may change. Check the latest information before visiting."
+    },
+
+    zh: {
+      heading: "敦煌美食攻略 · 去哪吃？",
+      label: "推荐店铺",
+      addressLabel: "店铺位置",
+      reasonLabel: "推荐理由",
+      orderLabel: "推荐点法",
+      tipLabel: "游客提示",
+
+      address:
+        "敦煌市鸣山北路248-1号，特色小吃街东口。",
+
+      reason:
+        "这家店以古法胡羊焖饼为特色。羊肉经过炖煮，搭配吸满汤汁的薄面饼，味道浓郁，适合第一次来到敦煌、想体验传统西北美食的游客。",
+
+      order:
+        "推荐尝试招牌古法胡羊焖饼，可以搭配沙葱炒蛋和一杯杏皮水。多人同行可以先询问菜品分量。",
+
+      tip:
+        "胡羊焖饼比较饱腹，适合午餐或晚餐。建议提前询问分量、辣度、价格及等待时间。",
+
+      info: "查看店铺信息 ↗",
+      map: "Google Maps 地图 ↗",
+
+      note:
+        "餐厅菜单、价格和营业时间可能发生变化，建议出发前查看最新信息。"
+    },
+
+    ms: {
+      heading: "Panduan Makanan · Di Mana Nak Makan?",
+      label: "CADANGAN RESTORAN",
+      addressLabel: "Lokasi",
+      reasonLabel: "Sebab Dicadangkan",
+      orderLabel: "Cadangan Pesanan",
+      tipLabel: "Tip Pelawat",
+
+      address:
+        "248-1 Jalan Mingshan Utara, berhampiran pintu timur jalan makanan tempatan, Dunhuang.",
+
+      reason:
+        "Restoran ini terkenal dengan roti leper rebusan kambing tradisional. Daging kambing dimasak bersama roti nipis dalam kuah yang kaya rasa.",
+
+      order:
+        "Cuba roti leper rebusan kambing istimewa bersama telur goreng dengan bawang gurun dan minuman aprikot.",
+
+      tip:
+        "Hidangan ini mengenyangkan dan sesuai untuk makan tengah hari atau malam. Tanya saiz hidangan, harga dan masa penyediaan.",
+
+      info: "LIHAT MAKLUMAT RESTORAN ↗",
+      map: "GOOGLE MAPS ↗",
+
+      note:
+        "Menu, harga dan waktu operasi mungkin berubah. Semak maklumat terkini sebelum melawat."
+    }
+  };
+
+  const restaurant =
+    "回味斋·古法胡羊焖饼·旗舰店";
+
+  const restaurantUrl =
+    "https://www.trip.com/restaurant/china/dunhuang/detail/restaurant-15795817/";
+
+  const googleMapsUrl =
+    "https://www.google.com/maps/search/?api=1&query=" +
+    encodeURIComponent(restaurant + " 敦煌 甘肃 中国");
+
+  // 创建攻略容器
+  const guide = document.createElement("section");
+
+  guide.id = "lambFoodGuide";
+
+  // 添加在原有美食提示下面
+  tip.insertAdjacentElement("afterend", guide);
+
+  function getLang() {
+
+    const lang =
+      (document.documentElement.lang || "en").toLowerCase();
+
+    if (lang.startsWith("zh")) return "zh";
+    if (lang.startsWith("ms")) return "ms";
+
+    return "en";
+  }
+
+  function isLambDish() {
+
+    const name = title.textContent.trim().toLowerCase();
+
+    return [
+      "胡羊焖饼",
+      "胡杨焖饼",
+      "lamb stewed flatbread",
+      "roti leper rebusan daging kambing"
+    ].includes(name);
+  }
+
+  function addRow(container, label, value) {
+
+    const row = document.createElement("div");
+    row.className = "lamb-guide-row";
+
+    const strong = document.createElement("strong");
+    strong.textContent = label;
+
+    const p = document.createElement("p");
+    p.textContent = value;
+
+    row.append(strong, p);
+    container.appendChild(row);
+  }
+
+  function renderGuide() {
+
+    if (!isLambDish()) {
+      guide.hidden = true;
+      return;
+    }
+
+    guide.hidden = false;
+
+    const t = translations[getLang()];
+
+    guide.replaceChildren();
+
+    const heading = document.createElement("h3");
+    heading.textContent = "📍 " + t.heading;
+
+    const card = document.createElement("div");
+    card.className = "lamb-guide-card";
+
+    const label = document.createElement("div");
+    label.className = "lamb-guide-label";
+    label.textContent = t.label;
+
+    const name = document.createElement("h4");
+    name.className = "lamb-guide-name";
+    name.textContent = restaurant;
+
+    card.append(label, name);
+
+    addRow(card, "📍 " + t.addressLabel, t.address);
+    addRow(card, "✦ " + t.reasonLabel, t.reason);
+    addRow(card, "🍽 " + t.orderLabel, t.order);
+    addRow(card, "💡 " + t.tipLabel, t.tip);
+
+    const links = document.createElement("div");
+    links.className = "lamb-guide-links";
+
+    const info = document.createElement("a");
+    info.textContent = t.info;
+    info.href = restaurantUrl;
+    info.target = "_blank";
+    info.rel = "noopener noreferrer";
+
+    const map = document.createElement("a");
+    map.textContent = t.map;
+    map.href = googleMapsUrl;
+    map.target = "_blank";
+    map.rel = "noopener noreferrer";
+
+    links.append(info, map);
+    card.appendChild(links);
+
+    const note = document.createElement("p");
+    note.className = "lamb-guide-note";
+    note.textContent = "ℹ " + t.note;
+
+    guide.append(heading, card, note);
+  }
+
+  // 切换美食时更新攻略
+  new MutationObserver(renderGuide).observe(title, {
+    childList: true,
+    characterData: true,
+    subtree: true
+  });
+
+  // 三语言切换
+  new MutationObserver(renderGuide).observe(
+    document.documentElement,
+    {
+      attributes: true,
+      attributeFilter: ["lang"]
+    }
+  );
+
+  renderGuide();
+
+})();
+</script>
+
+<!-- END HU YANG FOOD GUIDE -->
+
+<!-- =========================================
+     LAMB VERMICELLI SOUP FOOD GUIDE
+     羊肉粉汤美食攻略
+     只添加内容，不修改原来的介绍
+========================================= -->
+
+<style>
+#lambSoupGuide {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #dfcdb6;
+  color: #604636;
+}
+
+#lambSoupGuide h3 {
+  font-size: 25px;
+  color: #80543b;
+  margin: 0 0 18px;
+}
+
+#lambSoupGuide .soup-guide-card {
+  background: #f0e2ce;
+  border-left: 4px solid #a87852;
+  border-radius: 12px;
+  padding: 23px;
+}
+
+#lambSoupGuide .soup-guide-label {
+  color: #a26f4b;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+#lambSoupGuide .soup-guide-name {
+  color: #684331;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 8px 0 20px;
+}
+
+#lambSoupGuide .soup-guide-row {
+  margin-bottom: 16px;
+}
+
+#lambSoupGuide .soup-guide-row strong {
+  display: block;
+  color: #85573b;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+#lambSoupGuide .soup-guide-row p {
+  font-size: 15px;
+  color: #5d493b;
+  line-height: 1.85;
+  margin: 0;
+}
+
+#lambSoupGuide .soup-guide-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+#lambSoupGuide .soup-guide-links a {
+  display: inline-block;
+  text-decoration: none;
+  padding: 11px 16px;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 700;
+  background: #77503a;
+  color: white;
+}
+
+#lambSoupGuide .soup-guide-links a:last-child {
+  background: transparent;
+  color: #77503a;
+  border: 1px solid #a87852;
+}
+
+#lambSoupGuide .soup-guide-note {
+  margin-top: 14px;
+  padding: 14px;
+  background: #fff4e3;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #74563f;
+}
+
+body.senior-mode #lambSoupGuide p {
+  font-size: 21px;
+}
+
+@media (max-width: 550px) {
+  #lambSoupGuide .soup-guide-card {
+    padding: 16px;
+  }
+
+  #lambSoupGuide .soup-guide-links a {
+    width: 100%;
+    text-align: center;
+  }
+}
+</style>
+
+<script>
+(function () {
+
+  const dialog =
+    document.getElementById("dunhuangFoodDialog");
+
+  const title =
+    document.getElementById("foodDetailTitle");
+
+  const tip =
+    document.getElementById("foodDetailTip");
+
+  if (!dialog || !title || !tip) return;
+
+  // 防止重复添加
+  if (document.getElementById("lambSoupGuide")) return;
+
+  // 如果之前已经有六道美食的统一攻略，
+  // 不再重复添加。
+  if (document.getElementById("foodWhereGuide")) return;
+
+  /* ======================================
+     THREE LANGUAGE CONTENT
+  ====================================== */
+
+  const translations = {
+
+    en: {
+      heading: "Where to Eat in Dunhuang",
+      label: "RECOMMENDED RESTAURANT",
+      addressLabel: "Location",
+      reasonLabel: "Why Visit",
+      orderLabel: "What to Order",
+      tipLabel: "Travel Tip",
+
+      address:
+        "No. 104, Building 1, 292 Foguang West Road, Dunhuang.",
+
+      reason:
+        "This restaurant specialises in traditional lamb vermicelli soup. The warm broth, tender lamb and soft vermicelli make it a good choice for visitors who want to try a local Dunhuang breakfast.",
+
+      order:
+        "Try a bowl of Lamb Vermicelli Soup with warm flatbread. You can also ask about the lamb bone soup or other traditional lamb dishes.",
+
+      tip:
+        "Lamb Vermicelli Soup is a popular breakfast choice. Enjoy it while hot. Ask about portion sizes, seasonings and opening hours before visiting.",
+
+      info: "VIEW RESTAURANT DETAILS ↗",
+      map: "GOOGLE MAPS ↗",
+
+      note:
+        "Menus, prices and opening hours may change. Check the latest information before visiting."
+    },
+
+    zh: {
+      heading: "敦煌美食攻略 · 去哪吃？",
+      label: "推荐店铺",
+      addressLabel: "店铺位置",
+      reasonLabel: "推荐理由",
+      orderLabel: "推荐点法",
+      tipLabel: "游客提示",
+
+      address:
+        "敦煌市佛光西路292号1栋104。",
+
+      reason:
+        "米记是一家以传统羊肉粉汤为特色的敦煌餐馆。羊汤鲜香，搭配软滑的粉条和羊肉，适合想体验敦煌传统早餐文化的游客。",
+
+      order:
+        "推荐尝试招牌羊肉粉汤，搭配一份热饼。也可以询问店内是否提供羊骨汤等其他羊肉特色菜。",
+
+      tip:
+        "羊肉粉汤很适合作为早餐，建议趁热食用。可以根据口味调整胡椒、香菜等调料。部分传统早餐店下午较早结束营业，出发前记得确认时间。",
+
+      info: "查看店铺信息 ↗",
+      map: "Google Maps 地图 ↗",
+
+      note:
+        "餐厅菜单、价格和营业时间可能变化。建议前往之前查看最新信息。"
+    },
+
+    ms: {
+      heading: "Panduan Makanan · Di Mana Nak Makan?",
+      label: "CADANGAN RESTORAN",
+      addressLabel: "Lokasi",
+      reasonLabel: "Sebab Dicadangkan",
+      orderLabel: "Cadangan Pesanan",
+      tipLabel: "Tip Pelawat",
+
+      address:
+        "No. 104, Bangunan 1, 292 Jalan Foguang Barat, Dunhuang.",
+
+      reason:
+        "Restoran ini terkenal dengan sup bihun kambing tradisional. Kuah panas, daging kambing yang lembut dan bihun menjadikannya pilihan yang sesuai untuk mencuba sarapan tempatan Dunhuang.",
+
+      order:
+        "Cuba Sup Bihun Daging Kambing bersama roti leper panas. Anda juga boleh bertanya tentang sup tulang kambing dan hidangan kambing yang lain.",
+
+      tip:
+        "Sup bihun kambing sesuai untuk sarapan. Nikmati ketika panas. Tanya tentang saiz hidangan, perasa dan waktu operasi sebelum melawat.",
+
+      info: "LIHAT MAKLUMAT RESTORAN ↗",
+      map: "GOOGLE MAPS ↗",
+
+      note:
+        "Menu, harga dan waktu operasi mungkin berubah. Semak maklumat terkini sebelum melawat."
+    }
+  };
+
+  /* ======================================
+     RESTAURANT DETAILS
+  ====================================== */
+
+  const restaurant =
+    "米记·30年老字号羊肉粉汤（敦煌店）";
+
+  const restaurantUrl =
+    "https://us.trip.com/restaurant/china/dunhuang/detail/restaurant-63373292/";
+
+  const googleMapsUrl =
+    "https://www.google.com/maps/search/?api=1&query=" +
+    encodeURIComponent(
+      restaurant + " 佛光西路292号 敦煌 甘肃 中国"
+    );
+
+  /* ======================================
+     CREATE GUIDE SECTION
+  ====================================== */
+
+  const guide = document.createElement("section");
+
+  guide.id = "lambSoupGuide";
+
+  // 放在原来的美食提示后面
+  tip.insertAdjacentElement("afterend", guide);
+
+  function getLang() {
+
+    const lang =
+      (document.documentElement.lang || "en").toLowerCase();
+
+    if (lang.startsWith("zh")) return "zh";
+    if (lang.startsWith("ms")) return "ms";
+
+    return "en";
+  }
+
+  function isLambSoup() {
+
+    const name =
+      title.textContent.trim().toLowerCase();
+
+    return [
+      "羊肉粉汤",
+      "lamb vermicelli soup",
+      "sup bihun daging kambing"
+    ].includes(name);
+  }
+
+  function addRow(container, label, value) {
+
+    const row = document.createElement("div");
+    row.className = "soup-guide-row";
+
+    const strong = document.createElement("strong");
+    strong.textContent = label;
+
+    const p = document.createElement("p");
+    p.textContent = value;
+
+    row.append(strong, p);
+
+    container.appendChild(row);
+  }
+
+  /* ======================================
+     RENDER FOOD GUIDE
+  ====================================== */
+
+  function renderGuide() {
+
+    // 只在羊肉粉汤弹窗显示
+    if (!isLambSoup()) {
+      guide.hidden = true;
+      return;
+    }
+
+    guide.hidden = false;
+
+    const t = translations[getLang()];
+
+    guide.replaceChildren();
+
+    const heading = document.createElement("h3");
+    heading.textContent = "📍 " + t.heading;
+
+    const card = document.createElement("div");
+    card.className = "soup-guide-card";
+
+    const label = document.createElement("div");
+    label.className = "soup-guide-label";
+    label.textContent = t.label;
+
+    const name = document.createElement("h4");
+    name.className = "soup-guide-name";
+    name.textContent = restaurant;
+
+    card.append(label, name);
+
+    addRow(
+      card,
+      "📍 " + t.addressLabel,
+      t.address
+    );
+
+    addRow(
+      card,
+      "✦ " + t.reasonLabel,
+      t.reason
+    );
+
+    addRow(
+      card,
+      "🍽 " + t.orderLabel,
+      t.order
+    );
+
+    addRow(
+      card,
+      "💡 " + t.tipLabel,
+      t.tip
+    );
+
+    /* ======================================
+       RESTAURANT LINKS
+    ====================================== */
+
+    const links = document.createElement("div");
+    links.className = "soup-guide-links";
+
+    // 查看店铺资料
+    const info = document.createElement("a");
+    info.textContent = t.info;
+    info.href = restaurantUrl;
+    info.target = "_blank";
+    info.rel = "noopener noreferrer";
+
+    // Google Maps
+    const map = document.createElement("a");
+    map.textContent = t.map;
+    map.href = googleMapsUrl;
+    map.target = "_blank";
+    map.rel = "noopener noreferrer";
+
+    links.append(info, map);
+    card.appendChild(links);
+
+    const note = document.createElement("p");
+    note.className = "soup-guide-note";
+    note.textContent = "ℹ " + t.note;
+
+    guide.append(heading, card, note);
+  }
+
+  /* ======================================
+     AUTO UPDATE
+  ====================================== */
+
+  // 切换到不同美食时自动判断
+  new MutationObserver(renderGuide).observe(
+    title,
+    {
+      childList: true,
+      characterData: true,
+      subtree: true
+    }
+  );
+
+  // 中英文马来文切换
+  new MutationObserver(renderGuide).observe(
+    document.documentElement,
+    {
+      attributes: true,
+      attributeFilter: ["lang"]
+    }
+  );
+
+  renderGuide();
+
+})();
+</script>
+
+<!-- END LAMB VERMICELLI SOUP GUIDE -->
+
+<!-- =========================================
+     PAO'ER FRIED PASTRY FOOD GUIDE
+     泡儿油糕美食攻略
+     仅在原有美食提示下增加攻略
+========================================= -->
+
+<style>
+#paoerFoodGuide {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #dfcdb6;
+  color: #604636;
+}
+
+#paoerFoodGuide h3 {
+  font-size: 25px;
+  color: #80543b;
+  margin: 0 0 18px;
+}
+
+#paoerFoodGuide .paoer-guide-card {
+  background: #f0e2ce;
+  border-left: 4px solid #a87852;
+  border-radius: 12px;
+  padding: 23px;
+}
+
+#paoerFoodGuide .paoer-guide-label {
+  color: #a26f4b;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+#paoerFoodGuide .paoer-guide-name {
+  color: #684331;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 8px 0 20px;
+}
+
+#paoerFoodGuide .paoer-guide-row {
+  margin-bottom: 16px;
+}
+
+#paoerFoodGuide .paoer-guide-row strong {
+  display: block;
+  color: #85573b;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+#paoerFoodGuide .paoer-guide-row p {
+  font-size: 15px;
+  color: #5d493b;
+  line-height: 1.85;
+  margin: 0;
+}
+
+#paoerFoodGuide .paoer-guide-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+#paoerFoodGuide .paoer-guide-links a {
+  display: inline-block;
+  text-decoration: none;
+  padding: 11px 16px;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 700;
+  background: #77503a;
+  color: white;
+}
+
+#paoerFoodGuide .paoer-guide-links a:last-child {
+  background: transparent;
+  color: #77503a;
+  border: 1px solid #a87852;
+}
+
+#paoerFoodGuide .paoer-guide-note {
+  margin-top: 14px;
+  padding: 14px;
+  background: #fff4e3;
+  border: 1px solid #e6c7a2;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #74563f;
+}
+
+body.senior-mode #paoerFoodGuide p {
+  font-size: 21px;
+}
+
+@media (max-width: 550px) {
+  #paoerFoodGuide .paoer-guide-card {
+    padding: 16px;
+  }
+
+  #paoerFoodGuide .paoer-guide-links a {
+    width: 100%;
+    text-align: center;
+  }
+}
+</style>
+
+<script>
+(function () {
+
+  const dialog =
+    document.getElementById("dunhuangFoodDialog");
+
+  const title =
+    document.getElementById("foodDetailTitle");
+
+  const tip =
+    document.getElementById("foodDetailTip");
+
+  if (!dialog || !title || !tip) return;
+
+  // 防止重复插入
+  if (document.getElementById("paoerFoodGuide")) return;
+
+  // 如已经使用六道美食统一攻略，就不重复添加
+  if (document.getElementById("foodWhereGuide")) return;
+
+  /* ======================================
+     THREE LANGUAGE CONTENT
+  ====================================== */
+
+  const translations = {
+
+    en: {
+      heading: "Where to Eat in Dunhuang",
+      label: "SUGGESTED FOOD SHOP",
+      addressLabel: "Location",
+      reasonLabel: "Why Try It",
+      orderLabel: "What to Order",
+      tipLabel: "Travel Tip",
+
+      address:
+        "No. 22, Special Snack Street, Mingshan North Road, Dunhuang.",
+
+      reason:
+        "This small shop is listed for its traditional Pao'er fried pastry. The pastry has a delicate, crispy outer layer and a sweet filling, making it an interesting local dessert to try.",
+
+      order:
+        "Try freshly fried Pao'er pastry. You can pair it with local apricot juice or sweet fermented grain drinks if available.",
+
+      tip:
+        "Pao'er pastry tastes best when freshly fried. Be careful because the filling may be very hot. Ask about portion sizes and ingredients before ordering.",
+
+      info: "VIEW SHOP DETAILS ↗",
+      map: "GOOGLE MAPS ↗",
+
+      note:
+        "This shop is currently listed as suspended on Trip.com. Confirm whether it has reopened before visiting. Alternatively, look for freshly made Pao'er pastry at other stalls on Dunhuang's snack street. Prices and menus may change."
+    },
+
+    zh: {
+      heading: "敦煌美食攻略 · 去哪吃？",
+      label: "推荐店铺",
+      addressLabel: "店铺位置",
+      reasonLabel: "推荐理由",
+      orderLabel: "推荐点法",
+      tipLabel: "游客提示",
+
+      address:
+        "敦煌市鸣山北路特色小吃一条街22号。",
+
+      reason:
+        "这是一家以敦煌传统小吃泡儿油糕为特色的小店。泡儿油糕外皮轻薄酥脆，内馅香甜，适合喜欢传统甜点和地方小吃的游客。",
+
+      order:
+        "推荐尝试现炸的泡儿油糕，可以搭配一杯敦煌杏皮水。如果店内提供甜醅汤，也可以尝试当地的特色饮品。",
+
+      tip:
+        "泡儿油糕最好趁热吃，刚炸好的外皮更酥脆，但内馅可能很烫。第一次品尝可以先询问每份数量、馅料和价格。",
+
+      info: "查看店铺信息 ↗",
+      map: "Google Maps 地图 ↗",
+
+      note:
+        "注意：Trip.com 目前将这家店标为暂停营业，出发前请先确认是否恢复营业。如果没有营业，也可以在敦煌特色小吃街寻找其他现炸泡儿油糕的摊位。"
+    },
+
+    ms: {
+      heading: "Panduan Makanan · Di Mana Nak Makan?",
+      label: "CADANGAN KEDAI MAKANAN",
+      addressLabel: "Lokasi",
+      reasonLabel: "Sebab Dicadangkan",
+      orderLabel: "Cadangan Pesanan",
+      tipLabel: "Tip Pelawat",
+
+      address:
+        "No. 22, Jalan Makanan Khas, Jalan Mingshan Utara, Dunhuang.",
+
+      reason:
+        "Kedai kecil ini dikenali melalui senarai makanan tempatan kerana kuih goreng Pao'er tradisional. Bahagian luarnya rangup dan nipis, manakala intinya manis.",
+
+      order:
+        "Cuba kuih Pao'er yang baru digoreng. Anda boleh menikmatinya bersama minuman aprikot tempatan atau minuman bijirin manis jika tersedia.",
+
+      tip:
+        "Kuih Pao'er lebih sedap ketika baru digoreng. Berhati-hati kerana intinya mungkin panas. Tanya jumlah hidangan, bahan dan harga terlebih dahulu.",
+
+      info: "LIHAT MAKLUMAT KEDAI ↗",
+      map: "GOOGLE MAPS ↗",
+
+      note:
+        "Trip.com kini menyenaraikan kedai ini sebagai tidak beroperasi buat sementara. Sahkan sama ada kedai telah dibuka semula. Anda juga boleh mencari gerai kuih Pao'er yang baru digoreng di kawasan jalan makanan Dunhuang."
+    }
+
+  };
+
+  /* ======================================
+     SHOP INFORMATION
+  ====================================== */
+
+  const restaurant =
+    "泡儿油糕（敦煌商业步行街店）";
+
+  const restaurantUrl =
+    "https://gs.ctrip.com/html5/you/foods/fooddetail/8/7569234.html";
+
+  const googleMapsUrl =
+    "https://www.google.com/maps/search/?api=1&query=" +
+    encodeURIComponent(
+      "泡儿油糕 鸣山北路特色小吃一条街22号 敦煌 甘肃"
+    );
+
+  /* ======================================
+     CREATE FOOD GUIDE
+  ====================================== */
+
+  const guide = document.createElement("section");
+
+  guide.id = "paoerFoodGuide";
+
+  // 在原来的美食提示后面添加
+  tip.insertAdjacentElement("afterend", guide);
+
+  function getLang() {
+
+    const lang =
+      (document.documentElement.lang || "en").toLowerCase();
+
+    if (lang.startsWith("zh")) return "zh";
+    if (lang.startsWith("ms")) return "ms";
+
+    return "en";
+  }
+
+  function isPaoerDish() {
+
+    const name =
+      title.textContent.trim().toLowerCase();
+
+    return [
+      "泡儿油糕",
+      "泡儿油饼",
+      "pao'er fried pastry",
+      "paoer fried pastry",
+      "kuih goreng pao'er"
+    ].includes(name);
+
+  }
+
+  function addRow(container, label, value) {
+
+    const row = document.createElement("div");
+    row.className = "paoer-guide-row";
+
+    const strong = document.createElement("strong");
+    strong.textContent = label;
+
+    const p = document.createElement("p");
+    p.textContent = value;
+
+    row.append(strong, p);
+    container.appendChild(row);
+  }
+
+  /* ======================================
+     RENDER FOOD GUIDE
+  ====================================== */
+
+  function renderGuide() {
+
+    // 只在泡儿油糕弹窗显示
+    if (!isPaoerDish()) {
+      guide.hidden = true;
+      return;
+    }
+
+    guide.hidden = false;
+
+    const t = translations[getLang()];
+
+    guide.replaceChildren();
+
+    const heading = document.createElement("h3");
+    heading.textContent = "📍 " + t.heading;
+
+    const card = document.createElement("div");
+    card.className = "paoer-guide-card";
+
+    const label = document.createElement("div");
+    label.className = "paoer-guide-label";
+    label.textContent = t.label;
+
+    const name = document.createElement("h4");
+    name.className = "paoer-guide-name";
+    name.textContent = restaurant;
+
+    card.append(label, name);
+
+    // 地址
+    addRow(
+      card,
+      "📍 " + t.addressLabel,
+      t.address
+    );
+
+    // 推荐理由
+    addRow(
+      card,
+      "✦ " + t.reasonLabel,
+      t.reason
+    );
+
+    // 推荐点法
+    addRow(
+      card,
+      "🍽 " + t.orderLabel,
+      t.order
+    );
+
+    // 游客提示
+    addRow(
+      card,
+      "💡 " + t.tipLabel,
+      t.tip
+    );
+
+    /* ======================================
+       BUTTONS
+    ====================================== */
+
+    const links = document.createElement("div");
+    links.className = "paoer-guide-links";
+
+    // 店铺介绍
+    const info = document.createElement("a");
+    info.textContent = t.info;
+    info.href = restaurantUrl;
+    info.target = "_blank";
+    info.rel = "noopener noreferrer";
+
+    // Google Maps
+    const map = document.createElement("a");
+    map.textContent = t.map;
+    map.href = googleMapsUrl;
+    map.target = "_blank";
+    map.rel = "noopener noreferrer";
+
+    links.append(info, map);
+    card.appendChild(links);
+
+    // 营业状态提醒
+    const note = document.createElement("p");
+    note.className = "paoer-guide-note";
+    note.textContent = "ℹ " + t.note;
+
+    guide.append(heading, card, note);
+  }
+
+  /* ======================================
+     AUTO UPDATE
+  ====================================== */
+
+  // 切换不同美食时更新
+  new MutationObserver(renderGuide).observe(
+    title,
+    {
+      childList: true,
+      characterData: true,
+      subtree: true
+    }
+  );
+
+  // 切换中英马语言时更新
+  new MutationObserver(renderGuide).observe(
+    document.documentElement,
+    {
+      attributes: true,
+      attributeFilter: ["lang"]
+    }
+  );
+
+  renderGuide();
+
+})();
+</script>
+
+<!-- END PAO'ER FRIED PASTRY GUIDE -->
+
+<!-- ========== DUNHUANG NEW TRY-ON EXPERIENCE ========== -->
+
+<style>
+#dhTryOn {
+  margin-top: 35px;
+  padding: 28px;
+  background: #ecddc7;
+  border: 1px solid #d2b28c;
+  border-radius: 16px;
+  color: #50392c;
+}
+
+#dhTryOn h3 {
+  font-size: clamp(23px, 3vw, 30px);
+  margin: 0 0 8px;
+  color: #684433;
+}
+
+.dh-tryon-subtitle {
+  margin-bottom: 24px;
+  line-height: 1.8;
+  color: #795b46;
+}
+
+.dh-tryon-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.dh-tryon-preview {
+  min-width: 0;
+  padding: 10px;
+  background: #d2b28c;
+  border-radius: 13px;
+}
+
+#dhTryOnCanvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #cab399;
+  border-radius: 7px;
+  cursor: grab;
+  touch-action: none;
+}
+
+#dhTryOnCanvas:active {
+  cursor: grabbing;
+}
+
+.dh-tryon-panel {
+  min-width: 0;
+}
+
+.dh-tryon-panel h4 {
+  font-size: 18px;
+  margin: 0 0 13px;
+  color: #684433;
+}
+
+.dh-tryon-choices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+  margin-bottom: 22px;
+}
+
+.dh-tryon-choice {
+  padding: 7px;
+  border: 1px solid #c4a486;
+  border-radius: 9px;
+  background: #f8f0e5;
+  color: #604532;
+  cursor: pointer;
+}
+
+.dh-tryon-choice.active {
+  border: 2px solid #80533a;
+  background: #e0c6a8;
+}
+
+.dh-tryon-choice img {
+  width: 100%;
+  height: 115px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 5px;
+}
+
+.dh-tryon-choice span {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.dh-tryon-upload {
+  display: block;
+  padding: 14px;
+  background: #80533a;
+  color: white;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dh-tryon-upload:hover {
+  background: #684433;
+}
+
+.dh-tryon-upload input {
+  display: none;
+}
+
+.dh-tryon-zoom-label {
+  display: block;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #604532;
+}
+
+#dhTryOnZoom {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  accent-color: #80533a;
+}
+
+.dh-tryon-tip {
+  margin: 16px 0;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #795b46;
+}
+
+.dh-tryon-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.dh-tryon-actions button {
+  flex: 1;
+  padding: 12px 9px;
+  border-radius: 7px;
+  border: 1px solid #80533a;
+  background: transparent;
+  color: #684433;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+#dhTryOnDownload {
+  background: #80533a;
+  color: white;
+}
+
+#dhTryOnDownload:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+  #dhTryOn {
+    padding: 16px;
+  }
+
+  .dh-tryon-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .dh-tryon-choice img {
+    height: 100px;
+  }
+}
+.dh-tryon-actions {
+  flex-wrap: wrap;
+}
+
+#dhTryOnDownload {
+  flex: 1 1 100%;
+}
+</style>
+
+<script>
+(function () {
+
+  const dialog = document.getElementById(
+    "costumeExperienceDialog"
+  );
+
+  if (!dialog) return;
+
+  const costumeBody = dialog.querySelector(".costume-body");
+
+  // Add a NEW section below the existing costume layout
+  const section = document.createElement("section");
+  section.id = "dhTryOn";
+
+  section.innerHTML = `
+    <h3 id="dhTryOnTitle"></h3>
+
+    <p class="dh-tryon-subtitle" id="dhTryOnSubtitle"></p>
+
+    <div class="dh-tryon-layout">
+
+      <div class="dh-tryon-preview">
+        <canvas
+          id="dhTryOnCanvas"
+          width="720"
+          height="1000"
+        ></canvas>
+      </div>
+
+      <div class="dh-tryon-panel">
+
+        <h4 id="dhTryOnChoose"></h4>
+
+        <div class="dh-tryon-choices">
+
+          <button type="button"
+                  class="dh-tryon-choice active"
+                  data-dh-style="0">
+            <img src="./tryon1.jpg" alt="">
+            <span></span>
+          </button>
+
+          <button type="button"
+                  class="dh-tryon-choice"
+                  data-dh-style="1">
+            <img src="./tryon2.jpg" alt="">
+            <span></span>
+          </button>
+
+          <button type="button"
+                  class="dh-tryon-choice"
+                  data-dh-style="2">
+            <img src="./tryon3.jpg" alt="">
+            <span></span>
+          </button>
+
+        </div>
+
+        <label class="dh-tryon-upload">
+          <span id="dhTryOnUploadText"></span>
+          <input
+            type="file"
+            id="dhTryOnFile"
+            accept="image/*"
+          >
+        </label>
+
+        <label class="dh-tryon-zoom-label">
+          <span id="dhTryOnZoomText"></span>
+          <input
+            type="range"
+            id="dhTryOnZoom"
+            min="1"
+            max="5"
+            step="0.1"
+            value="2.5"
+          >
+        </label>
+
+        <p class="dh-tryon-tip" id="dhTryOnTip"></p>
+
+        <div class="dh-tryon-actions">
+          <button type="button" id="dhTryOnReset"></button>
+          <button type="button" id="dhTryOnClear"></button>
+          <button type="button"
+                  id="dhTryOnDownload"
+                  disabled></button>
+        </div>
+
+      </div>
+    </div>
+  `;
+
+  costumeBody.appendChild(section);
+
+  const canvas = document.getElementById("dhTryOnCanvas");
+  const ctx = canvas.getContext("2d");
+
+  const fileInput = document.getElementById("dhTryOnFile");
+  const zoomInput = document.getElementById("dhTryOnZoom");
+  const downloadButton = document.getElementById(
+    "dhTryOnDownload"
+  );
+
+  const styles = [
+    {
+      src: "./tryon1.jpg",
+      // Face center and size in original-image pixels
+      x: 613, y: 577, rx: 99, ry: 126,
+      angle: 0
+    },
+    {
+      src: "./tryon2.jpg",
+      x: 649, y: 470, rx: 130, ry: 164,
+      angle: 0
+    },
+    {
+      src: "./tryon3.jpg",
+      x: 571, y: 743, rx: 103, ry: 121,
+      angle: 0
+    }
+  ];
+
+  const translations = {
+    zh: {
+      title: "我的敦煌变装体验",
+      subtitle: "选择敦煌造型，上传照片，制作属于你的丝路纪念肖像。",
+      choose: "选择你的敦煌造型",
+      names: ["沙漠飞天", "敦煌舞衣", "丝路少年"],
+      upload: "📷 上传我的正脸照片",
+      zoom: "调整脸部大小",
+      tip: "上传照片后，在左侧图片上拖动调整脸的位置。建议使用光线均匀、面部清晰的正面照片。图片仅在你的浏览器中处理。",
+      reset: "重置",
+      clear: "清空照片",
+      download: "下载我的敦煌肖像"
+    },
+    en: {
+      title: "My Dunhuang Costume Experience",
+      subtitle: "Choose a Dunhuang look, upload your photo, and create your own Silk Road portrait.",
+      choose: "Choose Your Look",
+      names: ["Desert Apsara", "Dunhuang Dancer", "Silk Road Style"],
+      upload: "📷 Upload My Face Photo",
+      zoom: "Adjust Face Size",
+      tip: "Upload a clear front-facing photo. Drag on the portrait to adjust your face. Your image stays in your browser.",
+      reset: "Reset",
+      clear: "Remove Photo",
+      download: "Download My Portrait"
+    },
+    ms: {
+      title: "Pengalaman Pakaian Dunhuang Saya",
+      subtitle: "Pilih gaya Dunhuang, muat naik foto dan cipta potret Laluan Sutera anda.",
+      choose: "Pilih Gaya Anda",
+      names: ["Apsara Gurun", "Penari Dunhuang", "Gaya Laluan Sutera"],
+      upload: "📷 Muat Naik Foto Wajah",
+      zoom: "Laraskan Saiz Wajah",
+      tip: "Muat naik foto wajah hadapan yang jelas. Seret pada potret untuk melaraskan kedudukan. Foto kekal dalam pelayar anda.",
+      reset: "Tetapkan Semula",
+      clear: "Padam Foto",
+      download: "Muat Turun Potret Saya"
+    }
+  };
+
+  function getLang() {
+    let value = "";
+
+    if (typeof currentLanguage !== "undefined") {
+      value = String(currentLanguage).toLowerCase();
+    } else {
+      value = (
+        document.documentElement.lang || "en"
+      ).toLowerCase();
+    }
+
+    if (value.startsWith("zh")) return "zh";
+    if (value === "ms" || value === "bm") return "ms";
+    return "en";
+  }
+
+  function updateText() {
+    const t = translations[getLang()];
+
+    document.getElementById("dhTryOnTitle").textContent =
+      t.title;
+    document.getElementById("dhTryOnSubtitle").textContent =
+      t.subtitle;
+    document.getElementById("dhTryOnChoose").textContent =
+      t.choose;
+    document.getElementById("dhTryOnUploadText").textContent =
+      t.upload;
+    document.getElementById("dhTryOnZoomText").textContent =
+      t.zoom;
+    document.getElementById("dhTryOnTip").textContent =
+      t.tip;
+    document.getElementById("dhTryOnReset").textContent =
+      t.reset;
+      document.getElementById("dhTryOnClear").textContent =
+      t.clear;
+    downloadButton.textContent = t.download;
+
+    section.querySelectorAll(".dh-tryon-choice")
+      .forEach(function (button, index) {
+        button.querySelector("span").textContent =
+          t.names[index];
+      });
+  }
+
+  let selected = 0;
+  let templateImage = null;
+  let userImage = null;
+
+  let zoom = 2.5;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  let faceArea = null;
+  let dragging = null;
+  let loadVersion = 0;
+
+  // Reusable transparent layer for face blending
+  const faceLayer = document.createElement("canvas");
+  const layerCtx = faceLayer.getContext("2d");
+
+  function draw() {
+    const W = canvas.width;
+    const H = canvas.height;
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = "#ddc6a7";
+    ctx.fillRect(0, 0, W, H);
+
+    if (!templateImage) return;
+
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+
+    // Keep the full original costume photo
+    ctx.drawImage(templateImage, 0, 0, W, H);
+
+    // Before upload: show the untouched original photo
+    if (!userImage || !faceArea) return;
+
+    const f = faceArea;
+
+    faceLayer.width = W;
+    faceLayer.height = H;
+
+    layerCtx.clearRect(0, 0, W, H);
+    layerCtx.globalCompositeOperation = "source-over";
+
+    const coverScale = Math.max(
+      (f.rx * 2) / userImage.width,
+      (f.ry * 2) / userImage.height
+    );
+
+    const drawWidth =
+      userImage.width * coverScale * zoom;
+
+    const drawHeight =
+      userImage.height * coverScale * zoom;
+
+    // Draw uploaded photo at the target face
+    layerCtx.drawImage(
+      userImage,
+      f.x + offsetX - drawWidth / 2,
+      f.y + offsetY - drawHeight / 2,
+      drawWidth,
+      drawHeight
+    );
+
+    // Soft transparent gradient mask
+    layerCtx.globalCompositeOperation = "destination-in";
+    layerCtx.save();
+
+    layerCtx.translate(f.x, f.y);
+    layerCtx.rotate(f.angle);
+    layerCtx.scale(f.rx, f.ry);
+
+    const gradient = layerCtx.createRadialGradient(
+      0, 0, 0.62,
+      0, 0, 1.03
+    );
+
+    gradient.addColorStop(0, "rgba(0,0,0,1)");
+    gradient.addColorStop(0.72, "rgba(0,0,0,0.96)");
+    gradient.addColorStop(1, "rgba(0,0,0,0)");
+
+    layerCtx.fillStyle = gradient;
+
+    layerCtx.beginPath();
+    layerCtx.arc(0, 0, 1.03, 0, Math.PI * 2);
+    layerCtx.fill();
+
+    layerCtx.restore();
+    layerCtx.globalCompositeOperation = "source-over";
+
+    // Blend the uploaded face with the original image
+    ctx.drawImage(faceLayer, 0, 0);
+  }
+
+  function chooseStyle(index) {
+    selected = index;
+
+    zoom = 2.5;
+    offsetX = 0;
+    offsetY = 0;
+    zoomInput.value = zoom;
+
+    templateImage = null;
+    faceArea = null;
+
+    section.querySelectorAll(".dh-tryon-choice")
+      .forEach(function (button, i) {
+        button.classList.toggle("active", i === index);
+      });
+
+    const version = ++loadVersion;
+    const image = new Image();
+
+    image.onload = function () {
+      if (version !== loadVersion) return;
+
+      templateImage = image;
+
+      // Keep the original image proportions
+      const scale = 720 / image.width;
+
+      canvas.width = 720;
+      canvas.height = Math.round(image.height * scale);
+
+      const config = styles[selected];
+
+      faceArea = {
+        x: config.x * scale,
+        y: config.y * scale,
+        rx: config.rx * scale,
+        ry: config.ry * scale,
+        angle: config.angle
+      };
+
+      draw();
+      downloadButton.disabled = !userImage;
+    };
+
+    image.onerror = function () {
+      console.error("Unable to load costume image.");
+    };
+
+    image.src = styles[index].src;
+  }
+
+  section.querySelectorAll(".dh-tryon-choice")
+    .forEach(function (button) {
+      button.addEventListener("click", function () {
+        chooseStyle(Number(this.dataset.dhStyle));
+      });
+    });
+
+  // Load a visitor's photo locally
+  fileInput.addEventListener("change", function () {
+    const file = this.files[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      alert("Please choose an image.");
+      return;
+    }
+
+    const url = URL.createObjectURL(file);
+    const image = new Image();
+
+    image.onload = function () {
+      userImage = image;
+
+      zoom = 2.5;
+      offsetX = 0;
+      offsetY = 0;
+      zoomInput.value = zoom;
+
+      downloadButton.disabled = !templateImage;
+
+      draw();
+      URL.revokeObjectURL(url);
+    };
+
+    image.onerror = function () {
+      URL.revokeObjectURL(url);
+      alert("Unable to open the selected image.");
+    };
+
+    image.src = url;
+    this.value = "";
+  });
+
+  zoomInput.addEventListener("input", function () {
+    zoom = Number(this.value);
+    draw();
+  });
+
+  function getPoint(event) {
+    const rect = canvas.getBoundingClientRect();
+
+    return {
+      x: (event.clientX - rect.left) *
+        canvas.width / rect.width,
+      y: (event.clientY - rect.top) *
+        canvas.height / rect.height
+    };
+  }
+
+  // Drag anywhere on the preview to adjust the face
+  canvas.addEventListener("pointerdown", function (event) {
+    if (!userImage || !faceArea) return;
+
+    const p = getPoint(event);
+
+    dragging = {
+      x: p.x,
+      y: p.y,
+      oldX: offsetX,
+      oldY: offsetY
+    };
+
+    canvas.setPointerCapture(event.pointerId);
+  });
+
+  canvas.addEventListener("pointermove", function (event) {
+    if (!dragging) return;
+
+    const p = getPoint(event);
+
+    offsetX = dragging.oldX + (p.x - dragging.x);
+    offsetY = dragging.oldY + (p.y - dragging.y);
+
+    draw();
+  });
+
+  function stopDrag() {
+    dragging = null;
+  }
+
+  canvas.addEventListener("pointerup", stopDrag);
+  canvas.addEventListener("pointercancel", stopDrag);
+
+  document.getElementById("dhTryOnReset")
+    .addEventListener("click", function () {
+      zoom = 2.5;
+      offsetX = 0;
+      offsetY = 0;
+
+      zoomInput.value = zoom;
+      draw();
+    });
+// ===== CLEAR UPLOADED PHOTO =====
+
+document.getElementById("dhTryOnClear")
+  .addEventListener("click", function () {
+
+    // Remove uploaded photo
+    userImage = null;
+
+    // Clear file input
+    fileInput.value = "";
+
+    // Reset face size and position
+    zoom = 2.5;
+    offsetX = 0;
+    offsetY = 0;
+    dragging = null;
+
+    zoomInput.value = zoom;
+
+    // Disable download until a new photo is uploaded
+    downloadButton.disabled = true;
+
+    // Restore the original costume image
+    draw();
+
+  });
+  // Save the finished portrait as PNG
+  downloadButton.addEventListener("click", function () {
+    if (!userImage || !templateImage) return;
+
+    draw();
+
+    canvas.toBlob(function (blob) {
+      if (!blob) return;
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download =
+        "My-Dunhuang-Look-" + (selected + 1) + ".png";
+
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      setTimeout(function () {
+        URL.revokeObjectURL(url);
+      }, 3000);
+    }, "image/png");
+  });
+
+  // Language switching
+  document.addEventListener("click", function (event) {
+    if (event.target.closest(".language-switcher")) {
+      setTimeout(updateText, 50);
+    }
+  });
+
+  new MutationObserver(updateText).observe(
+    document.documentElement,
+    {
+      attributes: true,
+      attributeFilter: ["lang"]
+    }
+  );
+
+  updateText();
+  chooseStyle(0);
+
+})();
+</script>
+
+<!-- ========== END DUNHUANG NEW TRY-ON ========== -->
+
 
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1250,7 +1251,7 @@ body.senior-mode .vehicle {
 
     <a id="homeLogo"
        class="logo"
-       href="index.html">
+       href="Dunhuang%20AI.html">
         DUNHUANG<span>.</span>
     </a>
 
@@ -1266,7 +1267,7 @@ body.senior-mode .vehicle {
 
         <a id="backHome"
            class="home-link"
-           href="index.html"
+           href="Dunhuang%20AI.html"
            data-i18n="back">
             ← BACK TO HOME
         </a>
@@ -1661,7 +1662,7 @@ body.senior-mode .vehicle {
             links.appendChild(
                 makeLink(
                     {
-                        file: "index.html",
+                        file: "Dunhuang%20AI.html",
                         en: "Home",
                         zh: "首页",
                         ms: "Laman Utama"
@@ -2459,7 +2460,7 @@ function setLanguage(value) {
         });
 
     const home =
-        "index.html?lang=" +
+        "Dunhuang%20AI.html?lang=" +
         encodeURIComponent(value);
 
     $("homeLogo").href = home;
@@ -2510,6 +2511,446 @@ const params =
 
 setLanguage(params.get("lang") || "en");
 
+</script>
+
+<!-- ==========================================
+     DUNHUANG UNIFIED NAVIGATION
+     TRANSPORTATION PAGE
+========================================== -->
+
+<style>
+
+/* 导航实际高度，会由 JS 自动更新 */
+:root {
+  --transport-nav-height: 90px;
+}
+
+html {
+  scroll-padding-top: calc(var(--transport-nav-height) + 15px);
+}
+
+/* 顶部固定导航栏 */
+.site-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 99999 !important;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 25px;
+  min-height: 90px;
+  padding: 15px 4%;
+
+  background: rgba(23, 28, 25, 0.97);
+  backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid rgba(216,180,124,.3);
+  box-shadow: 0 5px 25px rgba(0,0,0,.15);
+}
+
+/* DUNHUANG Logo */
+.site-header .logo {
+  font-size: 36px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* 六个导航菜单：位置对齐首页 */
+.transport-shared-nav {
+  position: absolute;
+  left: 57.5%;
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 25px;
+  width: max-content;
+  white-space: nowrap;
+}
+
+.transport-shared-nav a {
+  color: #fff9ed;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: color .25s;
+}
+
+.transport-shared-nav a:hover,
+.transport-shared-nav a:focus-visible {
+  color: #d8b47c;
+}
+
+/* 右侧语言和长辈模式 */
+.site-header .nav-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  gap: 6px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* 隐藏多余返回首页按钮
+   但保留元素供原来的 JavaScript 使用 */
+.site-header #backHome {
+  display: none !important;
+}
+
+/* 避免固定导航遮住交通页标题 */
+.hero {
+  padding-top: calc(var(--transport-nav-height) + 78px);
+}
+
+/* 长辈模式 */
+body.senior-mode .transport-shared-nav a {
+  font-size: 19px;
+}
+
+/* ================================
+   RESPONSIVE - TABLET
+================================ */
+
+@media (max-width: 1450px) {
+
+  .site-header {
+    display: grid !important;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+  }
+
+  .site-header .logo {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .site-header .nav-actions {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .transport-shared-nav {
+    position: static;
+    transform: none;
+
+    grid-column: 1 / -1;
+    grid-row: 2;
+
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+}
+
+/* ================================
+   RESPONSIVE - MOBILE
+================================ */
+
+@media (max-width: 650px) {
+
+  .site-header {
+    position: fixed !important;
+    padding: 12px 4%;
+  }
+
+  .site-header .logo {
+    font-size: 29px;
+  }
+
+  .site-header .nav-actions {
+    gap: 5px;
+  }
+
+  .site-header .lang-btn,
+  .site-header .senior-btn {
+    padding: 7px 8px;
+    min-height: 38px;
+    font-size: 12px;
+  }
+
+  .transport-shared-nav {
+    gap: 10px 14px;
+  }
+
+  .transport-shared-nav a {
+    font-size: 12px;
+  }
+
+  body.senior-mode .transport-shared-nav a {
+    font-size: 16px;
+  }
+
+  .hero {
+    padding-top: calc(var(--transport-nav-height) + 40px);
+  }
+}
+
+/* ================================
+   RESPONSIVE - SMALL MOBILE
+================================ */
+
+@media (max-width: 450px) {
+
+  .site-header {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .site-header .logo,
+  .site-header .nav-actions,
+  .transport-shared-nav {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .site-header .nav-actions {
+    margin-left: 0;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+</style>
+
+<script>
+(function () {
+
+  /* 获取 Transport 原来的导航栏 */
+
+  const header =
+    document.querySelector(".site-header");
+
+  if (!header) return;
+
+  const actions =
+    header.querySelector(".nav-actions");
+
+  if (!actions) return;
+
+  /* 防止导航重复创建 */
+
+  if (header.querySelector(".transport-shared-nav")) {
+    return;
+  }
+
+  /* ================================
+     THREE LANGUAGES
+  ================================ */
+
+  const menuText = {
+
+    en: {
+      home: "HOME",
+      explore: "EXPLORE",
+      journey: "JOURNEY",
+      stories: "STORIES",
+      faq: "FAQ",
+      about: "ABOUT"
+    },
+
+    zh: {
+      home: "首页",
+      explore: "探索",
+      journey: "旅程",
+      stories: "历史故事",
+      faq: "常见问题",
+      about: "关于我们"
+    },
+
+    ms: {
+      home: "UTAMA",
+      explore: "TEROKAI",
+      journey: "KEMBARA",
+      stories: "KISAH",
+      faq: "SOALAN LAZIM",
+      about: "TENTANG KAMI"
+    }
+
+  };
+
+  /* ================================
+     CREATE NAVIGATION
+  ================================ */
+
+  const nav = document.createElement("nav");
+
+  nav.className = "transport-shared-nav";
+
+  nav.setAttribute(
+    "aria-label",
+    "Main navigation"
+  );
+
+  const sections = [
+    "home",
+    "explore",
+    "journey",
+    "stories",
+    "faq",
+    "about"
+  ];
+
+  sections.forEach(section => {
+
+    const link = document.createElement("a");
+
+    link.dataset.section = section;
+
+    nav.appendChild(link);
+
+  });
+
+  /* 插在 Logo 与语言按钮之间 */
+
+  header.insertBefore(nav, actions);
+
+  /* ================================
+     GET CURRENT LANGUAGE
+  ================================ */
+
+  function getLanguage() {
+
+    const value =
+      document.documentElement.lang.toLowerCase();
+
+    if (value.startsWith("zh")) return "zh";
+
+    if (value.startsWith("ms")) return "ms";
+
+    return "en";
+
+  }
+
+  /* ================================
+     UPDATE NAVIGATION
+  ================================ */
+
+  function updateNavigation() {
+
+    const language = getLanguage();
+
+    const text = menuText[language];
+
+    const homeUrl =
+      "./Dunhuang%20AI.html?lang=" +
+      encodeURIComponent(language);
+
+    const anchors = {
+      home: "home",
+      explore: "experiences",
+      journey: "journey",
+      stories: "storyJourney",
+      faq: "faq"
+    };
+
+    nav.querySelectorAll("a").forEach(link => {
+
+      const section = link.dataset.section;
+
+      link.textContent = text[section];
+
+      if (section === "about") {
+
+        link.href =
+          "./about.html?lang=" +
+          encodeURIComponent(language);
+
+      } else {
+
+        link.href =
+          homeUrl + "#" + anchors[section];
+
+      }
+
+    });
+
+    /* Logo 返回首页 */
+
+    const logo =
+      document.getElementById("homeLogo");
+
+    if (logo) {
+      logo.href = homeUrl + "#home";
+    }
+
+    updateHeaderHeight();
+
+  }
+
+  /* ================================
+     LANGUAGE BUTTONS
+  ================================ */
+
+  document.querySelectorAll(
+    ".site-header .lang-btn"
+  ).forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      /* 原来的 setLanguage() 先执行，
+         然后更新新导航的语言 */
+
+      updateNavigation();
+
+    });
+
+  });
+
+  /* ================================
+     HEADER HEIGHT
+  ================================ */
+
+  function updateHeaderHeight() {
+
+    document.documentElement.style.setProperty(
+      "--transport-nav-height",
+      header.offsetHeight + "px"
+    );
+
+  }
+
+  /* 长辈模式改变文字大小后重新计算 */
+
+  const seniorButton =
+    document.getElementById("seniorButton");
+
+  if (seniorButton) {
+
+    seniorButton.addEventListener(
+      "click",
+      updateHeaderHeight
+    );
+
+  }
+
+  window.addEventListener(
+    "resize",
+    updateHeaderHeight
+  );
+
+  if ("ResizeObserver" in window) {
+
+    new ResizeObserver(
+      updateHeaderHeight
+    ).observe(header);
+
+  }
+
+  /* 首次加载 */
+
+  updateNavigation();
+
+})();
 </script>
 
 </body>
